@@ -1,29 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" ng-app>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/assets/vendor/flat-ui-2.0/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="/assets/vendor/flat-ui-2.0/css/flat-ui.css">
-        <link rel="stylesheet" href="/assets/css/screen.css">
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-        <!--[if lt IE 9]>
-          <script src="/assets/vendor/flat-ui-2.0/js/html5shiv.js"></script>
-        <![endif]-->
-    </head>
-    <body>
+{% include '_header.html' %}
 
-    <div id="primary-color"></div>
-    <div id="primary-color-tinted"></div>
+{% include '_repository.html' %}
 
-    <div class="header">
-            <div class="container">
-                <h1>{{ repositoryName }}:{{ currentBranch }} <small>{{ commits }} commits</small></h1>
-            </div>
-        </div>
         <div class="container">
 
             <div ng-controller="CommitsByDate">
@@ -32,22 +10,5 @@
             </div>
 
         </div>
-        <script src="/assets/vendor/flat-ui-2.0/js/jquery-1.8.3.min.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/jquery.ui.touch-punch.min.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/bootstrap.min.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/bootstrap-select.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/bootstrap-switch.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/flatui-checkbox.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/flatui-radio.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/jquery.tagsinput.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/jquery.placeholder.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/jquery.stacktable.js"></script>
-        <script src="/assets/vendor/flat-ui-2.0/js/application.js"></script>
-        <script src="/assets/vendor/canvasjs-1.1.0/canvasjs.min.js"></script>
-        <script src="/assets/vendor/angular-1.0.7/angular.min.js"></script>
 
-        <script src="/assets/js/charts/commits-by-date.js"></script>
-        <script src="/assets/js/app.js"></script>
-    </body>
-</html>
+{% include '_footer.html' %}
