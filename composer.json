@@ -1,0 +1,10 @@
+{
+    "require": {
+        "silex/silex": "1.0.*@dev",
+        "twig/twig": "1.*",
+        "ornicar/php-git-repo": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}
