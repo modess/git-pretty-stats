@@ -1,14 +1,8 @@
-var CommitsByDate, rgb2hex;
-
-angular.module("app", []).config([
-  "$interpolateProvider", function($interpolateProvider) {
-    $interpolateProvider.startSymbol("[[");
-    return $interpolateProvider.endSymbol("]]");
-  }
-]);
+var loadContent, rgb2hex;
 
 $(function() {
-  return window.primary_color = rgb2hex($("#primary-color").css('color'));
+  window.primary_color = rgb2hex($("#primary-color").css('color'));
+  return loadContent();
 });
 
 rgb2hex = function(rgb) {
@@ -16,8 +10,8 @@ rgb2hex = function(rgb) {
   return "#" + ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2);
 };
 
-CommitsByDate = function($scope, $http) {
-  return $http.get("/stats").success(function(data) {
+loadContent = function() {
+  return $.get("/stats", function(data) {
     return renderCommitsByDateChart(data.commits_by_date);
   });
 };
