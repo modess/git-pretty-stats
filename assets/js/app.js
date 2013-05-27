@@ -2,6 +2,10 @@ var loadContent, rgb2hex;
 
 $(function() {
   window.primary_color = rgb2hex($("#primary-color").css('color'));
+  $('#tabs a').click(function(e) {
+    e.preventDefault();
+    return $(this).tab('show');
+  });
   return loadContent();
 });
 

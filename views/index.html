@@ -4,9 +4,20 @@
 
         <div class="container">
 
-            <div ng-controller="CommitsByDate">
-                <h2>Commits by date</h2>
-                <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
+            <ul class="nav nav-tabs" id="tabs">
+              <li class="active"><a href="#commits" data-toggle="tab">Commit activity</a></li>
+              <li><a href="#contributors" data-toggle="tab">Contributors</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="commits" class="tab-pane active">
+                    <h3>Commits by date</h3>
+                    <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
+                </div>
+
+                <div id="contributors" class="tab-pane fade">
+                    <h3>Contributors</h3>
+                </div>
             </div>
 
         </div>

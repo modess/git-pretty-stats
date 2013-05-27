@@ -1,5 +1,9 @@
 $ ->
     window.primary_color = rgb2hex($("#primary-color").css('color'))
+    $('#tabs a').click((e) ->
+      e.preventDefault()
+      $(this).tab 'show'
+    )
     loadContent()
 
 rgb2hex = (rgb) ->
