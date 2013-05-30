@@ -16,6 +16,8 @@ rgb2hex = function(rgb) {
 
 loadContent = function() {
   return $.get("/stats", function(data) {
-    return renderCommitsByDateChart(data.commits_by_date);
+    renderCommitsByDateChart(data.commits_by_date);
+    renderCommitsByHourChart(data.commits_by_hour);
+    return renderCommitsByDayChart(data.commits_by_day);
   });
 };

@@ -15,5 +15,7 @@ rgb2hex = (rgb) ->
 loadContent = ->
     $.get("/stats", (data) ->
         renderCommitsByDateChart data.commits_by_date
+        renderCommitsByHourChart data.commits_by_hour
+        renderCommitsByDayChart data.commits_by_day
     )
 

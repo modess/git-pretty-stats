@@ -9,22 +9,22 @@ namespace PrettyGit;
 class GitRepository extends \PHPGit_Repository
 {
     /**
-     * Storage for "raw" commits 
-     * 
+     * Storage for "raw" commits
+     *
      * @var array
      */
     protected $commits = array();
 
     /**
-     * Date format  
-     * 
+     * Date format
+     *
      * @var string
      */
     protected $dateFormat = 'iso';
 
     /**
-     * Mapper for fetching information about commits 
-     * 
+     * Mapper for fetching information about commits
+     *
      * @var array
      */
     protected $logFormat = array(
@@ -34,15 +34,29 @@ class GitRepository extends \PHPGit_Repository
     );
 
     /**
-     * Array for storing commits by date 
-     * 
+     * Array for storing commits by date
+     *
      * @var array
      */
     protected $commitsByDate = array();
 
     /**
-     * Constructor 
-     * 
+     * Array for storing commits by hour
+     *
+     * @var array
+     */
+    protected $commitsByHour = array();
+
+    /**
+     * Array for storing commits by hour
+     *
+     * @var array
+     */
+    protected $commitsByDay = array();
+
+    /**
+     * Constructor
+     *
      * @param string $path Path to repository
      * @return void
      */
@@ -54,8 +68,8 @@ class GitRepository extends \PHPGit_Repository
     }
 
     /**
-     * Return name of git repo (top level folder) 
-     * 
+     * Return name of git repo (top level folder)
+     *
      * @return string
      */
     public function getName()
@@ -67,8 +81,8 @@ class GitRepository extends \PHPGit_Repository
     }
 
     /**
-     * Load commits from git repo 
-     * 
+     * Load commits from git repo
+     *
      * @return void
      */
     private function _loadCommits()
@@ -77,8 +91,8 @@ class GitRepository extends \PHPGit_Repository
     }
 
     /**
-     * Count number of commits 
-     * 
+     * Count number of commits
+     *
      * @return int
      */
     public function getNumberOfCommits()
@@ -124,24 +138,34 @@ class GitRepository extends \PHPGit_Repository
 
             $commits[] = $commit;
 
-            $commitDay = date('Y-m-d', strtotime($commit['commitDate']));
-            if (!isset($this->commitsByDate[$commitDay])) {
-                $this->commitsByDate[$commitDay] = 0;
-            }
-            $this->commitsByDate[$commitDay]++;
+            $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
+            $commitHour = date('H', strtotime($commit['commitDate']));
+            $commitDay = date('N', strtotime($commit['commitDate']));
+            $this->_addCommitToStats($commit, $this->commitsByDate, $commitDate);
+            $this->_addCommitToStats($commit, $this->commitsByHour, $commitHour);
+            $this->_addCommitToStats($commit, $this->commitsByDay, $commitDay);
         }
         return $commits;
-    } 
+    }
+
+    private function _addCommitToStats($commit, &$stats, $key) {
+        if (!isset($stats[$key])) {
+            $stats[$key] = 0;
+        }
+        $stats[$key]++;
+    }
 
     /**
-     * Returns array for index page with statistics for charts 
-     * 
+     * Returns array for index page with statistics for charts
+     *
      * @return array
      */
     public function getStatisticsForIndex()
     {
         $statistics = array(
-            'commits_by_date' => $this->_getCommitsByDate()
+            'commits_by_date' => $this->_getCommitsByDate(),
+            'commits_by_hour' => $this->_getCommitsByHour(),
+            'commits_by_day' => $this->_getCommitsByDay(),
         );
 
         return $statistics;
@@ -149,10 +173,10 @@ class GitRepository extends \PHPGit_Repository
 
     /**
      * Get statistics for commits by date
-     * 
+     *
      * @return array
      */
-    private function _getCommitsByDate() 
+    private function _getCommitsByDate()
     {
         $firstDate = array_slice($this->commitsByDate, 0, 1);
         $lastDate = array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1);
@@ -180,5 +204,42 @@ class GitRepository extends \PHPGit_Repository
         }
         return $data;
     }
+
+    /**
+     * Get statistics for commits by hour of day
+     *
+     * @return array
+     */
+    private function _getCommitsByHour()
+    {
+        $data = array();
+        foreach ($this->commitsByHour as $hour => $numberOfCommits) {
+            $data[] = array(
+                'y' => $numberOfCommits,
+                'x' => $hour,
+            );
+        }
+        return $data;
+    }
+
+    /**
+     * Get statistics for commits by day of week
+     *
+     * @return array
+     */
+    private function _getCommitsByDay()
+    {
+        $data = array();
+        $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+        foreach ($this->commitsByDay as $weekday => $numberOfCommits) {
+            $data[] = array(
+                'label' => $days[$weekday],
+                'y' => $numberOfCommits,
+                'x' => $weekday,
+            );
+        }
+        return $data;
+    }
+
 }
 
