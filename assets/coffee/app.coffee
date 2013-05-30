@@ -17,5 +17,8 @@ loadContent = ->
         renderCommitsByDateChart data.commits_by_date
         renderCommitsByHourChart data.commits_by_hour
         renderCommitsByDayChart data.commits_by_day
+        $("a[href='#contributors']").trigger 'click'
+        renderCommitsByContributorsChart data.commits_by_contributor
+        $("a[href='#commits']").trigger 'click'
     )
 

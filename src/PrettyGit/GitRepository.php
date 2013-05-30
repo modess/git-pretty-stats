@@ -55,6 +55,13 @@ class GitRepository extends \PHPGit_Repository
     protected $commitsByDay = array();
 
     /**
+     * Array for storing commits by contributor
+     *
+     * @var array
+     */
+    protected $commitsByContributor = array();
+
+    /**
      * Constructor
      *
      * @param string $path Path to repository
@@ -144,6 +151,8 @@ class GitRepository extends \PHPGit_Repository
             $this->_addCommitToStats($commit, $this->commitsByDate, $commitDate);
             $this->_addCommitToStats($commit, $this->commitsByHour, $commitHour);
             $this->_addCommitToStats($commit, $this->commitsByDay, $commitDay);
+
+            $this->_addCommitToContributor($commit);
         }
         return $commits;
     }
@@ -153,6 +162,17 @@ class GitRepository extends \PHPGit_Repository
             $stats[$key] = 0;
         }
         $stats[$key]++;
+    }
+
+    private function _addCommitToContributor($commit) {
+        $contributor = sprintf(
+            '%s<br /><small>%s</small>',
+            $commit['commiter'],
+            $commit['commiterEmail']
+        );
+
+        $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
+        $this->commitsByContributor[$contributor][$commitDate][] = $commit;
     }
 
     /**
@@ -166,9 +186,22 @@ class GitRepository extends \PHPGit_Repository
             'commits_by_date' => $this->_getCommitsByDate(),
             'commits_by_hour' => $this->_getCommitsByHour(),
             'commits_by_day' => $this->_getCommitsByDay(),
+            'commits_by_contributor' => $this->_getCommitsByContributor(),
         );
 
         return $statistics;
+    }
+
+    private function _getFirstCommitDate()
+    {
+        $firstDate = array_slice($this->commitsByDate, 0, 1);
+        return new \DateTime(key($firstDate));
+    }
+
+    private function _getLastCommitDate()
+    {
+        $lastDate = array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1);
+        return new \DateTime(key($lastDate));
     }
 
     /**
@@ -178,11 +211,8 @@ class GitRepository extends \PHPGit_Repository
      */
     private function _getCommitsByDate()
     {
-        $firstDate = array_slice($this->commitsByDate, 0, 1);
-        $lastDate = array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1);
-
-        $begin = new \DateTime(key($firstDate));
-        $end = new \DateTime(key($lastDate));
+        $begin = $this->_getFirstCommitDate();
+        $end = $this->_getLastCommitDate();
         $interval = \DateInterval::createFromDateString('1 day');
         $period = new \DatePeriod($begin, $interval, $end);
 
@@ -236,6 +266,48 @@ class GitRepository extends \PHPGit_Repository
                 'label' => $days[$weekday],
                 'y' => $numberOfCommits,
                 'x' => $weekday,
+            );
+        }
+        return $data;
+    }
+
+    /**
+     * Get statistics for contributors
+     *
+     * @return array
+     */
+    private function _getCommitsByContributor()
+    {
+        $data = array();
+
+        foreach ($this->commitsByContributor as $contributor => $commits) {
+            $begin = $this->_getFirstCommitDate();
+            $end = $this->_getLastCommitDate();
+            $interval = \DateInterval::createFromDateString('1 day');
+            $period = new \DatePeriod($begin, $interval, $end);
+
+            $i = 0;
+            $commitsData = array();
+            $totalCommits = 0;
+            foreach ($period as $date) {
+                $dayFormatted = $date->format("Y-m-d");
+                $value = isset($commits[$dayFormatted]) ? count($commits[$dayFormatted]) : 0;
+                $totalCommits += $value;
+
+                $commitsData[] = array(
+                    'y' => $value,
+                    'x' => sprintf(
+                        'new Date(%s, %s, %s)',
+                        $date->format("Y"),
+                        $date->format("n"),
+                        $date->format("d")
+                    )
+                );
+            }
+            $data[] = array(
+                'contributor' => $contributor,
+                'commits' => $totalCommits,
+                'data' => $commitsData,
             );
         }
         return $data;

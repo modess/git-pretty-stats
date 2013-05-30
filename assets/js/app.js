@@ -18,6 +18,9 @@ loadContent = function() {
   return $.get("/stats", function(data) {
     renderCommitsByDateChart(data.commits_by_date);
     renderCommitsByHourChart(data.commits_by_hour);
-    return renderCommitsByDayChart(data.commits_by_day);
+    renderCommitsByDayChart(data.commits_by_day);
+    $("a[href='#contributors']").trigger('click');
+    renderCommitsByContributorsChart(data.commits_by_contributor);
+    return $("a[href='#commits']").trigger('click');
   });
 };
