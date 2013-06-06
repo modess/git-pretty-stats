@@ -13,7 +13,11 @@ rgb2hex = (rgb) ->
         ("0" + parseInt(rgb[3],10).toString(16)).slice(-2)
 
 loadContent = ->
+    $('#loader').modal { show: true }
+
     $.get("/stats", (data) ->
+        $('#loader').modal 'hide'
+
         renderCommitsByDateChart data.commits_by_date
         renderCommitsByHourChart data.commits_by_hour
         renderCommitsByDayChart data.commits_by_day

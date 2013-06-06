@@ -15,7 +15,11 @@ rgb2hex = function(rgb) {
 };
 
 loadContent = function() {
+  $('#loader').modal({
+    show: true
+  });
   return $.get("/stats", function(data) {
+    $('#loader').modal('hide');
     renderCommitsByDateChart(data.commits_by_date);
     renderCommitsByHourChart(data.commits_by_hour);
     renderCommitsByDayChart(data.commits_by_day);

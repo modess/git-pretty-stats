@@ -2,31 +2,40 @@
 
 {% include '_repository.html' %}
 
-        <div class="container">
+<div class="container">
 
-            <ul class="nav nav-tabs" id="tabs">
-              <li class="active"><a href="#commits" data-toggle="tab">Commit activity</a></li>
-              <li><a href="#contributors" data-toggle="tab">Contributors</a></li>
-            </ul>
+    <ul class="nav nav-tabs" id="tabs">
+        <li class="active"><a href="#commits" data-toggle="tab">Commit activity</a></li>
+        <li><a href="#contributors" data-toggle="tab">Contributors</a></li>
+    </ul>
 
-            <div class="tab-content">
-                <div id="commits" class="tab-pane active">
-                    <h3>By date <small>(zoom and pan)</small></h3>
-                    <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
+    <div class="tab-content">
+        <div id="commits" class="tab-pane active">
+            <h3>By date <small>(zoom and pan)</small></h3>
+            <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
 
-                    <h3>By hour of day</h3>
-                    <div id="commitsByHour" style="height: 300px; width: 100%;"></div>
+            <h3>By hour of day</h3>
+            <div id="commitsByHour" style="height: 300px; width: 100%;"></div>
 
-                    <h3>By day of week</h3>
-                    <div id="commitsByDay" style="height: 300px; width: 100%;"></div>
-                </div>
-
-                <div id="contributors" class="tab-pane fade">
-                    <h3>Contributors (zoom and pan)</h3>
-                    <ul class="thumbnails"></ul>
-                </div>
-            </div>
-
+            <h3>By day of week</h3>
+            <div id="commitsByDay" style="height: 300px; width: 100%;"></div>
         </div>
+
+        <div id="contributors" class="tab-pane fade">
+            <h3>Contributors (zoom and pan)</h3>
+            <ul class="thumbnails"></ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="loader" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loader" aria-hidden="true">
+    <div class="modal-header">
+        <h3>Hang in there</h3>
+    </div>
+    <div class="modal-body">
+        <p>Loading repository, fetching commits and building graphs...</p>
+    </div>
+</div>
 
 {% include '_footer.html' %}
