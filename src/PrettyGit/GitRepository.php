@@ -172,8 +172,8 @@ class GitRepository
 
     public function getLastCommitDate()
     {
-        $lastDate = array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1);
-        return new \DateTime(key($lastDate));
+        $lastDate = key(array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1));
+        return new \DateTime(date("Y-m-d", strtotime($lastDate . ' +1 day')));
     }
 
     /**
