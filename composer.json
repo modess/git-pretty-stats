@@ -4,6 +4,10 @@
         "twig/twig": "1.*",
         "ornicar/php-git-repo": "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*@dev",
+        "mockery/mockery": "dev-master"
+    },
     "autoload": {
         "psr-0": { "": "src/" }
     }
