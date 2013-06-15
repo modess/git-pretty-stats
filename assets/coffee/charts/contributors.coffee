@@ -10,7 +10,7 @@ renderCommitsByContributorsChart = (data) ->
         $("#chart-" + i).highcharts
           colors: window.chartColors
           chart:
-            type: "area"
+            type: "areaspline"
             zoomType: "x"
           title:
             text: ""
@@ -21,7 +21,7 @@ renderCommitsByContributorsChart = (data) ->
                 enabled: false
           xAxis:
             categories: contributor.data.x
-            tickInterval: 30
+            tickInterval: parseInt(contributor.data.x.length / 10)
             labels:
                 rotation: -45
                 y: 35

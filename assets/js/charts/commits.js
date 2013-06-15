@@ -4,7 +4,7 @@ renderCommitsByDateChart = function(data) {
   return $("#commitsByDate").highcharts({
     colors: window.chartColors,
     chart: {
-      type: "area",
+      type: "areaspline",
       zoomType: "x"
     },
     title: {
@@ -20,7 +20,7 @@ renderCommitsByDateChart = function(data) {
     },
     xAxis: {
       categories: data.x,
-      tickInterval: 20,
+      tickInterval: parseInt(data.x.length / 20),
       labels: {
         rotation: -45,
         y: 35

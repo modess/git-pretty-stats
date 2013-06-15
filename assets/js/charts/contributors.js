@@ -3,6 +3,7 @@ var renderCommitsByContributorsChart;
 renderCommitsByContributorsChart = function(data) {
   var contributor, i, source, template, _i, _len, _results;
 
+  $("#contributors h3").html(data.length + ' ' + $("#contributors h3").html());
   i = 0;
   source = $("#contributor-template").html();
   template = Handlebars.compile(source);
@@ -14,7 +15,7 @@ renderCommitsByContributorsChart = function(data) {
     $("#chart-" + i).highcharts({
       colors: window.chartColors,
       chart: {
-        type: "area",
+        type: "areaspline",
         zoomType: "x"
       },
       title: {
@@ -30,7 +31,7 @@ renderCommitsByContributorsChart = function(data) {
       },
       xAxis: {
         categories: contributor.data.x,
-        tickInterval: 30,
+        tickInterval: parseInt(contributor.data.x.length / 10),
         labels: {
           rotation: -45,
           y: 35
