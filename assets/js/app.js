@@ -13,13 +13,21 @@ loadContent = function() {
   $('#loader').modal({
     show: true
   });
-  return $.get("/stats", function(data) {
-    $('#loader').modal('hide');
-    renderCommitsByDateChart(data.commits_by_date);
-    renderCommitsByHourChart(data.commits_by_hour);
-    renderCommitsByDayChart(data.commits_by_day);
-    $("a[href='#contributors']").trigger('click');
-    renderCommitsByContributorsChart(data.commits_by_contributor);
-    return $("a[href='#commits']").trigger('click');
+  return $.ajax({
+    url: "/stats",
+    success: function(data) {
+      if (typeof data.commits_by_date === "undefined" && data.commits_by_date === null) {
+        $("#loader h3").html("Shit...");
+        $("#loader p").html("Something went wrong");
+        return false;
+      }
+      $('#loader').modal('hide');
+      renderCommitsByDateChart(data.commits_by_date);
+      renderCommitsByHourChart(data.commits_by_hour);
+      renderCommitsByDayChart(data.commits_by_day);
+      $("a[href='#contributors']").trigger('click');
+      renderCommitsByContributorsChart(data.commits_by_contributor);
+      return $("a[href='#commits']").trigger('click');
+    }
   });
 };

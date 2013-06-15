@@ -10,14 +10,21 @@ $ ->
 loadContent = ->
     $('#loader').modal { show: true }
 
-    $.get("/stats", (data) ->
-        $('#loader').modal 'hide'
+    $.ajax({
+        url: "/stats"
+        success: (data) ->
+            if (typeof data.commits_by_date == "undefined" && data.commits_by_date == null)
+                $("#loader h3").html "Shit..."
+                $("#loader p").html "Something went wrong"
+                return false
 
-        renderCommitsByDateChart data.commits_by_date
-        renderCommitsByHourChart data.commits_by_hour
-        renderCommitsByDayChart data.commits_by_day
-        $("a[href='#contributors']").trigger 'click'
-        renderCommitsByContributorsChart data.commits_by_contributor
-        $("a[href='#commits']").trigger 'click'
-    )
+            $('#loader').modal 'hide'
+
+            renderCommitsByDateChart data.commits_by_date
+            renderCommitsByHourChart data.commits_by_hour
+            renderCommitsByDayChart data.commits_by_day
+            $("a[href='#contributors']").trigger 'click'
+            renderCommitsByContributorsChart data.commits_by_contributor
+            $("a[href='#commits']").trigger 'click'
+    })
 
