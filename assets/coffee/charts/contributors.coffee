@@ -1,30 +1,34 @@
 renderCommitsByContributorsChart = (data) ->
     i = 0
+    source   = $("#contributor-template").html()
+    template = Handlebars.compile(source)
     for contributor in data
-        contributorDiv = $('<li class="span6"><div id="contributor-'+i+'" class="thumbnail"></div></li>')
-        contributorDiv.find('.thumbnail').append $('<h4>' + contributor.contributor + '</h4>')
-        contributorDiv.find('.thumbnail').append $('<div id="chart-'+i+'" style="height: 200px; width: 100%"></div>')
-        $("#contributors .thumbnails").append contributorDiv
-        datapoints = []
-        for datapoint in contributor.data
-            datapoint.x = eval datapoint.x
-            datapoints.push datapoint
+        contributor.i = i
+        $("#contributors .thumbnails").append template(contributor)
 
-        options = {
-            zoomEnabled: true
-            panEnabled: true
-            axisY:
-                labelFontSize: 14
-            axisX:
-                valueFormatString: "YYYY-MM-DD"
-                labelFontSize: 12
-            data: [
-                markerColor: "circle"
-                markerBorderColor: "white"
-                color: window.primary_color
-                dataPoints: datapoints
-            ]
-        }
-        chart = new CanvasJS.Chart "chart-" + i, options
-        chart.render()
+        $("#chart-" + i).highcharts
+          colors: window.chartColors
+          chart:
+            type: "area"
+            zoomType: "x"
+          title:
+            text: ""
+          plotOptions:
+            series:
+              lineWidth: 0
+              marker:
+                enabled: false
+          xAxis:
+            categories: contributor.data.x
+            tickInterval: 30
+            labels:
+                rotation: -45
+                y: 35
+          yAxis:
+            title:
+              text: ""
+          series: [
+            name: "Commits"
+            data: contributor.data.y
+          ]
         i++

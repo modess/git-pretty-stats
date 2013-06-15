@@ -6,60 +6,35 @@ namespace PrettyGit;
  * Class GitRepository
  * @author Niklas Modess <niklas@codingswag.com>
  */
-class GitRepository extends \PHPGit_Repository
+class GitRepository
 {
-    /**
-     * Storage for "raw" commits
-     *
-     * @var array
-     */
-    protected $commits = array();
+    /** @var \PHPGit_Repository */
+    public $gitWrapper;
 
-    /**
-     * Date format
-     *
-     * @var string
-     */
-    protected $dateFormat = 'iso';
+    /** @var array Storage for "raw" commits */
+    public $commits = array();
 
-    /**
-     * Mapper for fetching information about commits
-     *
-     * @var array
-     */
-    protected $logFormat = array(
+    /** @var string Date format */
+    public $dateFormat = 'iso';
+
+    /** @var array Mapper for fetching information about commits */
+    public $logFormat = array(
         'commiter' => '%cn',
         'commiterEmail' => '%ce',
         'commitDate' => '%cd',
     );
 
-    /**
-     * Array for storing commits by date
-     *
-     * @var array
-     */
-    protected $commitsByDate = array();
+    /** @var array Storage for commits by date */
+    public $commitsByDate = array();
 
-    /**
-     * Array for storing commits by hour
-     *
-     * @var array
-     */
-    protected $commitsByHour = array();
+    /** @var array Storage for commits by hour */
+    public $commitsByHour = array();
 
-    /**
-     * Array for storing commits by hour
-     *
-     * @var array
-     */
-    protected $commitsByDay = array();
+    /** @var array Storage for commits by hour */
+    public $commitsByDay = array();
 
-    /**
-     * Array for storing commits by contributor
-     *
-     * @var array
-     */
-    protected $commitsByContributor = array();
+    /** @var array Storage for commits by contributor */
+    public $commitsByContributor = array();
 
     /**
      * Constructor
@@ -67,24 +42,14 @@ class GitRepository extends \PHPGit_Repository
      * @param string $path Path to repository
      * @return void
      */
-    public function __construct($path)
+    public function __construct(\PHPGit_Repository $gitWrapper)
     {
-        parent::__construct($path);
-
-        $this->_loadCommits();
+        $this->gitWrapper = $gitWrapper;
     }
 
-    /**
-     * Return name of git repo (top level folder)
-     *
-     * @return string
-     */
-    public function getName()
+    public function getGitWrapper()
     {
-        $topLevelDir = $this->git('rev-parse --show-toplevel');
-        $topLevelDir = substr($topLevelDir, strrpos($topLevelDir, '/') + 1);
-
-        return $topLevelDir;
+        return $this->gitWrapper;
     }
 
     /**
@@ -92,9 +57,10 @@ class GitRepository extends \PHPGit_Repository
      *
      * @return void
      */
-    private function _loadCommits()
+    public function loadCommits()
     {
-        $this->commits = $this->getCommits(-1);
+        $rawCommits = $this->getCommits(-1);
+        $this->commits = $this->parseLogsIntoArray(trim($rawCommits));
     }
 
     /**
@@ -107,38 +73,39 @@ class GitRepository extends \PHPGit_Repository
         return count($this->commits);
     }
 
+
     /**
      * Return the result of `git log` formatted in a PHP array
      *
      * @return array list of commits and their properties
      **/
-    public function getCommits($nbCommits = 10)
+    public function getCommits($numberOfCommits = 10)
     {
-        $output = $this->git(
+        $output = $this->getGitWrapper()->git(
             sprintf(
                 '--no-pager log -n %d --date=%s --format=format:"%s" --reverse',
-                $nbCommits,
+                $numberOfCommits,
                 $this->dateFormat,
-                implode('|',$this->logFormat)
+                implode('|', $this->logFormat)
             )
         );
-        return $this->parseLogsIntoArray($output);
+        return $output;
     }
 
     /**
      * Convert a formatted log string into an array
      * @param string $logOutput The output from a `git log` command formated using $this->logFormat
      */
-    private function parseLogsIntoArray($logOutput)
+    public function parseLogsIntoArray($logOutput)
     {
         $commits = array();
 
-        foreach(explode("\n", $logOutput) as $line) {
+        foreach (explode("\n", $logOutput) as $line) {
             $commitInfo = explode('|', $line);
             $commit = array();
 
             $i = 0;
-            foreach ($this->logFormat as $key => $value) {
+            foreach (array_keys($this->logFormat) as $key) {
                 $commit[$key] = $commitInfo[$i];
                 $i++;
             }
@@ -148,27 +115,30 @@ class GitRepository extends \PHPGit_Repository
             $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
             $commitHour = date('H', strtotime($commit['commitDate']));
             $commitDay = date('N', strtotime($commit['commitDate']));
-            $this->_addCommitToStats($commit, $this->commitsByDate, $commitDate);
-            $this->_addCommitToStats($commit, $this->commitsByHour, $commitHour);
-            $this->_addCommitToStats($commit, $this->commitsByDay, $commitDay);
+            $this->addCommitToStats($this->commitsByDate, $commitDate);
+            $this->addCommitToStats($this->commitsByHour, $commitHour);
+            $this->addCommitToStats($this->commitsByDay, $commitDay);
 
-            $this->_addCommitToContributor($commit);
+            $this->addCommitToContributor($commit);
         }
+
         return $commits;
     }
 
-    private function _addCommitToStats($commit, &$stats, $key) {
+    public function addCommitToStats(&$stats, $key)
+    {
         if (!isset($stats[$key])) {
             $stats[$key] = 0;
         }
         $stats[$key]++;
     }
 
-    private function _addCommitToContributor($commit) {
+    public function addCommitToContributor($commit)
+    {
         $contributor = sprintf(
             '%s<br /><small>%s</small>',
-            $commit['commiter'],
-            $commit['commiterEmail']
+            trim($commit['commiter']),
+            trim($commit['commiterEmail'])
         );
 
         $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
@@ -183,22 +153,22 @@ class GitRepository extends \PHPGit_Repository
     public function getStatisticsForIndex()
     {
         $statistics = array(
-            'commits_by_date' => $this->_getCommitsByDate(),
-            'commits_by_hour' => $this->_getCommitsByHour(),
-            'commits_by_day' => $this->_getCommitsByDay(),
-            'commits_by_contributor' => $this->_getCommitsByContributor(),
+            'commits_by_date' => $this->getCommitsByDate(),
+            'commits_by_hour' => $this->getCommitsByHour(),
+            'commits_by_day' => $this->getCommitsByDay(),
+            'commits_by_contributor' => $this->getCommitsByContributor(),
         );
 
         return $statistics;
     }
 
-    private function _getFirstCommitDate()
+    public function getFirstCommitDate()
     {
         $firstDate = array_slice($this->commitsByDate, 0, 1);
         return new \DateTime(key($firstDate));
     }
 
-    private function _getLastCommitDate()
+    public function getLastCommitDate()
     {
         $lastDate = array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1);
         return new \DateTime(key($lastDate));
@@ -209,28 +179,19 @@ class GitRepository extends \PHPGit_Repository
      *
      * @return array
      */
-    private function _getCommitsByDate()
+    public function getCommitsByDate()
     {
-        $begin = $this->_getFirstCommitDate();
-        $end = $this->_getLastCommitDate();
+        $begin = $this->getFirstCommitDate();
+        $end = $this->getLastCommitDate();
         $interval = \DateInterval::createFromDateString('1 day');
         $period = new \DatePeriod($begin, $interval, $end);
 
-        $labels = array();
         $data = array();
-        $i = 0;
         foreach ($period as $date) {
             $dayFormatted = $date->format("Y-m-d");
             $value = isset($this->commitsByDate[$dayFormatted]) ? $this->commitsByDate[$dayFormatted] : 0;
-            $data[] = array(
-                'y' => $value,
-                'x' => sprintf(
-                    'new Date(%s, %s, %s)',
-                    $date->format("Y"),
-                    $date->format("n"),
-                    $date->format("d")
-                )
-            );
+            $data['x'][] = $dayFormatted;
+            $data['y'][] = $value;
         }
         return $data;
     }
@@ -240,14 +201,13 @@ class GitRepository extends \PHPGit_Repository
      *
      * @return array
      */
-    private function _getCommitsByHour()
+    public function getCommitsByHour()
     {
         $data = array();
+        ksort($this->commitsByHour);
         foreach ($this->commitsByHour as $hour => $numberOfCommits) {
-            $data[] = array(
-                'y' => $numberOfCommits,
-                'x' => $hour,
-            );
+            $data['x'][] = $hour;
+            $data['y'][] = $numberOfCommits;
         }
         return $data;
     }
@@ -257,16 +217,12 @@ class GitRepository extends \PHPGit_Repository
      *
      * @return array
      */
-    private function _getCommitsByDay()
+    public function getCommitsByDay()
     {
         $data = array();
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
         foreach ($this->commitsByDay as $weekday => $numberOfCommits) {
-            $data[] = array(
-                'label' => $days[$weekday],
-                'y' => $numberOfCommits,
-                'x' => $weekday,
-            );
+            $data[] = array($days[$weekday], $numberOfCommits);
         }
         return $data;
     }
@@ -276,17 +232,16 @@ class GitRepository extends \PHPGit_Repository
      *
      * @return array
      */
-    private function _getCommitsByContributor()
+    public function getCommitsByContributor()
     {
         $data = array();
 
         foreach ($this->commitsByContributor as $contributor => $commits) {
-            $begin = $this->_getFirstCommitDate();
-            $end = $this->_getLastCommitDate();
+            $begin = $this->getFirstCommitDate();
+            $end = $this->getLastCommitDate();
             $interval = \DateInterval::createFromDateString('1 day');
             $period = new \DatePeriod($begin, $interval, $end);
 
-            $i = 0;
             $commitsData = array();
             $totalCommits = 0;
             foreach ($period as $date) {
@@ -294,15 +249,8 @@ class GitRepository extends \PHPGit_Repository
                 $value = isset($commits[$dayFormatted]) ? count($commits[$dayFormatted]) : 0;
                 $totalCommits += $value;
 
-                $commitsData[] = array(
-                    'y' => $value,
-                    'x' => sprintf(
-                        'new Date(%s, %s, %s)',
-                        $date->format("Y"),
-                        $date->format("n"),
-                        $date->format("d")
-                    )
-                );
+                $commitsData['x'][] = $dayFormatted;
+                $commitsData['y'][] = $value;
             }
             $data[] = array(
                 'contributor' => $contributor,
@@ -312,6 +260,4 @@ class GitRepository extends \PHPGit_Repository
         }
         return $data;
     }
-
 }
-

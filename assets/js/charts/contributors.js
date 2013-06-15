@@ -1,44 +1,53 @@
 var renderCommitsByContributorsChart;
 
 renderCommitsByContributorsChart = function(data) {
-  var chart, contributor, contributorDiv, datapoint, datapoints, i, options, _i, _j, _len, _len1, _ref, _results;
+  var contributor, i, source, template, _i, _len, _results;
 
   i = 0;
+  source = $("#contributor-template").html();
+  template = Handlebars.compile(source);
   _results = [];
   for (_i = 0, _len = data.length; _i < _len; _i++) {
     contributor = data[_i];
-    contributorDiv = $('<li class="span6"><div id="contributor-' + i + '" class="thumbnail"></div></li>');
-    contributorDiv.find('.thumbnail').append($('<h4>' + contributor.contributor + '</h4>'));
-    contributorDiv.find('.thumbnail').append($('<div id="chart-' + i + '" style="height: 200px; width: 100%"></div>'));
-    $("#contributors .thumbnails").append(contributorDiv);
-    datapoints = [];
-    _ref = contributor.data;
-    for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-      datapoint = _ref[_j];
-      datapoint.x = eval(datapoint.x);
-      datapoints.push(datapoint);
-    }
-    options = {
-      zoomEnabled: true,
-      panEnabled: true,
-      axisY: {
-        labelFontSize: 14
+    contributor.i = i;
+    $("#contributors .thumbnails").append(template(contributor));
+    $("#chart-" + i).highcharts({
+      colors: window.chartColors,
+      chart: {
+        type: "area",
+        zoomType: "x"
       },
-      axisX: {
-        valueFormatString: "YYYY-MM-DD",
-        labelFontSize: 12
+      title: {
+        text: ""
       },
-      data: [
+      plotOptions: {
+        series: {
+          lineWidth: 0,
+          marker: {
+            enabled: false
+          }
+        }
+      },
+      xAxis: {
+        categories: contributor.data.x,
+        tickInterval: 30,
+        labels: {
+          rotation: -45,
+          y: 35
+        }
+      },
+      yAxis: {
+        title: {
+          text: ""
+        }
+      },
+      series: [
         {
-          markerColor: "circle",
-          markerBorderColor: "white",
-          color: window.primary_color,
-          dataPoints: datapoints
+          name: "Commits",
+          data: contributor.data.y
         }
       ]
-    };
-    chart = new CanvasJS.Chart("chart-" + i, options);
-    chart.render();
+    });
     _results.push(i++);
   }
   return _results;

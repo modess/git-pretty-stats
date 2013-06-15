@@ -27,7 +27,10 @@ $app->before(function() use ($app) {
     }
 
     try {
-        $app['repository'] = new PrettyGit\GitRepository(__DIR__ . '/' . $config['repositoryPath']);
+        $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $config['repositoryPath']);
+        $repository = new PrettyGit\GitRepository($gitWrapper);
+        $repository->loadCommits();
+        $app['repository'] = $repository;
     } catch (Exception $e) {
         return displayError('The repository path does not contain a valid git repository');
     }
@@ -42,15 +45,16 @@ $app->get('/', function() use($app) {
     return $app['twig']->render(
         'index.html',
         array(
-            'repositoryName' => $app['repository']->getName(),
-            'currentBranch' => $app['repository']->getCurrentBranch(),
+            'currentBranch' => $app['repository']->getGitWrapper()->getCurrentBranch(),
             'commits' => $app['repository']->getNumberOfCommits(),
         )
     );
 });
 
 $app->get('/stats', function() use($app) {
-    return $app->json($app['repository']->getStatisticsForIndex());
+    return $app->json(
+        $app['repository']->getStatisticsForIndex()
+    );
 });
 
 $app['debug'] = true;

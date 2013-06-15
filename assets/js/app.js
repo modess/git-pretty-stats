@@ -1,18 +1,13 @@
-var loadContent, rgb2hex;
+var loadContent;
 
 $(function() {
-  window.primary_color = rgb2hex($("#primary-color").css('color'));
+  window.chartColors = ['#3498DB', '#2ECC71', '#9B59B6', '#E74C3C', '#1ABC9C', '#F39C12', '#95A5A6'];
   $('#tabs a').click(function(e) {
     e.preventDefault();
     return $(this).tab('show');
   });
   return loadContent();
 });
-
-rgb2hex = function(rgb) {
-  rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-  return "#" + ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) + ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2);
-};
 
 loadContent = function() {
   $('#loader').modal({

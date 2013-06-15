@@ -11,7 +11,7 @@
 
     <div class="tab-content">
         <div id="commits" class="tab-pane active">
-            <h3>By date <small>(zoom and pan)</small></h3>
+            <h3>By date <small>(zoom)</small></h3>
             <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
 
             <h3>By hour of day</h3>
@@ -22,7 +22,7 @@
         </div>
 
         <div id="contributors" class="tab-pane fade">
-            <h3>Contributors (zoom and pan)</h3>
+            <h3>Contributors (zoom)</h3>
             <ul class="thumbnails"></ul>
         </div>
     </div>
@@ -37,5 +37,17 @@
         <p>Loading repository, fetching commits and building graphs...</p>
     </div>
 </div>
+
+{% raw %}
+<script id="contributor-template" type="text/x-handlebars-template">
+    <li class="span6">
+        <div id="contributor-{{ i }}" class="thumbnail">
+            <h4>{{{ contributor }}}</h4>
+            <h5>{{ commits }}</h5>
+            <div id="chart-{{ i }}" style="height: 200px; width: 100%"></div>
+        </div>
+    </li>
+</script>
+{% endraw %}
 
 {% include '_footer.html' %}
