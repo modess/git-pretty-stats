@@ -1,4 +1,5 @@
 renderCommitsByContributorsChart = (data) ->
+    $("#contributors h3").html(data.length + ' ' + $("#contributors h3").html())
     i = 0
     source   = $("#contributor-template").html()
     template = Handlebars.compile(source)
