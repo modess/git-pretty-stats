@@ -1,5 +1,4 @@
 <?php
-
 namespace PrettyGit;
 
 /**
@@ -135,14 +134,17 @@ class GitRepository
 
     public function addCommitToContributor($commit)
     {
-        $contributor = sprintf(
-            '%s<br /><small>%s</small>',
-            trim($commit['commiter']),
-            trim($commit['commiterEmail'])
-        );
+        $email = trim($commit['commiterEmail']);
+
+        if (!isset($this->commitsByContributor[$email])) {
+            $this->commitsByContributor[$email] = array(
+                'name' => trim($commit['commiter']),
+                'commits' => array()
+            );
+        }
 
         $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
-        $this->commitsByContributor[$contributor][$commitDate][] = $commit;
+        $this->commitsByContributor[$email]['commits'][$commitDate][] = $commit;
     }
 
     /**
@@ -222,7 +224,7 @@ class GitRepository
         $data = array();
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
         foreach ($this->commitsByDay as $weekday => $numberOfCommits) {
-            $data[] = array($days[$weekday], $numberOfCommits);
+            $data[] = array($days[$weekday - 1], $numberOfCommits);
         }
         return $data;
     }
@@ -236,7 +238,7 @@ class GitRepository
     {
         $data = array();
 
-        foreach ($this->commitsByContributor as $contributor => $commits) {
+        foreach ($this->commitsByContributor as $email => $contributor) {
             $begin = $this->getFirstCommitDate();
             $end = $this->getLastCommitDate();
             $interval = \DateInterval::createFromDateString('1 day');
@@ -246,18 +248,32 @@ class GitRepository
             $totalCommits = 0;
             foreach ($period as $date) {
                 $dayFormatted = $date->format("Y-m-d");
-                $value = isset($commits[$dayFormatted]) ? count($commits[$dayFormatted]) : 0;
+                $value = isset($contributor['commits'][$dayFormatted]) ?
+                    count($contributor['commits'][$dayFormatted]) : 0;
                 $totalCommits += $value;
 
                 $commitsData['x'][] = $dayFormatted;
                 $commitsData['y'][] = $value;
             }
+
             $data[] = array(
-                'contributor' => $contributor,
+                'name' => $contributor['name'],
+                'email' => $email,
                 'commits' => $totalCommits,
                 'data' => $commitsData,
             );
         }
+
+        usort($data, array($this, 'sortContributorsByCommits'));
+
         return $data;
+    }
+
+    public function sortContributorsByCommits($sortA, $sortB)
+    {
+        if ($sortA['commits'] == $sortB['commits']) {
+            return 0;
+        }
+        return ($sortA['commits'] > $sortB['commits']) ? -1 : 1;
     }
 }

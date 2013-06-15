@@ -42,7 +42,7 @@
 <script id="contributor-template" type="text/x-handlebars-template">
     <li class="span6">
         <div id="contributor-{{ i }}" class="thumbnail">
-            <h4>{{{ contributor }}}</h4>
+            <h4>{{ name }}<br /><small>{{ email }}</small></h4>
             <h5>{{ commits }}</h5>
             <div id="chart-{{ i }}" style="height: 200px; width: 100%"></div>
         </div>
