@@ -17,18 +17,17 @@ $app->before(function() use ($app) {
     }
 
     $error = false;
+    $repositoryPath = 'repository';
     $configFilePath = __DIR__ . '/config.php';
-    if (!file_exists($configFilePath)) {
-        return displayError('Config (config.php) file does not exists');
-    }
-
-    $config = require_once __DIR__ . '/config.php';
-    if (!isset($config['repositoryPath'])) {
-        return displayError('Config value for repositoryPath does not exist');
+    if (file_exists($configFilePath)) {
+        $config = require_once __DIR__ . '/config.php';
+        if (isset($config['repositoryPath'])) {
+            $repositoryPath = $config['repositoryPath'];
+        }
     }
 
     try {
-        $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $config['repositoryPath']);
+        $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
         $repository = new PrettyGit\GitRepository($gitWrapper);
         $repository->loadCommits();
         $app['repository'] = $repository;
