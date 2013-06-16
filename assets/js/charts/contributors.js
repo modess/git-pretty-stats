@@ -23,7 +23,7 @@ renderCommitsByContributorsChart = function(data) {
       },
       plotOptions: {
         series: {
-          lineWidth: 0,
+          lineWidth: 1,
           marker: {
             enabled: false
           }
