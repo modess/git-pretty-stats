@@ -30,6 +30,7 @@ Now go to your web browser and go to the URL where you've set everything up.
 ### Commit activity
 ![](http://www.codingswag.com/wp-content/uploads/2013/06/contributors.png)
 
+***
 
 ## Powered by
 * [php-git-repo](https://github.com/ornicar/php-git-repo)
