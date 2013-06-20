@@ -10,6 +10,11 @@
         <title>git-pretty-stats</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
+
+        {% if statsEndpoint %}
+        <link rel="stats endpoint" id="stats-endpoint" href="{{ statsEndpoint }}">
+        {% endif %}
+
         <link rel="stylesheet" href="{{ assetRoot }}/assets/vendor/flat-ui-2.0/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="{{ assetRoot }}/assets/vendor/font-awesome-3.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ assetRoot }}/assets/vendor/flat-ui-2.0/css/flat-ui.css">

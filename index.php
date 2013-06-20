@@ -48,7 +48,8 @@ $app->get('/', function() use($app) {
         'index.html',
         array(
             'currentBranch' => $app['repository']->getGitWrapper()->getCurrentBranch(),
-            'commits' => $app['repository']->getNumberOfCommits(),
+            'commits'       => $app['repository']->getNumberOfCommits(),
+            "statsEndpoint" => $app["request"]->getBaseUrl() . "/stats"
         )
     );
 });
