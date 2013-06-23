@@ -16,4 +16,8 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <php>
+        <ini name="date.timezone" value="Europe/Stockholm"/>
+    </php>
 </phpunit>

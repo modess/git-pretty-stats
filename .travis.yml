@@ -2,6 +2,5 @@ language: php
 php:
   - 5.3
 before_script:
-  - echo 'date.timezone = "Europe/Stockholm"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install --dev
 script: phpunit --coverage-text
