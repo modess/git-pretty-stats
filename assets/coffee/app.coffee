@@ -11,7 +11,7 @@ loadContent = ->
     $('#loader').modal { show: true }
 
     $.ajax({
-        url: "/stats"
+        url: $('#stats-endpoint').attr 'href'
         success: (data) ->
             if (typeof data.commits_by_date == "undefined" && data.commits_by_date == null)
                 $("#loader h3").html "Shit..."

@@ -14,7 +14,7 @@ loadContent = function() {
     show: true
   });
   return $.ajax({
-    url: "/stats",
+    url: $('#stats-endpoint').attr('href'),
     success: function(data) {
       if (typeof data.commits_by_date === "undefined" && data.commits_by_date === null) {
         $("#loader h3").html("Shit...");

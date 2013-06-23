@@ -11,6 +11,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+$app->error(function(\Exception $e) use($app) {
+    return $app["twig"]->render("error.html", array("message" => $e->getMessage()));
+});
+
 $app->before(function() use ($app) {
     if ($app['request']->getRequestUri() == '/error') {
         return true;
@@ -32,21 +36,20 @@ $app->before(function() use ($app) {
         $repository->loadCommits();
         $app['repository'] = $repository;
     } catch (Exception $e) {
-        return displayError('The repository path does not contain a valid git repository');
+        // Catch all possible errors while loading the repository, re-wrap it with a friendlier
+        // message and re-throw so it's caught by the error handler:
+        // (the original exception is chained to the new one):
+        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e); 
     }
 });
-
-function displayError($message) {
-    global $app;
-    return new Response($app['twig']->render('error.html', array('message' => $message)), 500);
-}
 
 $app->get('/', function() use($app) {
     return $app['twig']->render(
         'index.html',
         array(
             'currentBranch' => $app['repository']->getGitWrapper()->getCurrentBranch(),
-            'commits' => $app['repository']->getNumberOfCommits(),
+            'commits'       => $app['repository']->getNumberOfCommits(),
+            "statsEndpoint" => $app["request"]->getBaseUrl() . "/stats"
         )
     );
 });

@@ -1,13 +1,12 @@
-{% include '_header.html' %}
+{% extends "_layout.html" %}
 
-            <div class="container">
+{% block page_content %}
+  <div class="container">
 
-                <h1>Something went wrong...</h1>
-                <div class="alert alert-error alert-block">
-                    <h4>{{ message }}</h4>
-                </div>
+      <h1>Something went wrong...</h1>
+      <div class="alert alert-error alert-block">
+          <h4>{{ message }}</h4>
+      </div>
 
-            </div>
-
-{% include '_footer.html' %}
-
+  </div>
+{% endblock %}
