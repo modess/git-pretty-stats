@@ -10,6 +10,11 @@ Graphs that are included:
 * Commits by day of week
 * Commits by contributor
 
+## Requirements
+
+* PHP 5.3
+* Git
+
 ## Installation
 Start by clone this repository and setup your web server
 
