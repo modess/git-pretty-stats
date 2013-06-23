@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        {% if statsEndpoint %}
+        {% if statsEndpoint is defined %}
         <link rel="stats endpoint" id="stats-endpoint" href="{{ statsEndpoint }}">
         {% endif %}
 
