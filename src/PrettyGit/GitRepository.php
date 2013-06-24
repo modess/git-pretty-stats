@@ -46,6 +46,9 @@ class GitRepository
         $this->gitWrapper = $gitWrapper;
     }
 
+    /**
+     * @return \PHPGit_Repository
+     */
     public function getGitWrapper()
     {
         return $this->gitWrapper;
@@ -93,7 +96,9 @@ class GitRepository
 
     /**
      * Convert a formatted log string into an array
+     *
      * @param string $logOutput The output from a `git log` command formated using $this->logFormat
+     * @return array
      */
     public function parseLogsIntoArray($logOutput)
     {
@@ -124,6 +129,13 @@ class GitRepository
         return $commits;
     }
 
+    /**
+     * Increment commit statistics
+     *
+     * @param array $stats The array of commits
+     * @param string $key Key to increment
+     * @return void
+     */
     public function addCommitToStats(&$stats, $key)
     {
         if (!isset($stats[$key])) {
@@ -132,6 +144,12 @@ class GitRepository
         $stats[$key]++;
     }
 
+    /**
+     * Add a commit to contributor statistics
+     *
+     * @param array $commit
+     * @return void
+     */
     public function addCommitToContributor($commit)
     {
         $email = trim($commit['commiterEmail']);
@@ -164,12 +182,18 @@ class GitRepository
         return $statistics;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getFirstCommitDate()
     {
         $firstDate = array_slice($this->commitsByDate, 0, 1);
         return new \DateTime(key($firstDate));
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getLastCommitDate()
     {
         $lastDate = key(array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1));
@@ -269,6 +293,13 @@ class GitRepository
         return $data;
     }
 
+    /**
+     * Sort contributors by number of commits they have in descending order
+     *
+     * @param array $sortA
+     * @param array $sortB
+     * @return bool
+     */
     public function sortContributorsByCommits($sortA, $sortB)
     {
         if ($sortA['commits'] == $sortB['commits']) {
