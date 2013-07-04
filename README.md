@@ -2,7 +2,7 @@
 
 You know those cool graphs and statistics you can get for a repository on github? The things is that (unfortunately) not all git repositories are hosted on github for various reasons. This is the tool for rendering graphs for your repository that can be hosted anywhere, and it looks great.
 
-## Features (v1.0.0)
+## Features (v0.1.0)
 Graphs that are included:
 
 * Commits by date
@@ -27,6 +27,13 @@ Now go to your web browser and go to the URL where you've set everything up.
 
 *Disclaimer: the tool has been tested to work on repositories up to 10 000 commits. If your repository have a higher number of commits than that you might experience issues.*
 
+## Contribute
+1. Check for [open issues](https://github.com/modess/git-pretty-stats/issues) or open a fresh issue to start a discussion around a feature idea or a bug.
+2. Fork the [git-pretty-stats](https://github.com/modess/git-pretty-stats) repository on Github to start making your changes.
+3. Write a test which shows that the bug was fixed or that the feature works as expected. Make sure you have **100% code coverage**.
+4. Send a pull request. Make sure to add yourself to CONTRIBUTORS.md.
+
+
 ## Screenshots
 
 ### Commit activity
@@ -49,7 +56,8 @@ Now go to your web browser and go to the URL where you've set everything up.
 * [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
 
 ## TODO
-* Cache for larger repositories
+* Cache for large repositories
 * Handle multiple repositories
+* More graphs/statistics
 * Additions / deletions for contributors
 
