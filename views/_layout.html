@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="main">
     <head>
         {# Retrieve the base url for this request, and serve static assets from there,
            so that they're available also under relative paths #}
@@ -7,7 +7,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>git-pretty-stats</title>
+        <title>Git Pretty Stats</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -30,7 +30,7 @@
         <div class="footer">
             <div class="container">
                 <div class="row">
-                    <strong>git-pretty-stats</strong> -
+                    <strong>Git Pretty Stats</strong> -
                     <a href="http://www.codingswag.com/git-pretty-stats">homepage</a> -
                     <a href="http://www.github.com/modess/git-pretty-stats">github repository</a>
                 </div>
@@ -51,6 +51,8 @@
         <script src="{{ assetRoot }}/assets/vendor/flat-ui-2.0/js/application.js"></script>
         <script src="{{ assetRoot }}/assets/vendor/highcharts-3.0.2/highcharts.js"></script>
         <script src="{{ assetRoot }}/assets/vendor/handlebars-1.0.0/handlebars.js"></script>
+        <script src="{{ assetRoot }}/assets/vendor/angularjs-1.0.7/angular.min.js"></script>
+        <script src="{{ assetRoot }}/assets/vendor/angularjs-1.0.7/angular-resource.min.js"></script>
 
         <script src="{{ assetRoot }}/assets/js/charts/commits.js"></script>
         <script src="{{ assetRoot }}/assets/js/charts/contributors.js"></script>

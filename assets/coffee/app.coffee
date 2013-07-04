@@ -5,26 +5,50 @@ $ ->
             e.preventDefault()
             $(this).tab 'show'
     )
-    loadContent()
 
-loadContent = ->
+angular.module("SharedServices", [])
+.config(($httpProvider) ->
+  $httpProvider.responseInterceptors.push "myHttpInterceptor"
+  spinnerFunction = (data, headersGetter) ->
     $('#loader').modal { show: true }
 
-    $.ajax({
-        url: $('#stats-endpoint').attr 'href'
-        success: (data) ->
-            if (typeof data.commits_by_date == "undefined" && data.commits_by_date == null)
-                $("#loader h3").html "Shit..."
-                $("#loader p").html "Something went wrong"
-                return false
+  $httpProvider.defaults.transformRequest.push spinnerFunction
+)
+.factory "myHttpInterceptor", ($q, $window) ->
+    (promise) ->
+      promise.then ((response) ->
+        $('#loader').modal 'hide'
+        # response
+      ), (response) ->
+        $('#loader').modal 'hide'
+        # $q.reject response
 
-            $('#loader').modal 'hide'
+angular.module("main", ["SharedServices", "ngResource"])
+.config ($interpolateProvider) ->
+  $interpolateProvider.startSymbol('{[').endSymbol(']}')
+.config ($routeProvider) ->
+  $routeProvider
+    .when '/index',
+      controller: IndexCtrl
+    .otherwise
+      redirectTo: '/index'
 
-            renderCommitsByDateChart data.commits_by_date
-            renderCommitsByHourChart data.commits_by_hour
-            renderCommitsByDayChart data.commits_by_day
-            $("a[href='#contributors']").trigger 'click'
-            renderCommitsByContributorsChart data.commits_by_contributor
-            $("a[href='#commits']").trigger 'click'
-    })
+IndexCtrl = ->
+  $('#loader').modal { show: true }
 
+  $.ajax({
+      url: $('#stats-endpoint').attr 'href'
+      success: (data) ->
+          if (typeof data.commits_by_date == "undefined" && data.commits_by_date == null)
+              $("#loader h3").html "Shit..."
+              $("#loader p").html "Something went wrong"
+              return false
+
+          $('#loader').modal 'hide'
+          renderCommitsByDateChart data.commits_by_date
+          renderCommitsByHourChart data.commits_by_hour
+          renderCommitsByDayChart data.commits_by_day
+          $("a[href='#contributors']").trigger 'click'
+          renderCommitsByContributorsChart data.commits_by_contributor
+          $("a[href='#commits']").trigger 'click'
+  })
