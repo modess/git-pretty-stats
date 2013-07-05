@@ -15,8 +15,9 @@ $app->error(function(\Exception $e) use($app) {
     return $app["twig"]->render("error.html", array("message" => $e->getMessage()));
 });
 
-$app->before(function() use ($app) {
-    $repositoryPath = 'repository';
+function loadRepository ($path)
+{
+    $repositoryPath = 'repositories';
     $configFilePath = __DIR__ . '/config.php';
     if (file_exists($configFilePath)) {
         $config = require_once __DIR__ . '/config.php';
@@ -24,6 +25,8 @@ $app->before(function() use ($app) {
             $repositoryPath = $config['repositoryPath'];
         }
     }
+
+    $repositoryPath .= '/' . $path;
 
     try {
         $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
@@ -34,24 +37,30 @@ $app->before(function() use ($app) {
         // Catch all possible errors while loading the repository, re-wrap it with a friendlier
         // message and re-throw so it's caught by the error handler:
         // (the original exception is chained to the new one):
-        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e); 
+        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
     }
-});
 
-$app->get('/', function() use($app) {
+    return $repository;
+}
+
+$app->get('repository/{path}', function($path) use($app) {
+    $repository = loadRepository($path);
+
     return $app['twig']->render(
-        'index.html',
+        'repository.html',
         array(
-            'currentBranch' => $app['repository']->getGitWrapper()->getCurrentBranch(),
-            'commits'       => $app['repository']->getNumberOfCommits(),
-            "statsEndpoint" => $app["request"]->getBaseUrl() . "/stats"
+            'currentBranch' => $repository->getGitWrapper()->getCurrentBranch(),
+            'commits'       => $repository->getNumberOfCommits(),
+            "statsEndpoint" => $app["request"]->getBaseUrl() . "/stats/" . $path,
         )
     );
 });
 
-$app->get('/stats', function() use($app) {
+$app->get('/stats/{path}', function($path) use($app) {
+    $repository = loadRepository($path);
+
     return $app->json(
-        $app['repository']->getStatisticsForIndex()
+        $repository->getStatisticsForIndex()
     );
 });
 
