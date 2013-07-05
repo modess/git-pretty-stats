@@ -1,5 +1,7 @@
 {% extends "_layout.html" %}
 
+{% block page_title %}{{ name }} | {% endblock %}
+
 {% block page_content %}
     {% include '_repositoryHeader.html' %}
     <div class="container" ng-controller="IndexCtrl">
@@ -49,7 +51,4 @@
         </li>
     </script>
     {% endraw %}
-
-    <div class="push"></div>
-
 {% endblock %}
