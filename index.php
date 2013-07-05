@@ -67,9 +67,10 @@ $app->get('repository/{path}', function ($path) use ($app) {
     return $app['twig']->render(
         'repository.html',
         array(
-            'currentBranch' => $repository->getGitWrapper()->getCurrentBranch(),
+            'name'          => $repository->getName(),
+            'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
             'commits'       => $repository->getNumberOfCommits(),
-            "statsEndpoint" => $app["request"]->getBaseUrl() . "/stats/" . $path,
+            'statsEndpoint' => $app["request"]->getBaseUrl() . "/stats/" . $path,
         )
     );
 });
