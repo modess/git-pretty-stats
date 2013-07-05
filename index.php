@@ -16,11 +16,6 @@ $app->error(function(\Exception $e) use($app) {
 });
 
 $app->before(function() use ($app) {
-    if ($app['request']->getRequestUri() == '/error') {
-        return true;
-    }
-
-    $error = false;
     $repositoryPath = 'repository';
     $configFilePath = __DIR__ . '/config.php';
     if (file_exists($configFilePath)) {
