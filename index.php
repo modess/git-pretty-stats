@@ -29,6 +29,8 @@ $app->before(function() use ($app) {
     $config['repositoriesPath'] = $repositoriesPath;
 
     $app['config'] = $config;
+
+    $app['repositoryList'] = new PrettyGit\RepositoryList($repositoriesPath);
 });
 
 function loadRepository ($app, $path) {
@@ -49,14 +51,10 @@ function loadRepository ($app, $path) {
 }
 
 $app->get('/', function () use ($app) {
-    $repositoriesPath = $app['config']['repositoriesPath'];
-
-    $repositoryList = new PrettyGit\RepositoryList($repositoriesPath);
-
     return $app['twig']->render(
         'index.html',
         array(
-            'repositories' => $repositoryList->getRepositories()
+            'repositories' => $app['repositoryList']->getRepositories()
         )
     );
 });
@@ -67,6 +65,7 @@ $app->get('repository/{path}', function ($path) use ($app) {
     return $app['twig']->render(
         'repository.html',
         array(
+            'repositories'  => $app['repositoryList']->getRepositories(),
             'name'          => $repository->getName(),
             'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
             'commits'       => $repository->getNumberOfCommits(),
