@@ -15,19 +15,24 @@ $app->error(function(\Exception $e) use($app) {
     return $app["twig"]->render("error.html", array("message" => $e->getMessage()));
 });
 
-function loadRepository ($path)
-{
-    $repositoryPath = 'repositories';
+$app->before(function() use ($app) {
+    $repositoriesPath = 'repositories';
+
     $configFilePath = __DIR__ . '/config.php';
     if (file_exists($configFilePath)) {
-        $config = require_once __DIR__ . '/config.php';
-        if (isset($config['repositoryPath'])) {
-            $repositoryPath = $config['repositoryPath'];
+        $configFile = require_once __DIR__ . '/config.php';
+        if (isset($configFile['repositoriesPath'])) {
+            $repositoriesPath = $configFile['repositoriesPath'];
         }
     }
 
-    $repositoryPath .= '/' . $path;
+    $config['repositoriesPath'] = $repositoriesPath;
 
+    $app['config'] = $config;
+});
+
+function loadRepository ($app, $path) {
+    $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
     try {
         $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
         $repository = new PrettyGit\GitRepository($gitWrapper);
@@ -43,8 +48,21 @@ function loadRepository ($path)
     return $repository;
 }
 
-$app->get('repository/{path}', function($path) use($app) {
-    $repository = loadRepository($path);
+$app->get('/', function () use ($app) {
+    $repositoriesPath = $app['config']['repositoriesPath'];
+
+    $repositoryList = new PrettyGit\RepositoryList($repositoriesPath);
+
+    return $app['twig']->render(
+        'index.html',
+        array(
+            'repositories' => $repositoryList->getRepositories()
+        )
+    );
+});
+
+$app->get('repository/{path}', function ($path) use ($app) {
+    $repository = loadRepository($app, $path);
 
     return $app['twig']->render(
         'repository.html',
@@ -57,7 +75,7 @@ $app->get('repository/{path}', function($path) use($app) {
 });
 
 $app->get('/stats/{path}', function($path) use($app) {
-    $repository = loadRepository($path);
+    $repository = loadRepository($app, $path);
 
     return $app->json(
         $repository->getStatisticsForIndex()
