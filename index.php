@@ -30,7 +30,12 @@ $app->before(function() use ($app) {
 
     $app['config'] = $config;
 
-    $app['repositoryList'] = new PrettyGit\RepositoryList($repositoriesPath);
+    $repositoryList = new PrettyGit\RepositoryList($repositoriesPath);
+    $app['repositories'] = $repositoryList->getRepositories();
+
+    if (count($app['repositories']) == 0) {
+        throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
+    }
 });
 
 function loadRepository ($app, $path) {
@@ -54,7 +59,7 @@ $app->get('/', function () use ($app) {
     return $app['twig']->render(
         'index.html',
         array(
-            'repositories' => $app['repositoryList']->getRepositories()
+            'repositories' => $app['repositories']
         )
     );
 });
@@ -65,7 +70,7 @@ $app->get('repository/{path}', function ($path) use ($app) {
     return $app['twig']->render(
         'repository.html',
         array(
-            'repositories'  => $app['repositoryList']->getRepositories(),
+            'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
             'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
             'commits'       => $repository->getNumberOfCommits(),
