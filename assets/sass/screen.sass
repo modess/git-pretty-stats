@@ -1,11 +1,25 @@
 @import settings
 
 body, html
-  height: 100%
-  width: 100%
+  margin-bottom: 100px
 
-.push
-  height: 100px
+  &.index
+    background: $primary-color
+
+.todo
+  margin-top: 5em
+
+  li
+    padding: 0
+    &:first-child
+      -webkit-border-radius: 6px 6px 0 0
+      -moz-border-radius: 6px 6px 0 0
+      border-radius: 6px 6px 0 0
+
+  a
+    display: block
+    padding: 18px 42px 17px 25px
+    text-decoration: none
 
 .header
   background: $primary-color
@@ -22,33 +36,6 @@ body, html
   bottom: 0
   background: #ECF0F1
   text-align: center
-
-.entire
-  background: $primary-color
-  height: 100%
-  width: 100%
-
-  h1
-    color: #fff
-    text-align: center
-    font-size: 5em
-    line-height: 2em
-
-  .mrm
-    margin-right: 35px
-
-  a
-    display: block
-    padding: 18px 42px 17px 25px
-    text-decoration: none
-
-  .todo
-    li
-      padding: 0
-      &:first-child
-        -webkit-border-radius: 6px 6px 0 0
-        -moz-border-radius: 6px 6px 0 0
-        border-radius: 6px 6px 0 0
 
 #tabs
   margin-top: 15px
