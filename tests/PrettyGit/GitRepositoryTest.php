@@ -61,6 +61,36 @@ class GitRepositoryTest extends \PHPUnit_Framework_TestCase
         return $repo;
     }
 
+    public function testGetName()
+    {
+        $this->gitWrapper
+            ->shouldReceive('git')
+            ->with('rev-parse --show-toplevel')
+            ->andReturn('some/path/to/git-repo');
+
+        $repo = $this->createInstance();
+        $this->assertEquals(
+            'git-repo',
+            $repo->getName(),
+            'Name not correct'
+        );
+    }
+
+    public function testNumberOfCommitsFromGitAreCorrect()
+    {
+        $this->gitWrapper
+            ->shouldReceive('git')
+            ->with('git rev-list --count HEAD')
+            ->andReturn(5);
+
+        $repo = $this->createInstance();
+        $this->assertEquals(
+            5,
+            $repo->countCommitsFromGit(),
+            'Number of commits are incorrect from git'
+        );
+    }
+
     public function testNumberOfCommitsAreCorrect()
     {
         $repo = $this->createInstance();
