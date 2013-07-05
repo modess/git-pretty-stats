@@ -12,19 +12,15 @@ angular.module("SharedServices", []).config(function($httpProvider) {
   var spinnerFunction;
 
   $httpProvider.responseInterceptors.push("myHttpInterceptor");
-  spinnerFunction = function(data, headersGetter) {
-    return $('#loader').modal({
-      show: true
-    });
-  };
+  spinnerFunction = function(data, headersGetter) {};
+  $('#loader').modal({
+    show: true
+  });
   return $httpProvider.defaults.transformRequest.push(spinnerFunction);
 }).factory("myHttpInterceptor", function($q, $window) {
   return function(promise) {
-    return promise.then((function(response) {
-      return $('#loader').modal('hide');
-    }), function(response) {
-      return $('#loader').modal('hide');
-    });
+    promise.then((function(response) {}, $('#loader').modal('hide')), function(response) {});
+    return $('#loader').modal('hide');
   };
 });
 
