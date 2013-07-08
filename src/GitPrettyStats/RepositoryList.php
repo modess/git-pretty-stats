@@ -1,8 +1,9 @@
 <?php
-namespace PrettyGit;
+namespace GitPrettyStats;
 
 /**
  * Simple class for fetching all Git repositories from given path
+ * @author Niklas Modess <niklas@codingswag.com>
  */
 class RepositoryList
 {
@@ -38,7 +39,7 @@ class RepositoryList
 
                 try {
                     $gitWrapper = new \PHPGit_Repository(__DIR__ . '/../../' . $this->path . '/' . $entry);
-                    $repository = new GitRepository($gitWrapper);
+                    $repository = new Repository($gitWrapper);
                     $repositories[] = array(
                         'name' => $repository->getName(),
                         'commits' => $repository->countCommitsFromGit(),

@@ -1,11 +1,11 @@
 <?php
-namespace PrettyGit;
+namespace GitPrettyStats;
 
 /**
- * Class GitRepository
+ * Class Repository
  * @author Niklas Modess <niklas@codingswag.com>
  */
-class GitRepository
+class Repository
 {
     /** @var \PHPGit_Repository */
     public $gitWrapper;

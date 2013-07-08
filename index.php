@@ -4,6 +4,8 @@ set_time_limit(300);
 require_once __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Response;
+use GitPrettyStats\Repository;
+use GitPrettyStats\RepositoryList;
 
 $app = new Silex\Application();
 
@@ -30,7 +32,7 @@ $app->before(function() use ($app) {
 
     $app['config'] = $config;
 
-    $repositoryList = new PrettyGit\RepositoryList($repositoriesPath);
+    $repositoryList = new RepositoryList($repositoriesPath);
     $app['repositories'] = $repositoryList->getRepositories();
 
     if (count($app['repositories']) == 0) {
@@ -42,7 +44,7 @@ function loadRepository ($app, $path) {
     $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
     try {
         $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
-        $repository = new PrettyGit\GitRepository($gitWrapper);
+        $repository = new Repository($gitWrapper);
         $repository->loadCommits();
         $app['repository'] = $repository;
     } catch (Exception $e) {

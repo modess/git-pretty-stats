@@ -1,9 +1,9 @@
 <?php
-namespace PrettyGit;
+namespace GitPrettyStats;
 
 use Mockery as m;
 
-class GitRepositoryTest extends \PHPUnit_Framework_TestCase
+class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     protected $repository;
     protected $gitWrapper;
@@ -57,7 +57,7 @@ class GitRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function createInstance()
     {
-        $repo = new \PrettyGit\GitRepository($this->gitWrapper);
+        $repo = new Repository($this->gitWrapper);
         return $repo;
     }
 
