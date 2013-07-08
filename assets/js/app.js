@@ -47,12 +47,13 @@ IndexCtrl = function() {
         return false;
       }
       $('#loader').modal('hide');
+      $("a[href='#commits']").trigger('click');
       renderCommitsByDateChart(data.commits_by_date);
       renderCommitsByHourChart(data.commits_by_hour);
       renderCommitsByDayChart(data.commits_by_day);
       $("a[href='#contributors']").trigger('click');
       renderCommitsByContributorsChart(data.commits_by_contributor);
-      return $("a[href='#commits']").trigger('click');
+      return $("a[href='#statistics']").trigger('click');
     }
   });
 };
