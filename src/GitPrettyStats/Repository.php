@@ -1,6 +1,8 @@
 <?php
 namespace GitPrettyStats;
 
+use Carbon\Carbon;
+
 /**
  * Class Repository
  * @author Niklas Modess <niklas@codingswag.com>
@@ -207,21 +209,21 @@ class Repository
     }
 
     /**
-     * @return \DateTime
+     * @return Carbon
      */
     public function getFirstCommitDate()
     {
         $firstDate = array_slice($this->commitsByDate, 0, 1);
-        return new \DateTime(key($firstDate));
+        return new Carbon(key($firstDate));
     }
 
     /**
-     * @return \DateTime
+     * @return Carbon
      */
     public function getLastCommitDate()
     {
         $lastDate = key(array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1));
-        return new \DateTime(date("Y-m-d", strtotime($lastDate . ' +1 day')));
+        return new Carbon(date("Y-m-d", strtotime($lastDate . ' +1 day')));
     }
 
     /**
