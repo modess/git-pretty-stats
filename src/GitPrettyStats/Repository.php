@@ -188,17 +188,19 @@ class Repository
     }
 
     /**
-     * Returns array for index page with statistics for charts
+     * Returns array with statistics
      *
      * @return array
      */
-    public function getStatisticsForIndex()
+    public function getStatistics()
     {
         $statistics = array(
-            'commits_by_date' => $this->getCommitsByDate(),
-            'commits_by_hour' => $this->getCommitsByHour(),
-            'commits_by_day' => $this->getCommitsByDay(),
-            'commits_by_contributor' => $this->getCommitsByContributor(),
+            'charts' => array(
+                'date' => $this->getCommitsByDate(),
+                'hour' => $this->getCommitsByHour(),
+                'day' => $this->getCommitsByDay(),
+                'contributor' => $this->getCommitsByContributor(),
+            )
         );
 
         return $statistics;

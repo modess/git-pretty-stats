@@ -85,7 +85,7 @@ $app->get('/stats/{path}', function($path) use($app) {
     $repository = loadRepository($app, $path);
 
     return $app->json(
-        $repository->getStatisticsForIndex()
+        $repository->getStatistics()
     );
 });
 

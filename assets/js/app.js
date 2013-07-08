@@ -41,18 +41,18 @@ IndexCtrl = function() {
   return $.ajax({
     url: $('#stats-endpoint').attr('href'),
     success: function(data) {
-      if (typeof data.commits_by_date === "undefined" && data.commits_by_date === null) {
+      if (typeof data.charts.date === "undefined" && data.charts.date === null) {
         $("#loader h3").html("Shit...");
         $("#loader p").html("Something went wrong");
         return false;
       }
       $('#loader').modal('hide');
       $("a[href='#commits']").trigger('click');
-      renderCommitsByDateChart(data.commits_by_date);
-      renderCommitsByHourChart(data.commits_by_hour);
-      renderCommitsByDayChart(data.commits_by_day);
+      renderCommitsByDateChart(data.charts.date);
+      renderCommitsByHourChart(data.charts.hour);
+      renderCommitsByDayChart(data.charts.day);
       $("a[href='#contributors']").trigger('click');
-      renderCommitsByContributorsChart(data.commits_by_contributor);
+      renderCommitsByContributorsChart(data.charts.contributor);
       return $("a[href='#statistics']").trigger('click');
     }
   });
