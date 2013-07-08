@@ -1,11 +1,15 @@
 <?php
 namespace PrettyGit;
 
+/**
+ * Simple class for fetching all Git repositories from given path
+ */
 class RepositoryList
 {
     /** @var \PHPGit_Repository */
     public $gitWrapper;
 
+    /** @var string Path to repositories */
     public $path;
 
     /**
@@ -17,6 +21,11 @@ class RepositoryList
         $this->path = $path;
     }
 
+    /**
+     * Fetch all repositories
+     *
+     * @return array
+     */
     public function getRepositories ()
     {
         $repositories = array();
