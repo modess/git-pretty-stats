@@ -1,15 +1,44 @@
 @import settings
 
-body
+body, html
   margin-bottom: 100px
+
+  &.index
+    background: $primary-color
+
+.todo
+  margin-top: 5em
+
+  li
+    padding: 0
+    &:first-child
+      -webkit-border-radius: 6px 6px 0 0
+      -moz-border-radius: 6px 6px 0 0
+      border-radius: 6px 6px 0 0
+    &:last-child
+      padding-bottom: 0
+
+  a
+    display: block
+    padding: 18px 42px 17px 25px
+    text-decoration: none
 
 .header
   background: $primary-color
 
   h1
     color: white
+
     small
       color: tint($primary-color, 50%)
+
+  .dropdown-menu
+    right: 0
+    width: auto
+    left: auto
+
+  .select
+    margin-top: 8px
 
 .footer
   width: 100%

@@ -16,15 +16,30 @@ $app->error(function(\Exception $e) use($app) {
 });
 
 $app->before(function() use ($app) {
-    $repositoryPath = 'repository';
+    $repositoriesPath = 'repositories';
+
     $configFilePath = __DIR__ . '/config.php';
     if (file_exists($configFilePath)) {
-        $config = require_once __DIR__ . '/config.php';
-        if (isset($config['repositoryPath'])) {
-            $repositoryPath = $config['repositoryPath'];
+        $configFile = require_once __DIR__ . '/config.php';
+        if (isset($configFile['repositoriesPath'])) {
+            $repositoriesPath = $configFile['repositoriesPath'];
         }
     }
 
+    $config['repositoriesPath'] = $repositoriesPath;
+
+    $app['config'] = $config;
+
+    $repositoryList = new PrettyGit\RepositoryList($repositoriesPath);
+    $app['repositories'] = $repositoryList->getRepositories();
+
+    if (count($app['repositories']) == 0) {
+        throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
+    }
+});
+
+function loadRepository ($app, $path) {
+    $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
     try {
         $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
         $repository = new PrettyGit\GitRepository($gitWrapper);
@@ -34,24 +49,41 @@ $app->before(function() use ($app) {
         // Catch all possible errors while loading the repository, re-wrap it with a friendlier
         // message and re-throw so it's caught by the error handler:
         // (the original exception is chained to the new one):
-        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e); 
+        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
     }
-});
 
-$app->get('/', function() use($app) {
+    return $repository;
+}
+
+$app->get('/', function () use ($app) {
     return $app['twig']->render(
         'index.html',
         array(
-            'currentBranch' => $app['repository']->getGitWrapper()->getCurrentBranch(),
-            'commits'       => $app['repository']->getNumberOfCommits(),
-            "statsEndpoint" => $app["request"]->getBaseUrl() . "/stats"
+            'repositories' => $app['repositories']
         )
     );
 });
 
-$app->get('/stats', function() use($app) {
+$app->get('repository/{path}', function ($path) use ($app) {
+    $repository = loadRepository($app, $path);
+
+    return $app['twig']->render(
+        'repository.html',
+        array(
+            'repositories'  => $app['repositories'],
+            'name'          => $repository->getName(),
+            'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
+            'commits'       => $repository->getNumberOfCommits(),
+            'statsEndpoint' => $app["request"]->getBaseUrl() . "/stats/" . $path,
+        )
+    );
+});
+
+$app->get('/stats/{path}', function($path) use($app) {
+    $repository = loadRepository($app, $path);
+
     return $app->json(
-        $app['repository']->getStatisticsForIndex()
+        $repository->getStatisticsForIndex()
     );
 });
 

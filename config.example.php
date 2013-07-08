@@ -1,5 +1,5 @@
 <?
 
 return array(
-    'repositoryPath' => 'repository',
+    'repositoriesPath' => 'repositories',
 );

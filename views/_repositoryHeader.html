@@ -1,0 +1,26 @@
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="span10">
+                        <h1>{{ name }} @ {{ branch }} <small>{{ commits }} commits</small></h1>
+                    </div>
+                    <div class="span2">
+                        <div class="btn-group select select-block">
+                            <i class="dropdown-arrow"></i>
+                            <button class="btn dropdown-toggle clearfix btn-info" data-toggle="dropdown">
+                                <span class="filter-option pull-left">Repositories</span>&nbsp;<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                {% for repository in repositories %}
+                                <li rel="0">
+                                    <a tabindex="-1" href="{{ repository.name|url_encode }}">
+                                        <span class="pull-left">{{ repository.name }}</span>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -20,8 +20,14 @@ Start by clone this repository and setup your web server
 
 Install dependencies using [Composer](http://getcomposer.org/), e.g. `php composer.phar install`
 
-Clone the repository you want to graph in the root of the folder for git-pretty-stats. Using folder name **repository** is recommended since it's the default path, e.g. `git clone <repository-url> repository`
->  To manually set the repository path, copy `config.example.php` to `config.php`. Then change the value of `repositoryPath` in the config file relative to the folder where your desired git repository is located.
+Clone the repositories you want to statistics and graphs for in to the **repositories** folder. 
+
+    cd repositories
+    git clone <repository-url>
+    
+You can clone as many as you want to in to this folder.
+
+>  To manually set the repositories path, copy `config.example.php` to `config.php`. Then change the value of `repositoriesPath` in the config file relative to the folder where your desired git repositories are located.
 
 Now go to your web browser and go to the URL where you've set everything up.
 
@@ -30,7 +36,7 @@ Now go to your web browser and go to the URL where you've set everything up.
 ## Contribute
 1. Check for [open issues](https://github.com/modess/git-pretty-stats/issues) or open a fresh issue to start a discussion around a feature idea or a bug.
 2. Fork the [git-pretty-stats](https://github.com/modess/git-pretty-stats) repository on Github to start making your changes.
-3. Write a test which shows that the bug was fixed or that the feature works as expected. Make sure you have **100% code coverage**.
+3. Write test(s) which shows that the bug was fixed or that the feature works as expected.
 4. Send a pull request. Make sure to add yourself to CONTRIBUTORS.md.
 
 
@@ -57,7 +63,6 @@ Now go to your web browser and go to the URL where you've set everything up.
 
 ## TODO
 * Cache for large repositories
-* Handle multiple repositories
 * More graphs/statistics
 * Additions / deletions for contributors
 

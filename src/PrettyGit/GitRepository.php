@@ -55,6 +55,28 @@ class GitRepository
     }
 
     /**
+     * Get name of repository (top level directory)
+     *
+     * @return string
+     */
+    public function getName ()
+    {
+        $path = $this->getGitWrapper()->git('rev-parse --show-toplevel');
+        $name = substr($path, strrpos($path, '/') + 1);
+        return $name;
+    }
+
+    /**
+     * Count all commits using the git binary
+     *
+     * @return int
+     */
+    public function countCommitsFromGit ()
+    {
+        return $this->getGitWrapper()->git('git rev-list --count HEAD');
+    }
+
+    /**
      * Load commits from git repo
      *
      * @return void
