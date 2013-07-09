@@ -75,7 +75,6 @@ $app->get('repository/{path}', function ($path) use ($app) {
             'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
             'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
-            'commits'       => $repository->getNumberOfCommits(),
             'statsEndpoint' => $app["request"]->getBaseUrl() . "/stats/" . $path,
         )
     );
