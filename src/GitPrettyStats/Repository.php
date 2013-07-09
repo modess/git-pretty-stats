@@ -37,15 +37,19 @@ class Repository
     /** @var array Storage for commits by contributor */
     public $commitsByContributor = array();
 
+    /** @var PrettyGitStats\Statistics */
+    public $statistics;
+
     /**
      * Constructor
      *
-     * @param string $path Path to repository
+     * @param \PHPGit_Repository $gitwrapper Wrapper for git commands
      * @return void
      */
     public function __construct(\PHPGit_Repository $gitWrapper)
     {
         $this->gitWrapper = $gitWrapper;
+        $this->statistics = new Statistics($this);
     }
 
     /**
@@ -99,6 +103,15 @@ class Repository
         return count($this->commits);
     }
 
+    /**
+     * Count number of contributors
+     *
+     * @return int
+     */
+    public function getNumberOfContributors()
+    {
+        return count($this->commitsByContributor);
+    }
 
     /**
      * Return the result of `git log` formatted in a PHP array
@@ -189,14 +202,28 @@ class Repository
         $this->commitsByContributor[$email]['commits'][$commitDate][] = $commit;
     }
 
+    public function getDaysRepositoryBeenActive ()
+    {
+        return $this->getFirstCommitDate()->diffInDays($this->getLastCommitDate());
+    }
+
     /**
-     * Returns array with statistics
+     * Returns array with statistics and graph data
      *
      * @return array
      */
     public function getStatistics()
     {
         $statistics = array(
+            'statistics' => array(
+                $this->statistics->commits(),
+                $this->statistics->contributors(),
+                $this->statistics->contributorsAverageCommits(),
+                $this->statistics->firstCommit(),
+                $this->statistics->latestCommit(),
+                $this->statistics->activeFor(),
+                $this->statistics->averageCommitsPerDay(),
+            ),
             'charts' => array(
                 'date' => $this->getCommitsByDate(),
                 'hour' => $this->getCommitsByHour(),

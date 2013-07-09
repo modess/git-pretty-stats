@@ -3,6 +3,9 @@ namespace GitPrettyStats;
 
 use Mockery as m;
 
+/**
+ * @covers GitPrettyStats\Repository
+ */
 class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     protected $repository;
@@ -116,20 +119,18 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function expectedStatistics()
     {
         return array(
-            array('commits_by_date'),
-            array('commits_by_hour'),
-            array('commits_by_day'),
-            array('commits_by_contributor')
+            array('statistics'),
+            array('charts'),
         );
     }
 
     /**
      * @dataProvider expectedStatistics
      */
-    public function testGetStatisticsForIndex($expectedKey)
+    public function testgetStatistics($expectedKey)
     {
         $repo = $this->createInstance();
-        $result = $repo->getStatisticsForIndex();
+        $result = $repo->getStatistics();
 
         $this->assertArrayHasKey(
             $expectedKey,

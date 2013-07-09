@@ -47,6 +47,7 @@ IndexCtrl = function() {
         return false;
       }
       $('#loader').modal('hide');
+      renderStatistics(data.statistics);
       $("a[href='#commits']").trigger('click');
       renderCommitsByDateChart(data.charts.date);
       renderCommitsByHourChart(data.charts.hour);
