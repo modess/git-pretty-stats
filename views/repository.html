@@ -7,12 +7,19 @@
     <div class="container" ng-controller="IndexCtrl">
 
         <ul class="nav nav-tabs" id="tabs">
-            <li class="active"><a href="#commits" data-toggle="tab">Commit activity</a></li>
+            <li class="active"><a href="#statistics" data-toggle="tab">Statistics</a></li>
+            <li><a href="#commits" data-toggle="tab">Commit activity</a></li>
             <li><a href="#contributors" data-toggle="tab">Contributors</a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="commits" class="tab-pane active">
+            <div id="statistics" class="tab-pane active">
+                <ul class="thumbnails">
+                
+                </ul>
+            </div>
+
+            <div id="commits" class="tab-pane fade">
                 <h3>By date <small>(zoomable)</small></h3>
                 <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
 
@@ -47,6 +54,17 @@
                 <h4>{{ name }}<br /><small>{{ email }}</small></h4>
                 <h5>{{ commits }}</h5>
                 <div id="chart-{{ i }}" style="height: 200px; width: 100%"></div>
+            </div>
+        </li>
+    </script>
+    {% endraw %}
+
+    {% raw %}
+    <script id="statistics-template" type="text/x-handlebars-template">
+        <li class="span4">
+            <div class="thumbnail">
+                <div class="title">{{ title }}</div>
+                <div class="value">{{ value }}</div>
             </div>
         </li>
     </script>
