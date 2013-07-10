@@ -269,6 +269,8 @@ class Repository
     {
         $data = array();
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+
+        ksort($this->commitsByDay);
         foreach ($this->commitsByDay as $weekday => $numberOfCommits) {
             $data[] = array($days[$weekday - 1], $numberOfCommits);
         }

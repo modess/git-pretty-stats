@@ -248,11 +248,11 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $repo->loadCommits();
 
         $expected = array(
+            array("Monday", 2),
+            array("Tuesday", 2),
             array("Friday", 1),
             array("Saturday", 2),
             array("Sunday", 3),
-            array("Monday", 2),
-            array("Tuesday", 2)
         );
 
         $this->assertEquals(
