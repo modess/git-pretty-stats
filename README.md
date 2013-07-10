@@ -4,6 +4,7 @@ You know those cool graphs and statistics you can get for a repository on github
 
 ## Features (v0.2.0)
 
+* Handles multiple repositories
 * Statistics
   - Total commits
   - Total contributors
@@ -12,7 +13,6 @@ You know those cool graphs and statistics you can get for a repository on github
   - Latest commit date
   - Active for (X days)
   - Average commits per day
-
 * Graphs
   - Commits by date
   - Commits by hour of day
