@@ -66,3 +66,4 @@ phpunit.xml
 composer.lock
 !.gitkeep
 config.php
+Guardfile
