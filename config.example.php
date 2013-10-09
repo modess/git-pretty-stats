@@ -1,5 +1,0 @@
-<?
-
-return array(
-    'repositoriesPath' => 'repositories',
-);

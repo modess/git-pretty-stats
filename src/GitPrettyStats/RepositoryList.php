@@ -30,13 +30,26 @@ class RepositoryList
     public function getRepositories ()
     {
         $repositories = array();
-
-        if ($handle = opendir($this->path)) {
+        if ( is_array($this->path) ){
+            foreach ($this->path as $key => $repo) {
+                  try {
+                    $gitWrapper = new \PHPGit_Repository(__DIR__ . '/../../' . $repo . '/');
+                    $repository = new Repository($gitWrapper);
+                    $repositories[] = array(
+                        'name' => $repository->getName(),
+                        'commits' => $repository->countCommitsFromGit(),
+                        'branch' => $repository->getGitWrapper()->getCurrentBranch()
+                    );
+                } catch (Exception $e) {
+                    // Not a valid repository
+                }
+            }
+        }
+        elseif ($handle = opendir($this->path)) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry == '.' || $entry == '..') {
                     continue;
                 }
-
                 try {
                     $gitWrapper = new \PHPGit_Repository(__DIR__ . '/../../' . $this->path . '/' . $entry);
                     $repository = new Repository($gitWrapper);
@@ -50,7 +63,6 @@ class RepositoryList
                 }
             }
         }
-
         return $repositories;
     }
 }
