@@ -43,6 +43,10 @@ $app->before(function() use ($app) {
 
 function loadRepository ($app, $path) {
     $repositoryPath = $app['config']['repositoriesPath'][$path];
+    //trying the old-fashioned way for compatibility
+    if( !realpath($repositoryPath) ){
+        $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
+    }
     try {
         $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
         $repository = new Repository($gitWrapper);
