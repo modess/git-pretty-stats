@@ -27,15 +27,19 @@ $app->before(function() use ($app) {
             $repositoriesPath = $configFile['repositoriesPath'];
         }
     }
+
     $config['repositoriesPath'] = $repositoriesPath;
 
     $app['config'] = $config;
+
     $repositoryList = new RepositoryList($repositoriesPath);
     $app['repositories'] = $repositoryList->getRepositories();
+
     if (count($app['repositories']) == 0) {
         throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
     }
 });
+
 
 function loadRepository ($app, $path) {
     $repositoryPath = $app['config']['repositoriesPath'][$path];
