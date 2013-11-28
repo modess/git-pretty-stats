@@ -72,9 +72,9 @@ class Repository
      */
     public function getName ()
     {
-        return 'Asdf';
-        $path = $this->getClient()->run('rev-parse --show-toplevel');
+        $path = $this->getClient()->run($this->gitter, 'rev-parse --show-toplevel');
         $name = substr($path, strrpos($path, '/') + 1);
+
         return $name;
     }
 
