@@ -62,8 +62,12 @@ class Repository
      */
     public function getName ()
     {
-        $path = $this->getClient()->run($this->gitter, 'rev-parse --show-toplevel');
+        $path = $this->gitter->getPath();
         $name = substr($path, strrpos($path, '/') + 1);
+
+        if (substr($name, -4) == '.git') {
+            $name = substr($name, 0, strlen($name) - 4);
+        }
 
         return trim($name);
     }
