@@ -82,12 +82,12 @@ $app->get('repository/{path}', function ($path) use ($app) {
             'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
             'branch'        => $repository->gitter->getCurrentBranch(),
-            'statsEndpoint' => $app["request"]->getBaseUrl() . "/stats/" . $path,
+            'statsEndpoint' => $app["request"]->getBaseUrl() . "/git-stats/" . $path,
         )
     );
 });
 
-$app->get('/stats/{path}', function($path) use($app) {
+$app->get('/git-stats/{path}', function($path) use($app) {
     $repository = loadRepository($app, $path);
 
     return $app->json(
