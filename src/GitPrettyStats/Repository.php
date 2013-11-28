@@ -207,6 +207,8 @@ class Repository
      */
     public function getFirstCommitDate()
     {
+        ksort($this->commitsByDate);
+
         $firstDate = array_slice($this->commitsByDate, 0, 1);
 
         return new Carbon(key($firstDate));
@@ -217,6 +219,8 @@ class Repository
      */
     public function getLastCommitDate()
     {
+        ksort($this->commitsByDate);
+
         $lastDate = key(array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1));
 
         return new Carbon(date("Y-m-d", strtotime($lastDate . ' +1 day')));
