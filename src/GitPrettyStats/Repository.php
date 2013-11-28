@@ -65,7 +65,7 @@ class Repository
         $path = $this->getClient()->run($this->gitter, 'rev-parse --show-toplevel');
         $name = substr($path, strrpos($path, '/') + 1);
 
-        return $name;
+        return trim($name);
     }
 
     /**
