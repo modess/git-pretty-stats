@@ -122,24 +122,6 @@ class Repository
     }
 
     /**
-     * Return the result of `git log` formatted in a PHP array
-     *
-     * @return array list of commits and their properties
-     **/
-    // public function getCommits($numberOfCommits = 10)
-    // {
-    //     $output = $this->getClient()->git(
-    //         sprintf(
-    //             '--no-pager log -n %d --date=%s --format=format:"%s" --reverse',
-    //             $numberOfCommits,
-    //             $this->dateFormat,
-    //             implode('|', $this->logFormat)
-    //         )
-    //     );
-    //     return $output;
-    // }
-
-    /**
      * Parses commits and adds them to stats
      *
      * @return array
