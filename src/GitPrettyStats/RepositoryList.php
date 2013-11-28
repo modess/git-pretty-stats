@@ -17,7 +17,7 @@ class RepositoryList
      * @param string $path Path to repositories
      * @return void
      */
-    public function __construct($path)
+    public function __construct($path = null)
     {
         $this->path = $path;
     }
@@ -29,28 +29,58 @@ class RepositoryList
      */
     public function getRepositories ()
     {
-        $repositories = array();
+        $repositories        = array();
+        $loadRepositoryPaths = array();
 
-        if ($handle = opendir($this->path)) {
+        // Config with array of paths to repositories
+        if (is_array($this->path)) {
+            foreach ($this->path as $repo) {
+                $loadRepositoryPaths[] = realpath(__DIR__ . '/../../' . $repo . '/');
+            }
+        }
+
+        // Config with path to directory of repositories
+        elseif ($handle = opendir($this->path)) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry == '.' || $entry == '..') {
                     continue;
                 }
 
-                try {
-                    $gitWrapper = new \PHPGit_Repository(__DIR__ . '/../../' . $this->path . '/' . $entry);
-                    $repository = new Repository($gitWrapper);
-                    $repositories[] = array(
-                        'name' => $repository->getName(),
-                        'commits' => $repository->countCommitsFromGit(),
-                        'branch' => $repository->getGitWrapper()->getCurrentBranch()
-                    );
-                } catch (Exception $e) {
-                    // Not a valid repository
-                }
+                $loadRepositoryPaths[] = realpath(__DIR__ . '/../../' . $this->path . '/' . $entry);
+            }
+        }
+
+        // Load repositories
+        foreach ($loadRepositoryPaths as $loadRepositoryPath) {
+            if ($repository = $this->loadRepository($loadRepositoryPath)) {
+                $repositories[] = array(
+                    'name'    => $repository->getName(),
+                    'commits' => $repository->countCommitsFromGit(),
+                    'branch'  => $repository->gitter->getCurrentBranch()
+                );
             }
         }
 
         return $repositories;
+    }
+
+    /**
+     * Load a repository for given path
+     *
+     * @param  string $path Location of reposittory
+     * @return mixed
+     */
+    public function loadRepository ($path)
+    {
+        if ( !is_dir($path)) {
+            return false;
+        }
+
+        try {
+            $repository = new Repository($path);
+            return $repository;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
