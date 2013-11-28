@@ -3,7 +3,7 @@
         "silex/silex": "1.0.*@dev",
         "twig/twig": "1.*",
         "ornicar/php-git-repo": "dev-master",
-        "nesbot/carbon": "dev-master",
+        "nesbot/carbon": "1.6.0",
         "klaussilveira/gitter": "0.2.0"
     },
     "require-dev": {
