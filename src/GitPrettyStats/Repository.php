@@ -2,6 +2,7 @@
 namespace GitPrettyStats;
 
 use Carbon\Carbon;
+use Gitter\Client;
 
 /**
  * Class Repository
@@ -9,8 +10,11 @@ use Carbon\Carbon;
  */
 class Repository
 {
-    /** @var \PHPGit_Repository */
-    public $gitWrapper;
+    /** @var \Gitter\Repository */
+    public $gitter;
+
+    /** @var \Gitter\Client */
+    public $client;
 
     /** @var array Storage for "raw" commits */
     public $commits = array();
@@ -43,21 +47,22 @@ class Repository
     /**
      * Constructor
      *
-     * @param \PHPGit_Repository $gitwrapper Wrapper for git commands
+     * @param \Gitter\Client $client  Git client
      * @return void
      */
-    public function __construct(\PHPGit_Repository $gitWrapper)
+    public function __construct($path)
     {
-        $this->gitWrapper = $gitWrapper;
+        $this->client     = new Client;
+        $this->gitter     = $this->client->getRepository($path);
         $this->statistics = new Statistics($this);
     }
 
     /**
      * @return \PHPGit_Repository
      */
-    public function getGitWrapper()
+    public function getClient()
     {
-        return $this->gitWrapper;
+        return $this->client;
     }
 
     /**
@@ -67,7 +72,8 @@ class Repository
      */
     public function getName ()
     {
-        $path = $this->getGitWrapper()->git('rev-parse --show-toplevel');
+        return 'Asdf';
+        $path = $this->getClient()->run('rev-parse --show-toplevel');
         $name = substr($path, strrpos($path, '/') + 1);
         return $name;
     }
@@ -79,7 +85,8 @@ class Repository
      */
     public function countCommitsFromGit ()
     {
-        return $this->getGitWrapper()->git('git rev-list --count HEAD');
+        return 12;
+        return $this->getClient()->git('git rev-list --count HEAD');
     }
 
     /**
@@ -89,8 +96,9 @@ class Repository
      */
     public function loadCommits()
     {
-        $rawCommits = $this->getCommits(-1);
-        $this->commits = $this->parseLogsIntoArray(trim($rawCommits));
+        $this->commits = $this->gitter->getCommits();
+
+        $this->parseCommits();
     }
 
     /**
@@ -118,52 +126,37 @@ class Repository
      *
      * @return array list of commits and their properties
      **/
-    public function getCommits($numberOfCommits = 10)
-    {
-        $output = $this->getGitWrapper()->git(
-            sprintf(
-                '--no-pager log -n %d --date=%s --format=format:"%s" --reverse',
-                $numberOfCommits,
-                $this->dateFormat,
-                implode('|', $this->logFormat)
-            )
-        );
-        return $output;
-    }
+    // public function getCommits($numberOfCommits = 10)
+    // {
+    //     $output = $this->getClient()->git(
+    //         sprintf(
+    //             '--no-pager log -n %d --date=%s --format=format:"%s" --reverse',
+    //             $numberOfCommits,
+    //             $this->dateFormat,
+    //             implode('|', $this->logFormat)
+    //         )
+    //     );
+    //     return $output;
+    // }
 
     /**
-     * Convert a formatted log string into an array
+     * Parses commits and adds them to stats
      *
-     * @param string $logOutput The output from a `git log` command formated using $this->logFormat
      * @return array
      */
-    public function parseLogsIntoArray($logOutput)
+    public function parseCommits()
     {
-        $commits = array();
+        foreach ($this->commits as $commit) {
+            $date = $commit->getCommiterDate()->format('Y-m-d');
+            $hour = $commit->getCommiterDate()->format('H');
+            $day  = $commit->getCommiterDate()->format('N');
 
-        foreach (explode("\n", $logOutput) as $line) {
-            $commitInfo = explode('|', $line);
-            $commit = array();
-
-            $i = 0;
-            foreach (array_keys($this->logFormat) as $key) {
-                $commit[$key] = $commitInfo[$i];
-                $i++;
-            }
-
-            $commits[] = $commit;
-
-            $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
-            $commitHour = date('H', strtotime($commit['commitDate']));
-            $commitDay = date('N', strtotime($commit['commitDate']));
-            $this->addCommitToStats($this->commitsByDate, $commitDate);
-            $this->addCommitToStats($this->commitsByHour, $commitHour);
-            $this->addCommitToStats($this->commitsByDay, $commitDay);
+            $this->addCommitToStats($this->commitsByDate, $date);
+            $this->addCommitToStats($this->commitsByHour, $hour);
+            $this->addCommitToStats($this->commitsByDay, $day);
 
             $this->addCommitToContributor($commit);
         }
-
-        return $commits;
     }
 
     /**
@@ -189,17 +182,18 @@ class Repository
      */
     public function addCommitToContributor($commit)
     {
-        $email = trim($commit['commiterEmail']);
+        $email = $commit->getAuthor()->getEmail();
+        $name  = $commit->getAuthor()->getName();
 
         if (!isset($this->commitsByContributor[$email])) {
             $this->commitsByContributor[$email] = array(
-                'name' => trim($commit['commiter']),
+                'name' => $name,
                 'commits' => array()
             );
         }
 
-        $commitDate = date('Y-m-d', strtotime($commit['commitDate']));
-        $this->commitsByContributor[$email]['commits'][$commitDate][] = $commit;
+        $date = $commit->getCommiterDate()->format('Y-m-d');
+        $this->commitsByContributor[$email]['commits'][$date][] = $commit;
     }
 
     public function getDaysRepositoryBeenActive ()

@@ -81,7 +81,7 @@ $app->get('repository/{path}', function ($path) use ($app) {
         array(
             'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
-            'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
+            'branch'        => $repository->gitter->getCurrentBranch(),
             'statsEndpoint' => $app["request"]->getBaseUrl() . "/stats/" . $path,
         )
     );

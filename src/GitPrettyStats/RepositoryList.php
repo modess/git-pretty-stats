@@ -55,7 +55,7 @@ class RepositoryList
                 $repositories[] = array(
                     'name'    => $repository->getName(),
                     'commits' => $repository->countCommitsFromGit(),
-                    'branch'  => $repository->getGitWrapper()->getCurrentBranch()
+                    'branch'  => $repository->gitter->getCurrentBranch()
                 );
             }
         }
@@ -76,8 +76,7 @@ class RepositoryList
         }
 
         try {
-            $gitWrapper = new \PHPGit_Repository($path);
-            $repository = new Repository($gitWrapper);
+            $repository = new Repository($path);
             return $repository;
         } catch (Exception $e) {
             return false;
