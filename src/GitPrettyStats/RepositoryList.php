@@ -38,6 +38,7 @@ class RepositoryList
                 $loadRepositoryPaths[] = realpath(__DIR__ . '/../../' . $repo . '/');
             }
         }
+
         // Config with path to directory of repositories
         elseif ($handle = opendir($this->path)) {
             while (false !== ($entry = readdir($handle))) {

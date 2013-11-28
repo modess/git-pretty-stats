@@ -142,6 +142,7 @@ class Repository
         if (!isset($stats[$key])) {
             $stats[$key] = 0;
         }
+
         $stats[$key]++;
     }
 
@@ -158,12 +159,13 @@ class Repository
 
         if (!isset($this->commitsByContributor[$email])) {
             $this->commitsByContributor[$email] = array(
-                'name' => $name,
+                'name'    => $name,
                 'commits' => array()
             );
         }
 
         $date = $commit->getCommiterDate()->format('Y-m-d');
+
         $this->commitsByContributor[$email]['commits'][$date][] = $commit;
     }
 
@@ -190,9 +192,9 @@ class Repository
                 $this->statistics->averageCommitsPerDay(),
             ),
             'charts' => array(
-                'date' => $this->getCommitsByDate(),
-                'hour' => $this->getCommitsByHour(),
-                'day' => $this->getCommitsByDay(),
+                'date'        => $this->getCommitsByDate(),
+                'hour'        => $this->getCommitsByHour(),
+                'day'         => $this->getCommitsByDay(),
                 'contributor' => $this->getCommitsByContributor(),
             )
         );
@@ -206,6 +208,7 @@ class Repository
     public function getFirstCommitDate()
     {
         $firstDate = array_slice($this->commitsByDate, 0, 1);
+
         return new Carbon(key($firstDate));
     }
 
@@ -215,6 +218,7 @@ class Repository
     public function getLastCommitDate()
     {
         $lastDate = key(array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1));
+
         return new Carbon(date("Y-m-d", strtotime($lastDate . ' +1 day')));
     }
 
@@ -225,18 +229,19 @@ class Repository
      */
     public function getCommitsByDate()
     {
-        $begin = $this->getFirstCommitDate();
-        $end = $this->getLastCommitDate();
+        $begin    = $this->getFirstCommitDate();
+        $end      = $this->getLastCommitDate();
         $interval = \DateInterval::createFromDateString('1 day');
-        $period = new \DatePeriod($begin, $interval, $end);
+        $period   = new \DatePeriod($begin, $interval, $end);
 
         $data = array();
         foreach ($period as $date) {
             $dayFormatted = $date->format("Y-m-d");
-            $value = isset($this->commitsByDate[$dayFormatted]) ? $this->commitsByDate[$dayFormatted] : 0;
-            $data['x'][] = $dayFormatted;
-            $data['y'][] = $value;
+            $value        = isset($this->commitsByDate[$dayFormatted]) ? $this->commitsByDate[$dayFormatted] : 0;
+            $data['x'][]  = $dayFormatted;
+            $data['y'][]  = $value;
         }
+
         return $data;
     }
 
@@ -248,11 +253,14 @@ class Repository
     public function getCommitsByHour()
     {
         $data = array();
+
         ksort($this->commitsByHour);
+
         foreach ($this->commitsByHour as $hour => $numberOfCommits) {
             $data['x'][] = $hour;
             $data['y'][] = $numberOfCommits;
         }
+
         return $data;
     }
 
@@ -267,9 +275,11 @@ class Repository
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 
         ksort($this->commitsByDay);
+
         foreach ($this->commitsByDay as $weekday => $numberOfCommits) {
             $data[] = array($days[$weekday - 1], $numberOfCommits);
         }
+
         return $data;
     }
 
@@ -283,17 +293,20 @@ class Repository
         $data = array();
 
         foreach ($this->commitsByContributor as $email => $contributor) {
-            $begin = $this->getFirstCommitDate();
-            $end = $this->getLastCommitDate();
+            $begin    = $this->getFirstCommitDate();
+            $end      = $this->getLastCommitDate();
             $interval = \DateInterval::createFromDateString('1 day');
-            $period = new \DatePeriod($begin, $interval, $end);
+            $period   = new \DatePeriod($begin, $interval, $end);
 
-            $commitsData = array();
+            $commitsData  = array();
             $totalCommits = 0;
+
             foreach ($period as $date) {
                 $dayFormatted = $date->format("Y-m-d");
+
                 $value = isset($contributor['commits'][$dayFormatted]) ?
                     count($contributor['commits'][$dayFormatted]) : 0;
+
                 $totalCommits += $value;
 
                 $commitsData['x'][] = $dayFormatted;
@@ -301,10 +314,10 @@ class Repository
             }
 
             $data[] = array(
-                'name' => $contributor['name'],
-                'email' => $email,
+                'name'    => $contributor['name'],
+                'email'   => $email,
                 'commits' => $totalCommits,
-                'data' => $commitsData,
+                'data'    => $commitsData,
             );
         }
 
@@ -325,6 +338,7 @@ class Repository
         if ($sortA['commits'] == $sortB['commits']) {
             return 0;
         }
+
         return ($sortA['commits'] > $sortB['commits']) ? -1 : 1;
     }
 }
