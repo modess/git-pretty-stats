@@ -85,8 +85,7 @@ class Repository
      */
     public function countCommitsFromGit ()
     {
-        return 12;
-        return $this->getClient()->git('git rev-list --count HEAD');
+        return $this->getClient()->run($this->gitter, 'rev-list --count HEAD');
     }
 
     /**
