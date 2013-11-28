@@ -19,16 +19,6 @@ class Repository
     /** @var array Storage for "raw" commits */
     public $commits = array();
 
-    /** @var string Date format */
-    public $dateFormat = 'iso';
-
-    /** @var array Mapper for fetching information about commits */
-    public $logFormat = array(
-        'commiter' => '%cn',
-        'commiterEmail' => '%ce',
-        'commitDate' => '%cd',
-    );
-
     /** @var array Storage for commits by date */
     public $commitsByDate = array();
 
