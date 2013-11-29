@@ -2,9 +2,10 @@
 
 You know those cool graphs and statistics you can get for a repository on github? The things is that (unfortunately) not all git repositories are hosted on github for various reasons. This is the tool for rendering graphs for your repository that can be hosted anywhere, and it looks great.
 
-## Features (v0.2.0)
+## Features (v0.2.1)
 
 * Handles multiple repositories
+* Handles bare repositories
 * Statistics
   - Total commits
   - Total contributors
@@ -30,11 +31,11 @@ Start by clone this repository and setup your web server
 
 Install dependencies using [Composer](http://getcomposer.org/), e.g. `php composer.phar install`
 
-Clone the repositories you want to statistics and graphs for in to the **repositories** folder. 
+Clone the repositories you want to statistics and graphs for in to the **repositories** folder.
 
     cd repositories
     git clone <repository-url>
-    
+
 You can clone as many as you want to in to this folder.
 
 >  To manually set the repositories path, copy `config.example.php` to `config.php`. Then change the value of `repositoriesPath` in the config file relative to the folder where your desired git repositories are located.
@@ -62,8 +63,9 @@ For more screenshots visit the [project homepage](http://www.codingswag.com/git-
 
 ## Powered by
 
-* [php-git-repo](https://github.com/ornicar/php-git-repo)
+* [Gitter](https://github.com/klaussilveira/gitter)
 * [Silex](https://github.com/fabpot/Silex)
+* [Carbon](https://github.com/briannesbitt/Carbon)
 * [Twig](https://github.com/fabpot/Twig)
 * [Flat UI](https://github.com/designmodo/Flat-UI)
 * [Highcharts JS](https://github.com/highslide-software/highcharts.com)

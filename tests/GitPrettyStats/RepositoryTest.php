@@ -2,55 +2,68 @@
 namespace GitPrettyStats;
 
 use Mockery as m;
+use Carbon\Carbon;
 
 /**
  * @covers GitPrettyStats\Repository
  */
 class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
-    protected $repository;
-    protected $gitWrapper;
+    public $repository;
+    public $client;
+    public $gitter;
 
     public $commits = array(
-        array('Author 1', 'author_1@email.com', '2013-03-01 14:55:47 +0200'),
-        array('Author 1', 'author_1@email.com', '2013-03-02 12:13:54 +0200'),
-        array('Author 2', 'author_2@email.com', '2013-03-02 14:55:47 +0200'),
-        array('Author 3', 'author_3@email.com', '2013-03-03 09:13:47 +0200'),
-        array('Author 2', 'author_2@email.com', '2013-03-03 19:55:47 +0200'),
-        array('Author alias 1', 'author_1@email.com', '2013-03-03 22:32:19 +0200'),
-        array('Author 4', 'author_4@email.com', '2013-03-04 10:32:00 +0200'),
-        array('Author 4', 'author_4@email.com', '2013-03-04 14:55:47 +0200'),
-        array('Author 5', 'author_5@email.com', '2013-03-05 09:55:47 +0200'),
-        array('Author 1', 'author_1@email.com', '2013-03-05 18:14:30 +0200'),
+        array('Author 1', 'author_1@email.com', '2013-03-01 14:55:47'),
+        array('Author 1', 'author_1@email.com', '2013-03-02 12:13:54'),
+        array('Author 2', 'author_2@email.com', '2013-03-02 14:55:47'),
+        array('Author 3', 'author_3@email.com', '2013-03-03 09:13:47'),
+        array('Author 2', 'author_2@email.com', '2013-03-03 19:55:47'),
+        array('Author alias 1', 'author_1@email.com', '2013-03-03 22:32:19'),
+        array('Author 4', 'author_4@email.com', '2013-03-04 10:32:00'),
+        array('Author 4', 'author_4@email.com', '2013-03-04 14:55:47'),
+        array('Author 5', 'author_5@email.com', '2013-03-05 09:55:47'),
+        array('Author 1', 'author_1@email.com', '2013-03-05 18:14:30'),
     );
 
     public function setUp()
     {
-        $this->gitWrapper = m::mock('\PHPGit_Repository');
+        $this->client = m::mock('\Gitter\Client');
+        $this->gitter = m::mock('\Gitter\Repository');
 
-        $logFormat = array(
-            'commiter' => '%cn',
-            'commiterEmail' => '%ce',
-            'commitDate' => '%cd',
-        );
+        $this->client
+            ->shouldReceive('getRepository')
+            ->andReturn($this->gitter);
 
-        $logArg = sprintf(
-            '--no-pager log -n %d --date=%s --format=format:"%s" --reverse',
-            -1,
-            'iso',
-            implode('|', $logFormat)
-        );
-
-        $rawCommits = "";
+        $commits = array();
         foreach ($this->commits as $commit) {
-            $rawCommits .= "{$commit[0]}|{$commit[1]}|{$commit[2]}\n";
+            $commits[] = $this->createCommit($commit[0], $commit[1], $commit[2]);
         }
 
-        $this->gitWrapper
-            ->shouldReceive('git')
+        $this->commits = $commits;
+    }
+
+    public function createCommit($name, $email, $date)
+    {
+        $author = m::mock('stdClass');
+        $author
+            ->shouldReceive('getName')
             ->zeroOrMoreTimes()
-            ->with($logArg)
-            ->andReturn($rawCommits);
+            ->andReturn($name)
+            ->shouldReceive('getEmail')
+            ->zeroOrMoreTimes()
+            ->andReturn($email);
+
+        $commit = m::mock('stdClass');
+        $commit
+            ->shouldReceive('getCommiterDate')
+            ->zeroOrMoreTimes()
+            ->andReturn(new Carbon($date))
+            ->shouldReceive('getAuthor')
+            ->zeroOrMoreTimes()
+            ->andReturn($author);
+
+        return $commit;
     }
 
     public function tearDown()
@@ -60,44 +73,59 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function createInstance()
     {
-        $repo = new Repository($this->gitWrapper);
+        $repo = new Repository('.', $this->client);
+        $repo->commits = $this->commits;
+
         return $repo;
     }
 
-    public function testGetName()
+    public function repositoryNames ()
     {
-        $this->gitWrapper
-            ->shouldReceive('git')
-            ->with('rev-parse --show-toplevel')
-            ->andReturn('some/path/to/git-repo');
-
-        $repo = $this->createInstance();
-        $this->assertEquals(
-            'git-repo',
-            $repo->getName(),
-            'Name not correct'
+        return array(
+            array('./some/git/repository', 'repository'),
+            array('sample.git', 'sample'),
+            array('../../yet-another-repository', 'yet-another-repository'),
         );
     }
 
-    public function testNumberOfCommitsFromGitAreCorrect()
+    /**
+     * @dataProvider repositoryNames
+     */
+    public function testGetName($path, $expected)
     {
-        $this->gitWrapper
-            ->shouldReceive('git')
-            ->with('git rev-list --count HEAD')
-            ->andReturn(5);
+        $this->gitter
+            ->shouldReceive('getPath')
+            ->andReturn($path);
 
         $repo = $this->createInstance();
+
         $this->assertEquals(
-            5,
-            $repo->countCommitsFromGit(),
-            'Number of commits are incorrect from git'
+            $expected,
+            $repo->getName(),
+            'Returned incorrect repository name'
         );
+    }
+
+    public function testLoadCommits ()
+    {
+        $this->gitter->shouldReceive('getCommits')->once();
+
+        $repo = m::mock('GitPrettyStats\Repository[parseCommits]', ['.', $this->client]);
+
+        $repo->shouldReceive('parseCommits')->once();
+
+        $repo->loadCommits();
+
     }
 
     public function testNumberOfCommitsAreCorrect()
     {
+        $this->client
+            ->shouldReceive('getRepository')
+            ->andReturn($this->gitter);
+
         $repo = $this->createInstance();
-        $repo->loadCommits();
+
         $this->assertEquals(
             10,
             $repo->getNumberOfCommits(),
@@ -107,8 +135,13 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testNumberOfContributorsAreCorrect()
     {
+        $this->client
+            ->shouldReceive('getRepository')
+            ->andReturn($this->gitter);
+
         $repo = $this->createInstance();
-        $repo->loadCommits();
+        $repo->parseCommits();
+
         $this->assertEquals(
             5,
             count($repo->commitsByContributor),
@@ -142,16 +175,16 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testFirstAndLastCommitDate()
     {
         $repo = $this->createInstance();
-        $repo->loadCommits();
+        $repo->parseCommits();
 
-        $firstCommitDate = $this->commits[0][2];
+        $firstCommitDate = $this->commits[0]->getCommiterDate();
         $this->assertEquals(
             date('Y-m-d', strtotime($firstCommitDate)),
             $repo->getFirstCommitDate()->format('Y-m-d'),
             'First commit date not correct'
         );
 
-        $lastCommitDate = $this->commits[count($this->commits) - 1][2];
+        $lastCommitDate = $this->commits[count($this->commits) - 1]->getCommiterDate();
         $this->assertEquals(
             date('Y-m-d', strtotime($lastCommitDate . ' +1 day')),
             $repo->getLastCommitDate()->format('Y-m-d'),
@@ -159,9 +192,28 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testGetClient ()
+    {
+        $repo = $this->createInstance();
+
+        $this->assertEquals($this->client, $repo->getClient(), 'Invalid client returned');
+    }
+
+    public function testCountCommitsFromGit ()
+    {
+        $this->client
+            ->shouldReceive('run')
+            ->with($this->gitter, 'rev-list --count HEAD')
+            ->andReturn(5);
+
+        $repo = $this->createInstance();
+        $this->assertEquals(5, $repo->countCommitsFromGit(), 'Invalid commit count from git');
+    }
+
     public function testAddingCommitToStats()
     {
         $repo = $this->createInstance();
+        $repo->parseCommits();
 
         $commits = array();
         $key = 'commit';
@@ -175,11 +227,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddingCommitToContributor()
     {
-        $commit = array(
-            'commiter' => 'Jane Doe',
-            'commiterEmail' => 'jane@doe.com',
-            'commitDate' => '2013-04-01'
-        );
+        $commit = $this->createCommit('Jane Doe', 'jane@doe.com', '2013-04-01');
 
         $repo = $this->createInstance();
         $repo->addCommitToContributor($commit);
@@ -196,15 +244,16 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(
             $expected,
-            $repo->commitsByContributor[$commit['commiterEmail']],
+            $repo->commitsByContributor['jane@doe.com'],
             'Contributor formatted incorrectly'
         );
 
-        $commit['commitDate'] = '2013-05-01';
+        $commit = $this->createCommit('Jane Doe', 'jane@doe.com', '2013-05-01');
+
         $repo->addCommitToContributor($commit);
         $this->assertEquals(
             2,
-            count($repo->commitsByContributor[$commit['commiterEmail']]['commits']),
+            count($repo->commitsByContributor['jane@doe.com']['commits']),
             'Incorrect number of commits for contributor'
         );
     }
@@ -212,7 +261,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommitsByDate()
     {
         $repo = $this->createInstance();
-        $repo->loadCommits();
+        $repo->parseCommits();
 
         $expected = array(
             'x' => array('2013-03-01','2013-03-02','2013-03-03','2013-03-04', '2013-03-05'),
@@ -229,10 +278,10 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommitsByHour()
     {
         $repo = $this->createInstance();
-        $repo->loadCommits();
+        $repo->parseCommits();
 
         $expected = array(
-            'x' => array('08', '09', 11, 13, 17, 18, 21),
+            'x' => array('09', 10, 12, 14, 18, 19, 22),
             'y' => array(2, 1, 1, 3, 1, 1, 1)
         );
 
@@ -246,7 +295,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommitsByDay()
     {
         $repo = $this->createInstance();
-        $repo->loadCommits();
+        $repo->parseCommits();
 
         $expected = array(
             array("Monday", 2),
@@ -266,7 +315,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testGetCommitsByContributor()
     {
         $repo = $this->createInstance();
-        $repo->loadCommits();
+        $repo->parseCommits();
 
         $expected = array(
             array(

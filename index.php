@@ -32,8 +32,9 @@ $app->before(function() use ($app) {
 
     $app['config'] = $config;
 
-    $repositoryList = new RepositoryList($repositoriesPath);
-    $app['repositories'] = $repositoryList->getRepositories();
+    $repositoryList        = new RepositoryList($repositoriesPath);
+    $app['repositories']   = $repositoryList->getRepositories();
+    $app['repositoryList'] = new RepositoryList;
 
     if (count($app['repositories']) == 0) {
         throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
@@ -42,21 +43,23 @@ $app->before(function() use ($app) {
 
 
 function loadRepository ($app, $path) {
-    $repositoryPath = $app['config']['repositoriesPath'][$path];
-    //trying the old-fashioned way for compatibility
-    if( !realpath($repositoryPath) ){
+    if (isset($app['config']['repositoriesPath'][$path])) {
+        $repositoryPath = $app['config']['repositoriesPath'][$path];
+    } elseif (!realpath($path)) {
         $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
     }
+
+    if (!$repository = $app['repositoryList']->loadRepository($repositoryPath)) {
+        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
+    }
+
     try {
-        $gitWrapper = new \PHPGit_Repository(__DIR__ . '/' . $repositoryPath);
-        $repository = new Repository($gitWrapper);
         $repository->loadCommits();
-        $app['repository'] = $repository;
     } catch (Exception $e) {
         // Catch all possible errors while loading the repository, re-wrap it with a friendlier
         // message and re-throw so it's caught by the error handler:
         // (the original exception is chained to the new one):
-        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
+        throw new RuntimeException('Could not load commits from repository', 0, $e);
     }
 
     return $repository;
@@ -78,13 +81,13 @@ $app->get('repository/{path}', function ($path) use ($app) {
         array(
             'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
-            'branch'        => $repository->getGitWrapper()->getCurrentBranch(),
-            'statsEndpoint' => $app["request"]->getBaseUrl() . "/stats/" . $path,
+            'branch'        => $repository->gitter->getCurrentBranch(),
+            'statsEndpoint' => $app["request"]->getBaseUrl() . "/git-stats/" . $path,
         )
     );
 });
 
-$app->get('/stats/{path}', function($path) use($app) {
+$app->get('/git-stats/{path}', function($path) use($app) {
     $repository = loadRepository($app, $path);
 
     return $app->json(
