@@ -48,7 +48,7 @@ class Repository
     }
 
     /**
-     * @return \PHPGit_Repository
+     * @return \Gitter\Client
      */
     public function getClient()
     {
