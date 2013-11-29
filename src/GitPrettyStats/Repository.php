@@ -40,11 +40,12 @@ class Repository
      * @param \Gitter\Client $client  Git client
      * @return void
      */
-    public function __construct($path)
+    public function __construct($path, $client = null, $statistics = null)
     {
-        $this->client     = new Client;
+        $this->client     = ($client) ? $client : new Client;
+        $this->statistics = ($statistics) ? $statistics : new Statistics($this);
+
         $this->gitter     = $this->client->getRepository($path);
-        $this->statistics = new Statistics($this);
     }
 
     /**
@@ -62,8 +63,11 @@ class Repository
      */
     public function getName ()
     {
-        $path = $this->gitter->getPath();
-        $name = substr($path, strrpos($path, '/') + 1);
+        $name = $this->gitter->getPath();
+
+        if (strstr($name, '/')) {
+            $name = substr($name, strrpos($name, '/') + 1);
+        }
 
         if (substr($name, -4) == '.git') {
             $name = substr($name, 0, strlen($name) - 4);
