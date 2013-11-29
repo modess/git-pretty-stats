@@ -110,7 +110,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->gitter->shouldReceive('getCommits')->once();
 
-        $repo = m::mock('GitPrettyStats\Repository[parseCommits]', ['.', $this->client]);
+        $repo = m::mock('GitPrettyStats\Repository[parseCommits]', array('.', $this->client));
 
         $repo->shouldReceive('parseCommits')->once();
 
