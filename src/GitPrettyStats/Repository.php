@@ -69,10 +69,6 @@ class Repository
             $name = substr($name, strrpos($name, '/') + 1);
         }
 
-        if (substr($name, -4) == '.git') {
-            $name = substr($name, 0, strlen($name) - 4);
-        }
-
         return trim($name);
     }
 
