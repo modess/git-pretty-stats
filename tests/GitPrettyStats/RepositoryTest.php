@@ -83,7 +83,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('./some/git/repository', 'repository'),
-            array('sample.git', 'sample'),
+            array('sample.git', 'sample.git'),
             array('../../yet-another-repository', 'yet-another-repository'),
         );
     }
