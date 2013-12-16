@@ -5,7 +5,7 @@ namespace GitPrettyStats;
  * Simple class for fetching all Git repositories from given path
  * @author Niklas Modess <niklas@codingswag.com>
  */
-class RepositoryList
+class RepositoryFactory
 {
     /** @var \PHPGit_Repository */
     public $gitWrapper;
@@ -27,7 +27,7 @@ class RepositoryList
      *
      * @return array
      */
-    public function getRepositories ()
+    public function all ()
     {
         $repositories        = array();
         $loadRepositoryPaths = array();
@@ -38,7 +38,6 @@ class RepositoryList
                 $loadRepositoryPaths[] = realpath(__DIR__ . '/../../' . $repo . '/');
             }
         }
-
         // Config with path to directory of repositories
         elseif ($handle = opendir($this->path)) {
             while (false !== ($entry = readdir($handle))) {

@@ -5,7 +5,7 @@ require_once __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Response;
 use GitPrettyStats\Repository;
-use GitPrettyStats\RepositoryList;
+use GitPrettyStats\RepositoryFactory;
 
 $app = new Silex\Application();
 
@@ -32,9 +32,9 @@ $app->before(function() use ($app) {
 
     $app['config'] = $config;
 
-    $repositoryList        = new RepositoryList($repositoriesPath);
-    $app['repositories']   = $repositoryList->getRepositories();
-    $app['repositoryList'] = new RepositoryList;
+    $repositoryFactory        = new RepositoryFactory($repositoriesPath);
+    $app['repositories']      = $repositoryFactory->all();
+    $app['repositoryFactory'] = new RepositoryFactory;
 
     if (count($app['repositories']) == 0) {
         throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
@@ -49,7 +49,7 @@ function loadRepository ($app, $path) {
         $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
     }
 
-    if (!$repository = $app['repositoryList']->loadRepository($repositoryPath)) {
+    if (!$repository = $app['repositoryFactory']->loadRepository($repositoryPath)) {
         throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
     }
 
@@ -76,6 +76,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('repository/{path}', function ($path) use ($app) {
     $repository = loadRepository($app, $path);
+
     return $app['twig']->render(
         'repository.html',
         array(
