@@ -67,7 +67,7 @@ class RepositoryFactory
                 }
             }
 
-            $directories = $this->finder->directories()->in($this->baseDir . $repositoriesPath);
+            $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
 
             foreach ($directories as $directory) {
                 $this->paths[] = $directory->getRealPath();
@@ -84,29 +84,12 @@ class RepositoryFactory
      */
     public function all ()
     {
-        $repositories        = array();
-        $loadRepositoryPaths = array();
-
-        // Config with array of paths to repositories
-        if (is_array($this->path)) {
-            foreach ($this->path as $repo) {
-                $loadRepositoryPaths[] = realpath(__DIR__ . '/../../' . $repo . '/');
-            }
-        }
-        // Config with path to directory of repositories
-        elseif ($handle = opendir($this->path)) {
-            while (false !== ($entry = readdir($handle))) {
-                if ($entry == '.' || $entry == '..') {
-                    continue;
-                }
-
-                $loadRepositoryPaths[] = realpath(__DIR__ . '/../../' . $this->path . '/' . $entry);
-            }
-        }
+        $repositories = array();
 
         // Load repositories
-        foreach ($loadRepositoryPaths as $loadRepositoryPath) {
-            if ($repository = $this->loadRepository($loadRepositoryPath)) {
+        foreach ($this->getPaths() as $path) {
+            if ($repository = $this->loadRepository($path))
+            {
                 $repositories[] = array(
                     'name'    => $repository->getName(),
                     'commits' => $repository->countCommitsFromGit(),

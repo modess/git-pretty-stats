@@ -18,7 +18,7 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/other-repository');
 
-        $finder->shouldReceive('directories->in')
+        $finder->shouldReceive('depth->directories->in')
             ->once()
             ->with('/var/www/git-pretty-stats/repositories')
             ->andReturn(array($firstRepository, $secondRepository));
@@ -45,7 +45,7 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/other-repository');
 
-        $finder->shouldReceive('directories->in')
+        $finder->shouldReceive('depth->directories->in')
             ->once()
             ->with('/var/www/git-pretty-stats/non-default-dir')
             ->andReturn(array($firstRepository, $secondRepository));
