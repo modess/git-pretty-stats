@@ -1,28 +1,71 @@
 <?php
 namespace GitPrettyStats;
 
+use Symfony\Component\Finder\Finder;
+
 /**
- * Simple class for fetching all Git repositories from given path
+ * Factory for repositories
+ *
  * @author Niklas Modess <niklas@codingswag.com>
  */
 class RepositoryFactory
 {
-    /** @var \PHPGit_Repository */
+    /**
+     * @var \PHPGit_Repository  Git binary wrapper
+     */
     public $gitWrapper;
 
-    /** @var string Path to repositories */
-    public $path;
+    /**
+     * @var string  Paths to repositories
+     */
+    public $paths;
 
-    /** @var mixed Configuration values */
+    /**
+     * @var mixed  Configuration values
+     */
     protected $config;
+
+    /**
+     * @var Symfony\Component\Finder\Finder  File system handler
+     */
+    protected $finder;
 
     /**
      * @param string $path Path to repositories
      * @return void
      */
-    public function __construct($config = null)
+    public function __construct($config = null, $finder = null)
     {
         $this->config = $config;
+        $this->finder = ($finder) ? $finder : new Finder;
+    }
+
+    public function getPaths ()
+    {
+        $paths = array();
+
+        if (!$this->paths) {
+            if (is_array($this->config)) {
+                foreach ($this->config as $repo) {
+                    $paths[] = realpath(__DIR__ . '/../../' . $repo . '/');
+                }
+            }
+            // Empty config
+            else {
+                $baseDirectory = (isset($this->config['repositoriesPath'])) ?
+                    $this->config['repositoriesPath'] : 'repositories';
+
+                $directories = $this->finder->directories()->in(__DIR__ . '/../../' . $baseDirectory);
+
+                foreach ($directories as $directory) {
+                    $paths[] = $directory->getRealPath();
+                }
+            }
+
+            $this->paths = $paths;
+        }
+
+        return $this->paths;
     }
 
     /**
