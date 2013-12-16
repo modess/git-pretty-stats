@@ -36,6 +36,11 @@ class RepositoryFactory
     protected $finder;
 
     /**
+     * @var  array Loaded repositories
+     */
+    protected $repositories;
+
+    /**
      * @param string $path Path to repositories
      * @return void
      */
@@ -87,21 +92,25 @@ class RepositoryFactory
      */
     public function all ()
     {
-        $repositories = array();
+        if ($this->repositories) {
+            return $this->repositories;
+        }
 
         // Load repositories
         foreach ($this->getPaths() as $path) {
-            if ($repository = $this->load($path))
-            {
-                $repositories[] = array(
-                    'name'    => $repository->getName(),
-                    'commits' => $repository->countCommitsFromGit(),
-                    'branch'  => $repository->gitter->getCurrentBranch()
-                );
+            if ($repository = $this->load($path)) {
+                $repositories[ $repository->getName() ] = $repository;
             }
         }
 
+        $this->repositories = $repositories;
+
         return $repositories;
+    }
+
+    public function fromName ($name)
+    {
+        return isset($this->repositories[$name]) ? $this->repositories[$name] : false;
     }
 
     /**
@@ -122,5 +131,21 @@ class RepositoryFactory
         } catch (Exception $e) {
             return false;
         }
+    }
+
+
+    public function toArray ()
+    {
+        $toArray = array();
+
+        foreach ($this->all() as $repository) {
+            $toArray[ $repository->getName() ] = array(
+                'name'    => $repository->getName(),
+                'commits' => $repository->countCommitsFromGit(),
+                'branch'  => $repository->gitter->getCurrentBranch()
+            );
+        }
+
+        return $toArray;
     }
 }

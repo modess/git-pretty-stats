@@ -31,41 +31,17 @@ $app->before(function() use ($app) {
     }
 });
 
-
-function loadRepository ($app, $path) {
-    if (isset($app['config']['repositoriesPath'][$path])) {
-        $repositoryPath = $app['config']['repositoriesPath'][$path];
-    } elseif (!realpath($path)) {
-        $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
-    }
-
-    if (!$repository = $app['repositoryFactory']->loadRepository($repositoryPath)) {
-        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
-    }
-
-    try {
-        $repository->loadCommits();
-    } catch (Exception $e) {
-        // Catch all possible errors while loading the repository, re-wrap it with a friendlier
-        // message and re-throw so it's caught by the error handler:
-        // (the original exception is chained to the new one):
-        throw new RuntimeException('Could not load commits from repository', 0, $e);
-    }
-
-    return $repository;
-}
-
 $app->get('/', function () use ($app) {
     return $app['twig']->render(
         'index.html',
         array(
-            'repositories' => $app['repositories']
+            'repositories' => $app['repositoryFactory']->toArray()
         )
     );
 });
 
-$app->get('repository/{path}', function ($path) use ($app) {
-    $repository = loadRepository($app, $path);
+$app->get('repository/{name}', function ($name) use ($app) {
+    $repository = $app['repositoryFactory']->fromName($name);
 
     return $app['twig']->render(
         'repository.html',
@@ -73,13 +49,14 @@ $app->get('repository/{path}', function ($path) use ($app) {
             'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
             'branch'        => $repository->gitter->getCurrentBranch(),
-            'statsEndpoint' => $app["request"]->getBaseUrl() . "/git-stats/" . $path,
+            'statsEndpoint' => $app["request"]->getBaseUrl() . "/git-stats/" . $name,
         )
     );
 });
 
-$app->get('/git-stats/{path}', function($path) use($app) {
-    $repository = loadRepository($app, $path);
+$app->get('/git-stats/{name}', function($name) use($app) {
+    $repository = $app['repositoryFactory']->fromName($name);
+    $repository->loadCommits();
 
     return $app->json(
         $repository->getStatistics()
