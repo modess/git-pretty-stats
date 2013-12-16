@@ -108,4 +108,21 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testFromName ()
+    {
+        $factory = new RepositoryFactory;
+
+        $repositories = array(
+            'first-repo' => '/path',
+            'second-repo' => '/other-path'
+        );
+
+        $factory->setRepositories($repositories);
+
+        $this->assertEquals(
+            '/path',
+            $factory->fromName('first-repo'),
+            'From name returned incorrect value'
+        );
+    }
 }
