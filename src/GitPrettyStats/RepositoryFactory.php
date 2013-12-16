@@ -91,7 +91,7 @@ class RepositoryFactory
 
         // Load repositories
         foreach ($this->getPaths() as $path) {
-            if ($repository = $this->loadRepository($path))
+            if ($repository = $this->load($path))
             {
                 $repositories[] = array(
                     'name'    => $repository->getName(),
@@ -110,7 +110,7 @@ class RepositoryFactory
      * @param  string $path Location of reposittory
      * @return mixed
      */
-    public function loadRepository ($path)
+    public function load ($path)
     {
         if ( !is_dir($path)) {
             return false;
