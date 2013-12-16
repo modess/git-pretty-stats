@@ -58,4 +58,39 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
             'Did not load repositories path with repository path set in config'
         );
     }
+
+    public function testGetPathsWithConfigArray ()
+    {
+        $finder = m::mock('stdClass');
+
+        $firstRepositoryPath = '/path/to/first-repo';
+        $secondRepositoryPath = '/path/to/second-repo';
+
+        $config = array(
+            'repositoriesPath' => array(
+                $firstRepositoryPath,
+                $secondRepositoryPath
+            )
+        );
+
+        $firstRepository = m::mock('stdClass');
+        $firstRepository->shouldReceive('getRealPath')->once()->andReturn($firstRepositoryPath);
+
+        $secondRepository = m::mock('stdClass');
+        $secondRepository->shouldReceive('getRealPath')->once()->andReturn($secondRepositoryPath);
+
+        $finder
+            ->shouldReceive('depth->directories->append')
+            ->once()
+            ->andReturn(array($firstRepository, $secondRepository));
+
+        $factory = new RepositoryFactory($config, $finder, '/var/www/git-pretty-stats/');
+
+        $this->assertEquals(
+            array($firstRepositoryPath, $secondRepositoryPath),
+            $factory->getPaths(),
+            'Did not load repositories paths correctly with repository array set in config'
+        );
+    }
+
 }

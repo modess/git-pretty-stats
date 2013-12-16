@@ -55,22 +55,25 @@ class RepositoryFactory
             if (!isset($this->config['repositoriesPath']))
             {
                 $repositoriesPath = 'repositories';
+                $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
+            }
+            elseif (is_array($this->config['repositoriesPath']))
+            {
+                $paths = array();
+                foreach ($this->config['repositoriesPath'] as $path) {
+                    $paths[] = $path;
+                }
+
+                $directories = $this->finder->depth(0)->directories()->append($paths);
             }
             elseif (isset($this->config['repositoriesPath']))
             {
                 $repositoriesPath = $this->config['repositoriesPath'];
-            }
-            elseif (is_array($this->config['repositoriesPath']))
-            {
-                foreach ($this->config as $repo) {
-                    $paths[] = realpath(__DIR__ . '/../../' . $repo . '/');
-                }
+                $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
             }
 
-            $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
-
-            foreach ($directories as $directory) {
-                $this->paths[] = $directory->getRealPath();
+            foreach ($directories as $key => $directory) {
+                $this->paths[$key] = $directory->getRealPath();
             }
         }
 
