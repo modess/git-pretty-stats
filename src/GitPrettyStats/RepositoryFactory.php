@@ -157,6 +157,25 @@ class RepositoryFactory
         }
     }
 
+    /**
+     * Set repositories
+     *
+     * @param array $repositories
+     */
+    public function setRepositories (array $repositories)
+    {
+        $this->repositories = $repositories;
+    }
+
+    /**
+     * Get repositories
+     *
+     * @return array
+     */
+    public function getRepositories ()
+    {
+        return $this->repositories;
+    }
 
     /**
      * Return all repositories in array format

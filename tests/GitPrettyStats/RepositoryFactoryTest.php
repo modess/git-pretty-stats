@@ -93,4 +93,19 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testRepositoriesSetterAndGetter ()
+    {
+        $factory = new RepositoryFactory;
+
+        $repositories = array('first-repo', 'second-repo');
+
+        $factory->setRepositories($repositories);
+
+        $this->assertEquals(
+            $repositories,
+            $factory->getRepositories(),
+            'Repositories setter and getter failed'
+        );
+    }
+
 }
