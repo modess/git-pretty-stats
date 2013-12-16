@@ -13,13 +13,16 @@ class RepositoryFactory
     /** @var string Path to repositories */
     public $path;
 
+    /** @var mixed Configuration values */
+    protected $config;
+
     /**
      * @param string $path Path to repositories
      * @return void
      */
-    public function __construct($path = null)
+    public function __construct($config = null)
     {
-        $this->path = $path;
+        $this->config = $config;
     }
 
     /**

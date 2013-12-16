@@ -21,20 +21,10 @@ $app->before(function() use ($app) {
     $repositoriesPath = 'repositories';
 
     $configFilePath = __DIR__ . '/config.php';
-    if (file_exists($configFilePath)) {
-        $configFile = require_once __DIR__ . '/config.php';
-        if (isset($configFile['repositoriesPath'])) {
-            $repositoriesPath = $configFile['repositoriesPath'];
-        }
-    }
+    $config = (file_exists($configFilePath)) ? require_once __DIR__ . '/config.php' : null;
 
-    $config['repositoriesPath'] = $repositoriesPath;
-
-    $app['config'] = $config;
-
-    $repositoryFactory        = new RepositoryFactory($repositoriesPath);
-    $app['repositories']      = $repositoryFactory->all();
-    $app['repositoryFactory'] = new RepositoryFactory;
+    $app['repositoryFactory'] = new RepositoryFactory($config);
+    $app['repositories']      = $app['repositoryFactory']->all();
 
     if (count($app['repositories']) == 0) {
         throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
