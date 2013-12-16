@@ -15,7 +15,7 @@ class RepositoryFactory
      *
      * @var  array
      */
-    public $paths;
+    protected $paths;
 
     /**
      * Base directory for paths
