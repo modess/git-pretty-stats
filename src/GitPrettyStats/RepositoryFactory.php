@@ -21,6 +21,11 @@ class RepositoryFactory
     public $paths;
 
     /**
+     * @var string  Base directory for paths
+     */
+    protected $baseDir;
+
+    /**
      * @var mixed  Configuration values
      */
     protected $config;
@@ -34,35 +39,39 @@ class RepositoryFactory
      * @param string $path Path to repositories
      * @return void
      */
-    public function __construct($config = null, $finder = null)
+    public function __construct($config = null, $finder = null, $baseDir = null)
     {
-        $this->config = $config;
-        $this->finder = ($finder) ? $finder : new Finder;
+        $this->config  = $config;
+        $this->finder  = ($finder !== null)  ? $finder : new Finder;
+        $this->baseDir = ($baseDir !== null) ? $baseDir : __DIR__ . '/../../';
     }
 
     public function getPaths ()
     {
         $paths = array();
 
-        if (!$this->paths) {
-            if (is_array($this->config)) {
+        if (!$this->paths)
+        {
+            if (!isset($this->config['repositoriesPath']))
+            {
+                $repositoriesPath = 'repositories';
+            }
+            elseif (isset($this->config['repositoriesPath']))
+            {
+                $repositoriesPath = $this->config['repositoriesPath'];
+            }
+            elseif (is_array($this->config['repositoriesPath']))
+            {
                 foreach ($this->config as $repo) {
                     $paths[] = realpath(__DIR__ . '/../../' . $repo . '/');
                 }
             }
-            // Empty config
-            else {
-                $baseDirectory = (isset($this->config['repositoriesPath'])) ?
-                    $this->config['repositoriesPath'] : 'repositories';
 
-                $directories = $this->finder->directories()->in(__DIR__ . '/../../' . $baseDirectory);
+            $directories = $this->finder->directories()->in($this->baseDir . $repositoriesPath);
 
-                foreach ($directories as $directory) {
-                    $paths[] = $directory->getRealPath();
-                }
+            foreach ($directories as $directory) {
+                $this->paths[] = $directory->getRealPath();
             }
-
-            $this->paths = $paths;
         }
 
         return $this->paths;
