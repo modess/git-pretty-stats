@@ -5,7 +5,7 @@ require_once __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Response;
 use GitPrettyStats\Repository;
-use GitPrettyStats\RepositoryList;
+use GitPrettyStats\RepositoryFactory;
 
 $app = new Silex\Application();
 
@@ -21,74 +21,42 @@ $app->before(function() use ($app) {
     $repositoriesPath = 'repositories';
 
     $configFilePath = __DIR__ . '/config.php';
-    if (file_exists($configFilePath)) {
-        $configFile = require_once __DIR__ . '/config.php';
-        if (isset($configFile['repositoriesPath'])) {
-            $repositoriesPath = $configFile['repositoriesPath'];
-        }
-    }
+    $config = (file_exists($configFilePath)) ? require_once __DIR__ . '/config.php' : null;
 
-    $config['repositoriesPath'] = $repositoriesPath;
-
-    $app['config'] = $config;
-
-    $repositoryList        = new RepositoryList($repositoriesPath);
-    $app['repositories']   = $repositoryList->getRepositories();
-    $app['repositoryList'] = new RepositoryList;
+    $app['repositoryFactory'] = new RepositoryFactory($config);
+    $app['repositories']      = $app['repositoryFactory']->all();
 
     if (count($app['repositories']) == 0) {
         throw new RuntimeException("No repositories found in path: $repositoriesPath", 0);
     }
 });
 
-
-function loadRepository ($app, $path) {
-    if (isset($app['config']['repositoriesPath'][$path])) {
-        $repositoryPath = $app['config']['repositoriesPath'][$path];
-    } elseif (!realpath($path)) {
-        $repositoryPath = $app['config']['repositoriesPath'] . '/' . $path;
-    }
-
-    if (!$repository = $app['repositoryList']->loadRepository($repositoryPath)) {
-        throw new RuntimeException('The repository path does not contain a valid git repository', 0, $e);
-    }
-
-    try {
-        $repository->loadCommits();
-    } catch (Exception $e) {
-        // Catch all possible errors while loading the repository, re-wrap it with a friendlier
-        // message and re-throw so it's caught by the error handler:
-        // (the original exception is chained to the new one):
-        throw new RuntimeException('Could not load commits from repository', 0, $e);
-    }
-
-    return $repository;
-}
-
 $app->get('/', function () use ($app) {
     return $app['twig']->render(
         'index.html',
         array(
-            'repositories' => $app['repositories']
+            'repositories' => $app['repositoryFactory']->toArray()
         )
     );
 });
 
-$app->get('repository/{path}', function ($path) use ($app) {
-    $repository = loadRepository($app, $path);
+$app->get('repository/{name}', function ($name) use ($app) {
+    $repository = $app['repositoryFactory']->fromName($name);
+
     return $app['twig']->render(
         'repository.html',
         array(
             'repositories'  => $app['repositories'],
             'name'          => $repository->getName(),
             'branch'        => $repository->gitter->getCurrentBranch(),
-            'statsEndpoint' => $app["request"]->getBaseUrl() . "/git-stats/" . $path,
+            'statsEndpoint' => $app["request"]->getBaseUrl() . "/git-stats/" . $name,
         )
     );
 });
 
-$app->get('/git-stats/{path}', function($path) use($app) {
-    $repository = loadRepository($app, $path);
+$app->get('/git-stats/{name}', function($name) use($app) {
+    $repository = $app['repositoryFactory']->fromName($name);
+    $repository->loadCommits();
 
     return $app->json(
         $repository->getStatistics()

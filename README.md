@@ -2,7 +2,7 @@
 
 You know those cool graphs and statistics you can get for a repository on github? The things is that (unfortunately) not all git repositories are hosted on github for various reasons. This is the tool for rendering graphs for your repository that can be hosted anywhere, and it looks great.
 
-## Features (v0.2.1)
+## Features
 
 * Handles multiple repositories
 * Handles bare repositories
@@ -22,8 +22,8 @@ You know those cool graphs and statistics you can get for a repository on github
 
 ## Requirements
 
-* PHP 5.3
-* Git
+* PHP >= 5.3
+* Git >= 1.7.2
 
 ## Installation
 
@@ -33,12 +33,36 @@ Install dependencies using [Composer](http://getcomposer.org/), e.g. `php compos
 
 Clone the repositories you want to statistics and graphs for in to the **repositories** folder.
 
-    cd repositories
-    git clone <repository-url>
+```php
+cd repositories
+git clone <repository-url>
+```
 
 You can clone as many as you want to in to this folder.
 
->  To manually set the repositories path, copy `config.example.php` to `config.php`. Then change the value of `repositoriesPath` in the config file relative to the folder where your desired git repositories are located.
+### Configuration
+To manually set the repositories path(s), copy `config.example.php` to `config.php`.
+
+**Custom directory for repositories**
+
+Set the `repositoriesPath` to a relative path where you store your repositories
+
+```php
+'repositoriesPath' => '../../repositories'
+```
+
+**Specify each repository path**
+
+Set the `repositoriesPath` to an array of paths. They can be either relative or absolute.
+
+```php
+'repositoriesPath' => array(
+    '/var/www/web-project',
+    '../test-project'
+);
+```
+
+***
 
 Now go to your web browser and go to the URL where you've set everything up.
 
@@ -49,7 +73,7 @@ Now go to your web browser and go to the URL where you've set everything up.
 1. Check for [open issues](https://github.com/modess/git-pretty-stats/issues) or open a fresh issue to start a discussion around a feature idea or a bug.
 2. Fork the [git-pretty-stats](https://github.com/modess/git-pretty-stats) repository on Github to start making your changes.
 3. Write test(s) which shows that the bug was fixed or that the feature works as expected.
-4. Send a pull request. Make sure to add yourself to CONTRIBUTORS.md.
+5. Send a pull request to the **develop** branch. Make sure to add yourself to CONTRIBUTORS.md.
 
 If there is some certain statistics or graph that you are missing and would like to be added? [Create an issue](https://github.com/modess/git-pretty-stats/issues/new) and request it!
 
