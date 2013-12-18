@@ -33,12 +33,36 @@ Install dependencies using [Composer](http://getcomposer.org/), e.g. `php compos
 
 Clone the repositories you want to statistics and graphs for in to the **repositories** folder.
 
-    cd repositories
-    git clone <repository-url>
+```php
+cd repositories
+git clone <repository-url>
+```
 
 You can clone as many as you want to in to this folder.
 
->  To manually set the repositories path, copy `config.example.php` to `config.php`. Then change the value of `repositoriesPath` in the config file relative to the folder where your desired git repositories are located.
+### Configuration
+To manually set the repositories path(s), copy `config.example.php` to `config.php`.
+
+**Custom directory for repositories**
+
+Set the `repositoriesPath` to a relative path where you store your repositories
+
+```php
+'repositoriesPath' => '../../repositories'
+```
+
+**Specify each repository path**
+
+Set the `repositoriesPath` to an array of paths. They can be either relative or absolute.
+
+```php
+'repositoriesPath' => array(
+    '/var/www/web-project',
+    '../test-project'
+);
+```
+
+***
 
 Now go to your web browser and go to the URL where you've set everything up.
 
