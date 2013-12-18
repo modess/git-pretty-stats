@@ -22,8 +22,8 @@ You know those cool graphs and statistics you can get for a repository on github
 
 ## Requirements
 
-* PHP 5.3
-* Git
+* PHP >= 5.3
+* Git >= 1.7.2
 
 ## Installation
 
