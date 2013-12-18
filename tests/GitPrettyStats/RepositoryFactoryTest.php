@@ -108,6 +108,53 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testAll ()
+    {
+        $firstRepository = m::mock('stdClass');
+        $firstRepository->shouldReceive('getName')->once()->andReturn('first-repo');
+
+        $secondRepository = m::mock('stdClass');
+        $secondRepository->shouldReceive('getName')->once()->andReturn('second-repo');
+
+        $factory = m::mock('GitPrettyStats\RepositoryFactory[getPaths,load]');
+        $factory
+            ->shouldReceive('getPaths')
+            ->once()
+            ->andReturn(array('/first/path', '/second/path'))
+            ->shouldReceive('load')
+            ->once()
+            ->with('/first/path')
+            ->andReturn($firstRepository)
+            ->shouldReceive('load')
+            ->once()
+            ->with('/second/path')
+            ->andReturn($secondRepository);
+
+        $this->assertEquals(
+            array('first-repo' => $firstRepository, 'second-repo' => $secondRepository),
+            $factory->all(),
+            'Did not return all repositories'
+        );
+    }
+
+    public function testAllLazyLoad ()
+    {
+        $factory = new RepositoryFactory;
+
+        $repositories = array(
+            'first-repo' => '/path',
+            'second-repo' => '/other-path'
+        );
+
+        $factory->setRepositories($repositories);
+
+        $this->assertEquals(
+            $repositories,
+            $factory->all(),
+            'Lazy load for repositories failed'
+        );
+    }
+
     public function testFromName ()
     {
         $factory = new RepositoryFactory;
