@@ -172,4 +172,51 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
             'From name returned incorrect value'
         );
     }
+
+
+    public function testToArray ()
+    {
+        $gitter = m::mock('stdClass');
+        $gitter->shouldReceive('getCurrentBranch')->twice()->andReturn('master');
+
+        $firstRepository = m::mock('stdClass');
+        $firstRepository->gitter = $gitter;
+        $firstRepository
+            ->shouldReceive('getName')
+            ->twice()
+            ->andReturn('first-repo')
+            ->shouldReceive('countCommitsFromGit')
+            ->once()
+            ->andReturn(271);
+
+        $secondRepository = m::mock('stdClass');
+        $secondRepository->gitter = $gitter;
+        $secondRepository
+            ->shouldReceive('getName')
+            ->twice()
+            ->andReturn('second-repo')
+            ->shouldReceive('countCommitsFromGit')
+            ->once()
+            ->andReturn(173);
+
+        $factory = m::mock('GitPrettyStats\RepositoryFactory[all]');
+        $factory->shouldReceive('all')->once()->andReturn(array($firstRepository, $secondRepository));
+
+        $this->assertEquals(
+            array(
+                'first-repo' => array(
+                    'name'    => 'first-repo',
+                    'commits' => 271,
+                    'branch'  => 'master'
+                ),
+                'second-repo' => array(
+                    'name'    => 'second-repo',
+                    'commits' => 173,
+                    'branch'  => 'master'
+                )
+            ),
+            $factory->toArray(),
+            'Did not return all repositories'
+        );
+    }
 }
