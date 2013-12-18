@@ -2,7 +2,7 @@
 
 You know those cool graphs and statistics you can get for a repository on github? The things is that (unfortunately) not all git repositories are hosted on github for various reasons. This is the tool for rendering graphs for your repository that can be hosted anywhere, and it looks great.
 
-## Features (v0.2.1)
+## Features
 
 * Handles multiple repositories
 * Handles bare repositories
