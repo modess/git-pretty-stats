@@ -140,6 +140,7 @@ class RepositoryFactory
     /**
      * Load a repository for given path
      *
+     * @codeCoverageIgnore
      * @param  string $path
      * @return GitPrettyStats\Repository|false
      */
