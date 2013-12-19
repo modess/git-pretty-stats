@@ -4,7 +4,8 @@
         "twig/twig": "1.*",
         "nesbot/carbon": "1.6.0",
         "klaussilveira/gitter": "0.2.0",
-        "symfony/finder": "v2.4.0"
+        "symfony/finder": "v2.4.0",
+        "igorw/config-service-provider": "v1.2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*@dev",
