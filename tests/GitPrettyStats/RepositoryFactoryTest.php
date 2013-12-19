@@ -35,9 +35,7 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
     public function testGetPathsWithConfig ()
     {
         $finder = m::mock('stdClass');
-        $config = array(
-            'repositoriesPath' => 'non-default-dir'
-        );
+        $config = 'non-default-dir';
 
         $firstRepository = m::mock('stdClass');
         $firstRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/repository');
