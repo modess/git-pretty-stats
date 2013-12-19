@@ -9,14 +9,23 @@ use GitPrettyStats\RepositoryFactory;
 
 $app = new Silex\Application();
 
+//
+// Register view service provider
+//
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+//
+// Register error handler
+//
 $app->error(function(\Exception $e) use($app) {
     return $app["twig"]->render("error.html", array("message" => $e->getMessage()));
 });
 
+//
+// Register hook that runs before the application
+//
 $app->before(function() use ($app) {
     $repositoriesPath = 'repositories';
 
@@ -31,6 +40,9 @@ $app->before(function() use ($app) {
     }
 });
 
+//
+// Default route
+//
 $app->get('/', function () use ($app) {
     return $app['twig']->render(
         'index.html',
@@ -40,6 +52,9 @@ $app->get('/', function () use ($app) {
     );
 });
 
+//
+// Repository route
+//
 $app->get('repository/{name}', function ($name) use ($app) {
     $repository = $app['repositoryFactory']->fromName($name);
 
@@ -54,6 +69,9 @@ $app->get('repository/{name}', function ($name) use ($app) {
     );
 });
 
+//
+// Repository statistics route
+//
 $app->get('/git-stats/{name}', function($name) use($app) {
     $repository = $app['repositoryFactory']->fromName($name);
     $repository->loadCommits();
