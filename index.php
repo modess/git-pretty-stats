@@ -10,6 +10,11 @@ use GitPrettyStats\RepositoryFactory;
 $app = new Silex\Application();
 
 //
+// Register configuration service provider
+//
+$app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__ . "/config.php"));
+
+//
 // Register view service provider
 //
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -81,5 +86,4 @@ $app->get('/git-stats/{name}', function($name) use($app) {
     );
 });
 
-$app['debug'] = true;
 $app->run();
