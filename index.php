@@ -32,10 +32,13 @@ $app->error(function(\Exception $e) use($app) {
 // Register hook that runs before the application
 //
 $app->before(function() use ($app) {
-    $repositoriesPath = 'repositories';
+    $config = null;
 
-    $configFilePath = __DIR__ . '/config.php';
-    $config = (file_exists($configFilePath)) ? require_once __DIR__ . '/config.php' : null;
+    try {
+        $config = $app['repositoriesPath'];
+    } catch (InvalidArgumentException $e) {
+        // Config file not setup
+    }
 
     $app['repositoryFactory'] = new RepositoryFactory($config);
     $app['repositories']      = $app['repositoryFactory']->all();

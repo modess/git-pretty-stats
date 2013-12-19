@@ -72,25 +72,25 @@ class RepositoryFactory
         if (!$this->paths)
         {
             // No config file exists or repositories path not set
-            if (!isset($this->config['repositoriesPath']))
+            if (is_null($this->config))
             {
                 $repositoriesPath = 'repositories';
                 $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
             }
             // Repositories are specified as array in config
-            elseif (is_array($this->config['repositoriesPath']))
+            elseif (is_array($this->config))
             {
                 $paths = array();
-                foreach ($this->config['repositoriesPath'] as $path) {
+                foreach ($this->config as $path) {
                     $paths[] = $path;
                 }
 
                 $directories = $this->finder->depth(0)->directories()->append($paths);
             }
             // Custom repository path
-            elseif (isset($this->config['repositoriesPath']))
+            elseif (!is_null($this->config))
             {
-                $repositoriesPath = $this->config['repositoriesPath'];
+                $repositoriesPath = $this->config;
                 $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
             }
 
