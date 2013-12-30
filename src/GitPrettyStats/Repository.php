@@ -34,18 +34,22 @@ class Repository
     /** @var PrettyGitStats\Statistics */
     public $statistics;
 
+    /** @var array Author email aliases */
+    public $emailAliases = array();
+
     /**
      * Constructor
      *
      * @param \Gitter\Client $client  Git client
      * @return void
      */
-    public function __construct($path, $client = null, $statistics = null)
+    public function __construct($path, $client = null, $statistics = null, $emailAliases)
     {
         $this->client     = ($client) ? $client : new Client;
         $this->statistics = ($statistics) ? $statistics : new Statistics($this);
 
         $this->gitter     = $this->client->getRepository($path);
+        $this->emailAliases = $emailAliases;
     }
 
     /**
@@ -160,6 +164,10 @@ class Repository
     {
         $email = $commit->getAuthor()->getEmail();
         $name  = $commit->getAuthor()->getName();
+
+        if (isset($this->emailAliases[$email])) {
+            $email = $this->emailAliases[$email];
+        }
 
         if (!isset($this->commitsByContributor[$email])) {
             $this->commitsByContributor[$email] = array(
