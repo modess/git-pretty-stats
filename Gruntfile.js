@@ -1,8 +1,19 @@
 var javascriptFiles = [
     "<%= bowerRoot %>/flat-ui-official/js/jquery-2.0.3.min.js",
+    "<%= bowerRoot %>/flat-ui-official/js/jquery-ui-1.10.3.min.js",
+    "<%= bowerRoot %>/flat-ui-official/js/jquery.placeholder.js",
+    "<%= bowerRoot %>/flat-ui-official/js/jquery.stackable.js",
+    "<%= bowerRoot %>/flat-ui-official/js/jquery.tagsinput.js",
     "<%= bowerRoot %>/flat-ui-official/js/bootstrap.min.js",
+    "<%= bowerRoot %>/flat-ui-official/js/bootstrap-select.js",
+    "<%= bowerRoot %>/flat-ui-official/js/bootstrap-switch.js",
+    "<%= bowerRoot %>/flat-ui-official/js/bootstrap-typeahead.js",
+    "<%= bowerRoot %>/flat-ui-official/js/icon-font-ie7.js",
+    "<%= bowerRoot %>/flat-ui-official/js/flatui-checkbox.js",
+    "<%= bowerRoot %>/flat-ui-official/js/flatui-radio.js",
     "<%= bowerRoot %>/flat-ui-official/js/application.js",
-    "<%= bowerRoot %>/angular/angular.min.js",
+    "<%= bowerRoot %>/angular/angular.js",
+    "<%= bowerRoot %>/angular-resource/angular-resource.js",
     "<%= bowerRoot %>/highcharts/hightcharts.js",
     "<%= compiledRoot %>/app.js"
 ];

@@ -9,6 +9,7 @@
   "dependencies": {
     "angular": "~1.2.6",
     "flat-ui-official": "~2.1.1",
-    "highcharts": "~3.0.7"
+    "highcharts": "~3.0.7",
+    "angular-resource": "~1.2.6"
   }
 }
