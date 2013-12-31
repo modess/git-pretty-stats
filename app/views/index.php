@@ -7,10 +7,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="<?=asset('css/screen.css')?>">
+        <link rel="stylesheet" href="<?=asset('assets/css/app.css')?>">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
         <!--[if lt IE 9]>
-            <script src="<?=asset('/js/html5shiv.js')?>"></script>
+            <script src="<?=asset('assets/js/html5shiv.js')?>"></script>
         <![endif]-->
     </head>
     <body>
@@ -27,6 +27,6 @@
             </div>
         </div>
 
-        <script src="<?=asset('js/app.js')?>"></script>
+        <script src="<?=asset('assets/js/app.js')?>"></script>
     </body>
 </html>
