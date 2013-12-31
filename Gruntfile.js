@@ -36,6 +36,7 @@ module.exports = function(grunt) {
 
         jsRoot: "<%= root %>/js",
         cssRoot: "<%= root %>/css",
+        templateRoot: "<%= root %>/templates",
         imgRoot: "<%= root %>/images",
         fontRoot: "<%= root %>/fonts",
 
@@ -60,6 +61,7 @@ module.exports = function(grunt) {
                     '<%= compiledRoot %>/app.js': [
                         '<%= coffeeRoot %>/app.coffee',
                         '<%= coffeeRoot %>/statistics.coffee',
+                        '<%= coffeeRoot %>/controllers/*.coffee',
                         '<%= coffeeRoot %>/charts/*.coffee',
                     ]
                 }
@@ -91,12 +93,26 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false,
                 }
+            },
+            copy: {
+                files: ['<%= coffeeRoot %>/templates/**/*'],
+                tasks: ['copy'],
+                options: {
+                    spawn: false,
+                }
             }
         },
 
         copy: {
             main: {
                 files: [
+                    {
+                        expand: true,
+                        cwd: '<%= coffeeRoot %>/templates',
+                        src: '**',
+                        dest: '<%= templateRoot %>',
+                        flatten: false
+                    },
                     {
                         expand: true,
                         cwd: '<%= bowerRoot %>/flat-ui-official/images',
