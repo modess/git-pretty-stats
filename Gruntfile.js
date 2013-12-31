@@ -80,6 +80,9 @@ module.exports = function(grunt) {
         },
 
         watch: {
+            options: {
+                livereload: true
+            },
             coffee: {
                 files: ['<%= coffeeRoot %>/**/*'],
                 tasks: ['coffee', 'concat:javascripts'],
