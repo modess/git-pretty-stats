@@ -8,7 +8,6 @@ var javascriptFiles = [
     "<%= bowerRoot %>/flat-ui-official/js/bootstrap-select.js",
     "<%= bowerRoot %>/flat-ui-official/js/bootstrap-switch.js",
     "<%= bowerRoot %>/flat-ui-official/js/bootstrap-typeahead.js",
-    "<%= bowerRoot %>/flat-ui-official/js/icon-font-ie7.js",
     "<%= bowerRoot %>/flat-ui-official/js/flatui-checkbox.js",
     "<%= bowerRoot %>/flat-ui-official/js/flatui-radio.js",
     "<%= bowerRoot %>/flat-ui-official/js/application.js",
