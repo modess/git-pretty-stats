@@ -10603,6 +10603,11 @@ body.list, html.list {
 .todo {
   margin-top: 5em;
 }
+.todo ul {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
 .todo li {
   padding: 0;
 }
@@ -10613,6 +10618,9 @@ body.list, html.list {
 }
 .todo li:last-child {
   padding-bottom: 0;
+}
+.todo li .todo-icon {
+  padding: 5px 22px 0 0;
 }
 .todo a {
   display: block;
