@@ -63,6 +63,7 @@ nbproject/
 .sass-cache/
 /vendor/
 /assets/vendor
+/assets/compiled
 /node_modules
 phpunit.xml
 composer.lock

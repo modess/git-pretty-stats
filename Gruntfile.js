@@ -14,6 +14,7 @@ var javascriptFiles = [
     "<%= bowerRoot %>/flat-ui-official/js/application.js",
     "<%= bowerRoot %>/angular/angular.js",
     "<%= bowerRoot %>/angular-resource/angular-resource.js",
+    "<%= bowerRoot %>/angular-route/angular-route.js",
     "<%= bowerRoot %>/highcharts/hightcharts.js",
     "<%= compiledRoot %>/app.js"
 ];

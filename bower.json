@@ -10,6 +10,7 @@
     "angular": "~1.2.6",
     "flat-ui-official": "~2.1.1",
     "highcharts": "~3.0.7",
-    "angular-resource": "~1.2.6"
+    "angular-resource": "~1.2.6",
+    "angular-route": "~1.2.6"
   }
 }

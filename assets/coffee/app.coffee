@@ -23,7 +23,7 @@ angular.module("SharedServices", [])
     $('#loader').modal 'hide'
     # $q.reject response
 
-angular.module("main", ["SharedServices", "ngResource"])
+angular.module("main", ["SharedServices", "ngResource", "ngRoute"])
 .config ($interpolateProvider) ->
   $interpolateProvider.startSymbol('{[').endSymbol(']}')
 .config ($routeProvider) ->
