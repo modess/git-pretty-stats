@@ -62,8 +62,8 @@ nbproject/
 ###########
 .sass-cache/
 /vendor/
+/assets/vendor
 phpunit.xml
 composer.lock
 !.gitkeep
 config.php
-Guardfile
