@@ -23905,7 +23905,11 @@ $(function() {
   });
 });
 
-angular.module("main", ["ngResource", "ngRoute"]).config(function($routeProvider) {
+angular.module("main", ["ngResource", "ngRoute"]).run(function($rootScope, $location) {
+  return $rootScope.$on("$routeChangeSuccess", function(ev, data) {
+    return $rootScope.isList = $location.path() === "/list";
+  });
+}).config(function($routeProvider) {
   return $routeProvider.when('/list', {
     templateUrl: 'assets/templates/list.html',
     controller: 'ListCtrl'

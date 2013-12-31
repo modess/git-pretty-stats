@@ -1,7 +1,7 @@
 body, html {
   margin-bottom: 100px;
 }
-body.index, html.index {
+body.list, html.list {
   background: #1abc9c;
 }
 
