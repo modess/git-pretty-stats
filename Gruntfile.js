@@ -99,6 +99,10 @@ module.exports = function(grunt) {
                         dest: '<%= fontRoot %>',
                         flatten: false
                     },
+                    {
+                        src: '<%= bowerRoot %>/flat-ui-official/js/html5shiv.js',
+                        dest: '<%= jsRoot %>/html5shiv.js'
+                    }
                 ]
             }
         },
