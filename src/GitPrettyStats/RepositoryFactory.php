@@ -153,7 +153,7 @@ class RepositoryFactory
         try {
             $repository = new Repository($path);
             return $repository;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
