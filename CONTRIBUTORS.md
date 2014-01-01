@@ -10,4 +10,6 @@ In chronological order:
 
 * filp <https://github.com/filp>
 
+* jasonrm <https://github.com/jasonrm>
+
 * [Your name or handle] <[email or website]>
