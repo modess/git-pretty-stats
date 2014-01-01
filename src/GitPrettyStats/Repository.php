@@ -43,12 +43,11 @@ class Repository
      * @param \Gitter\Client $client  Git client
      * @return void
      */
-    public function __construct($path, $client = null, $statistics = null, $emailAliases)
+    public function __construct($path, $client = null, $statistics = null, $emailAliases = array())
     {
-        $this->client     = ($client) ? $client : new Client;
-        $this->statistics = ($statistics) ? $statistics : new Statistics($this);
-
-        $this->gitter     = $this->client->getRepository($path);
+        $this->client       = ($client) ? $client : new Client;
+        $this->statistics   = ($statistics) ? $statistics : new Statistics($this);
+        $this->gitter       = $this->client->getRepository($path);
         $this->emailAliases = $emailAliases;
     }
 
