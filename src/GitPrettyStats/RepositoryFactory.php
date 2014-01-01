@@ -58,7 +58,6 @@ class RepositoryFactory
      * @param  array $config  Configuration values
      * @param  Symfony\Component\Finder\Finder File system handler
      * @param  string $baseDir Base directory for Git Pretty Stats
-     * @param  array $emailAliases Author email aliases
      * @return void
      */
     public function __construct($config = null, $finder = null, $baseDir = null)
@@ -66,7 +65,9 @@ class RepositoryFactory
         $this->config  = $config;
         $this->finder  = ($finder !== null)  ? $finder : new Finder;
         $this->baseDir = ($baseDir !== null) ? $baseDir : __DIR__ . '/../../';
-        $this->emailAliases = is_array($config['emailAliases']) ? $config['emailAliases'] : null;
+
+        $this->emailAliases = isset($config['emailAliases']) && is_array($config['emailAliases']) ?
+            $config['emailAliases'] : null;
     }
 
     /**
