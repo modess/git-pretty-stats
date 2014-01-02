@@ -2,6 +2,7 @@
 namespace GitPrettyStats;
 
 use Symfony\Component\Finder\Finder;
+use Config;
 
 /**
  * Factory for repositories
@@ -23,13 +24,6 @@ class RepositoryFactory
      * @var  string
      */
     protected $baseDir;
-
-    /**
-     * Configuration values
-     *
-     * @var  array|null
-     */
-    protected $config;
 
     /**
      * File system handler
@@ -55,19 +49,17 @@ class RepositoryFactory
     /**
      * Create a new factory
      *
-     * @param  array $config  Configuration values
      * @param  Symfony\Component\Finder\Finder File system handler
      * @param  string $baseDir Base directory for Git Pretty Stats
      * @return void
      */
-    public function __construct($config = null, $finder = null, $baseDir = null)
+    public function __construct(Finder $finder, $baseDir = null)
     {
-        $this->config  = $config;
-        $this->finder  = ($finder !== null)  ? $finder : new Finder;
-        $this->baseDir = ($baseDir !== null) ? $baseDir : __DIR__ . '/../../';
+        $this->finder  = $finder;
+        $this->baseDir = ($baseDir !== null) ? $baseDir : base_path();
 
-        $this->emailAliases = isset($config['emailAliases']) && is_array($config['emailAliases']) ?
-            $config['emailAliases'] : null;
+        $emailAliases = Config::get('git-pretty-stats.emailAliases');
+        $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
     }
 
     /**
@@ -81,27 +73,39 @@ class RepositoryFactory
 
         if (!$this->paths)
         {
+            $repositoriesPath = Config::get('git-pretty-stats.repositoriesPath');
+
             // No config file exists or repositories path not set
-            if (is_null($this->config))
+            if (!$repositoriesPath)
             {
-                $repositoriesPath = 'repositories';
-                $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
+                $directories = $this->finder
+                    ->depth(0)
+                    ->directories()
+                    ->in($this->baseDir . '/repositories');
             }
             // Repositories are specified as array in config
-            elseif (is_array($this->config))
+            elseif (is_array($repositoriesPath))
             {
                 $paths = array();
-                foreach ($this->config as $path) {
+                foreach ($repositoriesPath as $path) {
+                    if (substr($path, 0, 1) != '/') {
+                        $path = $this->baseDir . '/' . $path;
+                    }
                     $paths[] = $path;
                 }
 
-                $directories = $this->finder->depth(0)->directories()->append($paths);
+                $directories = $this->finder
+                    ->depth(0)
+                    ->directories()
+                    ->append($paths);
             }
             // Custom repository path
-            elseif (!is_null($this->config))
+            elseif (!is_null($repositoriesPath))
             {
-                $repositoriesPath = $this->config;
-                $directories = $this->finder->depth(0)->directories()->in($this->baseDir . $repositoriesPath);
+                $directories = $this->finder
+                    ->depth(0)
+                    ->directories()
+                    ->in($this->baseDir . $repositoriesPath);
             }
 
             // Real paths for all repositories
