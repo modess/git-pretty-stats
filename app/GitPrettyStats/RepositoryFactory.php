@@ -75,16 +75,8 @@ class RepositoryFactory
         {
             $repositoriesPath = Config::get('git-pretty-stats.repositoriesPath');
 
-            // No config file exists or repositories path not set
-            if (!$repositoriesPath)
-            {
-                $directories = $this->finder
-                    ->depth(0)
-                    ->directories()
-                    ->in($this->baseDir . '/repositories');
-            }
             // Repositories are specified as array in config
-            elseif (is_array($repositoriesPath))
+            if (is_array($repositoriesPath))
             {
                 $paths = array();
                 foreach ($repositoriesPath as $path) {
@@ -105,7 +97,7 @@ class RepositoryFactory
                 $directories = $this->finder
                     ->depth(0)
                     ->directories()
-                    ->in($this->baseDir . $repositoriesPath);
+                    ->in($this->baseDir . '/' . $repositoriesPath);
             }
 
             // Real paths for all repositories
