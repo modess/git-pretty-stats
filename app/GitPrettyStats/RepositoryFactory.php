@@ -46,6 +46,13 @@ class RepositoryFactory
     protected $repositories;
 
     /**
+     * Author email aliases
+     *
+     * @var  array
+     */
+    protected $emailAliases;
+
+    /**
      * Create a new factory
      *
      * @param  array $config  Configuration values
@@ -58,6 +65,9 @@ class RepositoryFactory
         $this->config  = $config;
         $this->finder  = ($finder !== null)  ? $finder : new Finder;
         $this->baseDir = ($baseDir !== null) ? $baseDir : __DIR__ . '/../../';
+
+        $this->emailAliases = isset($config['emailAliases']) && is_array($config['emailAliases']) ?
+            $config['emailAliases'] : null;
     }
 
     /**
@@ -151,9 +161,9 @@ class RepositoryFactory
         }
 
         try {
-            $repository = new Repository($path);
+            $repository = new Repository($path, null, null, $this->emailAliases);
             return $repository;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }

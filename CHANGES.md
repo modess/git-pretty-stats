@@ -1,5 +1,14 @@
 # Changes in the Git Pretty Stats project
 
+## 0.3.0
+* Refactored configuration management
+
+## 0.2.2
+* Bug fix repository links
+
+## 0.2.1
+* Support for bare repositories
+
 ## 0.2.0
 * Support for multiple repositories
 * Changed namespace to *GitPrettyStats*
