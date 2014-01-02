@@ -13,6 +13,7 @@ return array(
         'an_old_email@example.com' => 'my_new_email@example.com',
         'annother_old_email@example.com' => 'my_new_email@example.com'
     ),
+    'cacheTime' => 30,
     'repositoriesPath' => array(
         'repo-name' => '../repo-path',
         'repo-name2' => '../repo-path2',

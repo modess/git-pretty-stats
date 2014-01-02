@@ -21,9 +21,9 @@ $app->before(function() use ($app) {
     $repositoriesPath = 'repositories';
 
     $configFilePath = __DIR__ . '/config.php';
-    $config = (file_exists($configFilePath)) ? require_once __DIR__ . '/config.php' : null;
+    $app['config'] = (file_exists($configFilePath)) ? require_once __DIR__ . '/config.php' : null;
 
-    $app['repositoryFactory'] = new RepositoryFactory($config);
+    $app['repositoryFactory'] = new RepositoryFactory($app['config']);
     $app['repositories']      = $app['repositoryFactory']->all();
 
     if (count($app['repositories']) == 0) {
@@ -55,11 +55,22 @@ $app->get('repository/{name}', function ($name) use ($app) {
 });
 
 $app->get('/git-stats/{name}', function($name) use($app) {
-    $repository = $app['repositoryFactory']->fromName($name);
-    $repository->loadCommits();
-
+    $cache_file = __DIR__.'/cache/'.$name.'.json';
+    $from_cache
+        = isset($app['config']['cacheTime'])
+        && $app['config']['cacheTime']
+        && file_exists($cache_file)
+        && filemtime($cache_file) > (time() - $app['config']['cacheTime']);
+    if ($from_cache) {
+        $statistics = json_decode(file_get_contents($cache_file));
+    } else {
+        $repository = $app['repositoryFactory']->fromName($name);
+        $repository->loadCommits();
+        $statistics = $repository->getStatistics();
+        file_put_contents($cache_file, json_encode($statistics));
+    }
     return $app->json(
-        $repository->getStatistics()
+        $statistics
     );
 });
 
