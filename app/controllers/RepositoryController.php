@@ -1,7 +1,7 @@
 <?php
 use GitPrettyStats\RepositoryFactory;
 
-class ListController extends Controller {
+class RepositoryController extends Controller {
     /**
      * Repository factory
      *
@@ -34,7 +34,7 @@ class ListController extends Controller {
      *
      * @return Response
      */
-    public function fetch ()
+    public function all ()
     {
         $list = $this->factory->toArray();
 

@@ -1,4 +1,4 @@
 <?php
 
-Route::get('/', 'ListController@index');
-Route::get('/list/fetch', 'ListController@fetch');
+Route::get('/', 'RepositoryController@index');
+Route::get('/repository/all', 'RepositoryController@all');
