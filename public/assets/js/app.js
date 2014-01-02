@@ -23930,17 +23930,13 @@ renderStatistics = function(data) {
   return _results;
 };
 
-ListCtrl = function($scope) {
-  $('#loader').modal({
-    show: true
+ListCtrl = function($scope, $http) {
+  return $http({
+    method: 'GET',
+    url: base_url + '/list/fetch'
+  }).then(function(response) {
+    return $scope.repositories = response.data;
   });
-  return $scope.repositories = [
-    {
-      name: 'gps',
-      branch: 'master',
-      commits: 387
-    }
-  ];
 };
 
 RepositoryCtrl = function() {

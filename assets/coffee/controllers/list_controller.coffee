@@ -1,13 +1,7 @@
-ListCtrl = ($scope) ->
-  $('#loader').modal { show: true }
-
-  # $.ajax
-  #   url: base_url + '/repositories'
-  $scope.repositories = [
-    {
-      name: 'gps',
-      branch: 'master',
-      commits: 387
-    }
-  ]
-
+ListCtrl = ($scope, $http) ->
+  $http(
+    method: 'GET'
+    url: base_url + '/list/fetch'
+  ).then( (response) ->
+    $scope.repositories = response.data
+  )
