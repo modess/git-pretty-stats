@@ -23933,7 +23933,7 @@ renderStatistics = function(data) {
 ListCtrl = function($scope, $http) {
   return $http({
     method: 'GET',
-    url: base_url + '/repository/all'
+    url: base_url + '/repository'
   }).then(function(response) {
     return $scope.repositories = response.data;
   });
