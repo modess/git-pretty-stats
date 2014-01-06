@@ -10661,6 +10661,8 @@ body.list, html.list {
 
 .thumbnail {
   position: relative;
+  font-size: 0.8em;
+  margin-top: 1em;
 }
 .thumbnail h5 {
   position: absolute;
