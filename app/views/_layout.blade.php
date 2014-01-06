@@ -15,9 +15,7 @@
 </head>
 <body<?=(Request::is('/') == '/') ? ' class="list"':''?>>
 
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 
     <div class="footer">
         <div class="container">
