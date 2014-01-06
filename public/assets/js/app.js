@@ -23895,7 +23895,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-var ListCtrl, RepositoryCtrl, renderCommitsByContributorsChart, renderCommitsByDateChart, renderCommitsByDayChart, renderCommitsByHourChart, renderStatistics;
+var RepositoryCtrl, renderCommitsByContributorsChart, renderCommitsByDateChart, renderCommitsByDayChart, renderCommitsByHourChart, renderStatistics;
 
 $(function() {
   window.chartColors = ['#3498DB', '#2ECC71', '#9B59B6', '#E74C3C', '#1ABC9C', '#F39C12', '#95A5A6'];
@@ -23905,18 +23905,7 @@ $(function() {
   });
 });
 
-angular.module("main", ["ngResource", "ngRoute"]).run(function($rootScope, $location) {
-  return $rootScope.$on("$routeChangeSuccess", function(ev, data) {
-    return $rootScope.isList = $location.path() === "/list";
-  });
-}).config(function($routeProvider) {
-  return $routeProvider.when('/list', {
-    templateUrl: 'assets/templates/list.html',
-    controller: 'ListCtrl'
-  }).otherwise({
-    redirectTo: '/list'
-  });
-});
+angular.module("main", ["ngResource", "ngRoute"]);
 
 renderStatistics = function(data) {
   var source, statistic, template, _i, _len, _results;
@@ -23928,15 +23917,6 @@ renderStatistics = function(data) {
     _results.push($("#statistics .thumbnails").append(template(statistic)));
   }
   return _results;
-};
-
-ListCtrl = function($scope, $http) {
-  return $http({
-    method: 'GET',
-    url: base_url + '/repository'
-  }).then(function(response) {
-    return $scope.repositories = response.data;
-  });
 };
 
 RepositoryCtrl = function() {

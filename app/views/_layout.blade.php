@@ -13,9 +13,11 @@
         <script src="<?=asset('assets/js/html5shiv.js')?>"></script>
     <![endif]-->
 </head>
-<body ng-class="{'list': isList}">
+<body<?=(Request::is('/') == '/') ? ' class="list"':''?>>
 
-    <ng-view></ng-view>
+    <div class="container">
+        @yield('content')
+    </div>
 
     <div class="footer">
         <div class="container">

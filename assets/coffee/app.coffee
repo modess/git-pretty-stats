@@ -7,14 +7,3 @@ $ ->
   )
 
 angular.module("main", ["ngResource", "ngRoute"])
-.run ($rootScope, $location) ->
-  $rootScope.$on "$routeChangeSuccess", (ev, data) ->
-    $rootScope.isList = $location.path() is "/list"
-
-.config ($routeProvider) ->
-  $routeProvider
-  .when '/list',
-    templateUrl: 'assets/templates/list.html'
-    controller: 'ListCtrl'
-  .otherwise
-    redirectTo: '/list'

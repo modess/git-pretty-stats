@@ -10,7 +10,7 @@ class RepositoryController extends Controller {
     protected $factory;
 
     /**
-     * Create a new ListController
+     * Create a new RepositoryController
      *
      * @param RepositoryFactory $factory
      */
@@ -26,7 +26,9 @@ class RepositoryController extends Controller {
      */
     public function index ()
     {
-        return View::make('list');
+        $repositories = $this->factory->toArray();
+
+        return View::make('list')->withRepositories($repositories);
     }
 
     /**
