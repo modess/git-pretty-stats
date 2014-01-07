@@ -32,18 +32,6 @@ class RepositoryController extends Controller {
     }
 
     /**
-     * Fetch repository list
-     *
-     * @return Response
-     */
-    public function all ()
-    {
-        $list = $this->factory->toArray();
-
-        return Response::json($list);
-    }
-
-    /**
      * Get repository
      *
      * @param str $name
@@ -58,6 +46,30 @@ class RepositoryController extends Controller {
             'repositories'  => $repositories,
             'name'          => $repository->getName(),
             'branch'        => $repository->gitter->getCurrentBranch()
+        ));
+    }
+
+    /**
+     * Get repository data
+     *
+     * @param str $name
+     * @return Response
+     */
+    public function data ($name)
+    {
+        $repositories = $this->factory->toArray();
+        $repository   = $this->factory->fromName($name);
+        $repository->loadCommits();
+
+        $statistics = $repository->getStatistics();
+
+        return Response::json(array(
+            'repositories'  => $repositories,
+            'repository'    => array(
+                'name'          => $repository->getName(),
+                'branch'        => $repository->gitter->getCurrentBranch(),
+                'data'          => $statistics
+            )
         ));
     }
 }
