@@ -10633,14 +10633,14 @@ body.list, html.list {
 }
 .header h1 {
   color: white;
+  font-size: 2em;
+  margin-top: 0.5em;
 }
 .header h1 small {
-  color: tint(#1abc9c, 50%);
+  color: tint(#1abc9c, 60%);
 }
-.header .dropdown-menu {
-  right: 0;
-  width: auto;
-  left: auto;
+.header button {
+  margin-top: 1em;
 }
 .header .select {
   margin-top: 8px;
