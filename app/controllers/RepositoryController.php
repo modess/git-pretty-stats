@@ -42,4 +42,22 @@ class RepositoryController extends Controller {
 
         return Response::json($list);
     }
+
+    /**
+     * Get repository
+     *
+     * @param str $name
+     * @return View
+     */
+    public function show ($name)
+    {
+        $repositories = $this->factory->toArray();
+        $repository   = $this->factory->fromName($name);
+
+        return View::make('repository')->with(array(
+            'repositories'  => $repositories,
+            'name'          => $repository->getName(),
+            'branch'        => $repository->gitter->getCurrentBranch()
+        ));
+    }
 }

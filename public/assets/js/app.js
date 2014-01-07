@@ -24085,3 +24085,4 @@ renderCommitsByContributorsChart = function(data) {
   }
   return _results;
 };
+angular.module('main').controller('RepositoryController', ['$scope', function($scope) {}]);
