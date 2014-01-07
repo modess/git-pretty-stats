@@ -7,3 +7,6 @@ $ ->
   )
 
 angular.module("main", ["ngResource", "ngRoute"])
+.config(($interpolateProvider) ->
+  $interpolateProvider.startSymbol('<%').endSymbol('%>')
+)
