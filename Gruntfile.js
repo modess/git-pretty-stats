@@ -60,9 +60,8 @@ module.exports = function(grunt) {
                 files: {
                     '<%= compiledRoot %>/app.js': [
                         '<%= coffeeRoot %>/app.coffee',
-                        '<%= coffeeRoot %>/statistics.coffee',
-                        '<%= coffeeRoot %>/controllers/*.coffee',
-                        '<%= coffeeRoot %>/charts/*.coffee',
+                        '<%= coffeeRoot %>/directives/*.coffee',
+                        '<%= coffeeRoot %>/controllers/*.coffee'
                     ]
                 }
             }
@@ -98,7 +97,7 @@ module.exports = function(grunt) {
                 }
             },
             copy: {
-                files: ['<%= coffeeRoot %>/templates/**/*'],
+                files: ['assets/templates/**/*'],
                 tasks: ['copy'],
                 options: {
                     spawn: false,
@@ -111,7 +110,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: '<%= coffeeRoot %>/templates',
+                        cwd: 'assets/templates',
                         src: '**',
                         dest: '<%= templateRoot %>',
                         flatten: false
