@@ -12,4 +12,6 @@ In chronological order:
 
 * jasonrm <https://github.com/jasonrm>
 
+* dreuter <https://github.com/dreuter>
+
 * [Your name or handle] <[email or website]>
