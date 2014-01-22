@@ -82,7 +82,9 @@ class Repository
      */
     public function countCommitsFromGit ()
     {
-        return $this->getClient()->run($this->gitter, 'rev-list HEAD | wc -l | tr -d "\n"');
+        return (version_compare($this->getClient()->getVersion(), '1.7.2', '>=')) ?
+            $this->getClient()->run($this->gitter, 'rev-list --count HEAD') :
+            $this->getClient()->run($this->gitter, 'rev-list HEAD | wc -l | tr -d "\n"');
     }
 
     /**
