@@ -22,6 +22,7 @@ var javascriptFiles = [
 var stylesheetFiles = [
     "<%= bowerRoot %>/flat-ui-official/bootstrap/css/bootstrap.css",
     "<%= bowerRoot %>/flat-ui-official/css/flat-ui.css",
+    "<%= bowerRoot %>/font-awesome/css/font-awesome.css",
     "<%= compiledRoot %>/app.css"
 ];
 
@@ -134,6 +135,13 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: '<%= bowerRoot %>/flat-ui-official/bootstrap/fonts',
+                        src: '**',
+                        dest: '<%= fontRoot %>',
+                        flatten: false
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= bowerRoot %>/font-awesome/fonts',
                         src: '**',
                         dest: '<%= fontRoot %>',
                         flatten: false

@@ -27094,6 +27094,9 @@ angular.module('main').directive('statistics', function() {
 angular.module('main').controller('RepositoryController', [
   '$scope', '$http', function($scope, $http) {
     $scope.name = $("input[name='name']").val();
+    $('#loader').modal({
+      show: true
+    });
     return $http({
       method: 'GET',
       url: base_url + '/repository/' + $scope.name + '/data'
@@ -27108,7 +27111,8 @@ angular.module('main').controller('RepositoryController', [
       renderCommitsByDayChart(charts.day);
       $("a[href='#contributors']").trigger('click');
       renderCommitsByContributorsChart(charts.contributor);
-      return $("a[href='#statistics']").trigger('click');
+      $("a[href='#statistics']").trigger('click');
+      return $('#loader').modal('hide');
     });
   }
 ]);

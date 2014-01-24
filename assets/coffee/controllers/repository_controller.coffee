@@ -1,5 +1,6 @@
 angular.module('main').controller('RepositoryController', ['$scope', '$http', ($scope, $http) ->
   $scope.name = $("input[name='name']").val()
+  $('#loader').modal { show: true }
 
   $http(
     method: 'GET'
@@ -19,5 +20,7 @@ angular.module('main').controller('RepositoryController', ['$scope', '$http', ($
     renderCommitsByContributorsChart charts.contributor
 
     $("a[href='#statistics']").trigger 'click'
+
+    $('#loader').modal 'hide'
   )
 ])

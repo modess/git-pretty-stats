@@ -57,13 +57,17 @@
 
     </div>
 
-    <div id="loader" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="loader" aria-hidden="true">
-        <div class="modal-header">
-            <h3>Hang in there</h3>
-        </div>
-        <div class="modal-body">
-            <p><i class="icon-spinner icon-spin icon-large"></i> Loading repository, fetching commits and building graphs...</p>
-        </div>
-    </div>
+    <div class="modal fade" id="loader" tabindex="-1" role="dialog" aria-labelledby="myLoader" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Hang in there</h4>
+                </div>
+                <div class="modal-body">
+                    <p><i class="fa fa-spinner fa-spin"></i> Loading repository, fetching commits and building graphs...</p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 @stop
