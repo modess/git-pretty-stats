@@ -202,8 +202,25 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testCountCommitsFromGit ()
     {
         $this->client
+            ->shouldReceive('getVersion')
+            ->once()
+            ->andReturn('1.8.2')
             ->shouldReceive('run')
             ->with($this->gitter, 'rev-list --count HEAD')
+            ->andReturn(5);
+
+        $repo = $this->createInstance();
+        $this->assertEquals(5, $repo->countCommitsFromGit(), 'Invalid commit count from git');
+    }
+
+    public function testCountCommitsFromGitBackwardsCompatible ()
+    {
+        $this->client
+            ->shouldReceive('getVersion')
+            ->once()
+            ->andReturn('1.7.0')
+            ->shouldReceive('run')
+            ->with($this->gitter, 'rev-list HEAD | wc -l | tr -d "\n"')
             ->andReturn(5);
 
         $repo = $this->createInstance();
