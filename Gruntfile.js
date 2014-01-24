@@ -14,7 +14,8 @@ var javascriptFiles = [
     "<%= bowerRoot %>/angular/angular.js",
     "<%= bowerRoot %>/angular-resource/angular-resource.js",
     "<%= bowerRoot %>/angular-route/angular-route.js",
-    "<%= bowerRoot %>/highcharts/hightcharts.js",
+    "<%= bowerRoot %>/handlebars/handlebars.js",
+    "<%= bowerRoot %>/highcharts/highcharts.js",
     "<%= compiledRoot %>/app.js"
 ];
 
@@ -59,6 +60,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     '<%= compiledRoot %>/app.js': [
+                        '<%= coffeeRoot %>/charts/*.coffee',
                         '<%= coffeeRoot %>/app.coffee',
                         '<%= coffeeRoot %>/directives/*.coffee',
                         '<%= coffeeRoot %>/controllers/*.coffee'
