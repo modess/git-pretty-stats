@@ -1,7 +1,14 @@
 renderCommitsByContributorsChart = (data) ->
   $("#contributors h3").html(data.length + ' ' + $("#contributors h3").html())
   i = 0
-  source   = $("#contributor-template").html()
+  source   = '<div class="col-md-6">' +
+    '<div id="contributor-{{ i }}" class="thumbnail">' +
+    '<h4>{{ name }}<br /><small>{{ email }}</small></h4>' +
+    '<h5>{{ commits }}</h5>' +
+    '<div id="chart-{{ i }}" style="height: 200px; width: 100%"></div>' +
+    '</div>' +
+    '</div>'
+
   template = Handlebars.compile(source)
   for contributor in data
     contributor.i = i

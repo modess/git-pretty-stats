@@ -10600,6 +10600,10 @@ body.list, html.list {
   background: #1abc9c;
 }
 
+h3 {
+  font-size: 1.5em;
+}
+
 .todo {
   margin-top: 5em;
 }
@@ -10661,8 +10665,10 @@ body.list, html.list {
 
 .thumbnail {
   position: relative;
-  font-size: 0.8em;
   margin-top: 1em;
+}
+.thumbnail h4 {
+  font-size: 1.1em;
 }
 .thumbnail h5 {
   position: absolute;
@@ -10671,6 +10677,7 @@ body.list, html.list {
   padding: 10px;
   background: #1abc9c;
   color: white;
+  font-size: 1.25em;
 }
 
 #statistics {
@@ -10682,10 +10689,10 @@ body.list, html.list {
   padding: 10px;
 }
 #statistics .thumbnail .title {
-  font-size: 1.1em;
+  font-size: 0.95em;
 }
 #statistics .thumbnail .value {
-  font-size: 3em;
+  font-size: 2.5em;
   line-height: 1em;
   padding-top: 10px;
   text-align: right;
