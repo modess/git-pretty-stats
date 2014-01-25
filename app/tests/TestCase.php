@@ -16,4 +16,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
         return require __DIR__.'/../../bootstrap/start.php';
     }
 
+    /**
+     * Tear down
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+
 }

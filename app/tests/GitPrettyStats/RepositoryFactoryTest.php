@@ -6,7 +6,7 @@ use Mockery as m;
 /**
  * @covers GitPrettyStats\RepositoryFactory
  */
-class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
+class RepositoryFactoryTest extends \TestCase
 {
     public function testGetPathsWithoutConfig ()
     {

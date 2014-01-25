@@ -7,7 +7,7 @@ use Carbon\Carbon;
 /**
  * @covers GitPrettyStats\Repository
  */
-class RepositoryTest extends \PHPUnit_Framework_TestCase
+class RepositoryTest extends \TestCase
 {
     public $repository;
     public $client;
