@@ -78,13 +78,14 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testGetPathsWithConfigArray ()
     {
-        $firstRepositoryPath = '/path/to/first-repo';
+        $firstRepositoryPath  = '/path/to/first-repo';
         $secondRepositoryPath = '/path/to/second-repo';
+        $thirdRepositoryPath  = 'relative/path';
 
         \Config::shouldReceive('get')
             ->once()
             ->with('git-pretty-stats.repositoriesPath')
-            ->andReturn(array($firstRepositoryPath, $secondRepositoryPath));
+            ->andReturn(array($firstRepositoryPath, $secondRepositoryPath, $thirdRepositoryPath));
 
         $firstRepository = m::mock('stdClass');
         $firstRepository->shouldReceive('getRealPath')->once()->andReturn($firstRepositoryPath);
@@ -92,15 +93,18 @@ class RepositoryFactoryTest extends \TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getRealPath')->once()->andReturn($secondRepositoryPath);
 
+        $thirdRepository = m::mock('stdClass');
+        $thirdRepository->shouldReceive('getRealPath')->once()->andReturn($thirdRepositoryPath);
+
         $this->finder
             ->shouldReceive('depth->directories->append')
             ->once()
-            ->andReturn(array($firstRepository, $secondRepository));
+            ->andReturn(array($firstRepository, $secondRepository, $thirdRepository));
 
         $factory = new RepositoryFactory($this->finder, '/var/www/git-pretty-stats');
 
         $this->assertEquals(
-            array($firstRepositoryPath, $secondRepositoryPath),
+            array($firstRepositoryPath, $secondRepositoryPath, $thirdRepositoryPath),
             $factory->getPaths(),
             'Did not load repositories paths correctly with repository array set in config'
         );
