@@ -8,22 +8,39 @@ use Mockery as m;
  */
 class RepositoryFactoryTest extends \TestCase
 {
+    protected $finder;
+
+    public function setUp ()
+    {
+        parent::setUp();
+
+        $this->finder = m::mock('Symfony\Component\Finder\Finder');
+
+        \Config::shouldReceive('get')
+            ->zeroOrMoreTimes()
+            ->with('git-pretty-stats.emailAliases')
+            ->andReturn(array());
+    }
+
     public function testGetPathsWithoutConfig ()
     {
-        $finder = m::mock('stdClass');
-
         $firstRepository = m::mock('stdClass');
         $firstRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/repository');
 
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/other-repository');
 
-        $finder->shouldReceive('depth->directories->in')
+        \Config::shouldReceive('get')
+            ->once()
+            ->with('git-pretty-stats.repositoriesPath')
+            ->andReturn('repositories');
+
+        $this->finder->shouldReceive('depth->directories->in')
             ->once()
             ->with('/var/www/git-pretty-stats/repositories')
             ->andReturn(array($firstRepository, $secondRepository));
 
-        $factory = new RepositoryFactory(null, $finder, '/var/www/git-pretty-stats/');
+        $factory = new RepositoryFactory($this->finder, '/var/www/git-pretty-stats');
 
         $this->assertEquals(
             array('/absolute/path/repository', '/absolute/path/other-repository'),
@@ -34,8 +51,10 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testGetPathsWithConfig ()
     {
-        $finder = m::mock('stdClass');
-        $config = 'non-default-dir';
+        \Config::shouldReceive('get')
+            ->once()
+            ->with('git-pretty-stats.repositoriesPath')
+            ->andReturn('non-default-dir');
 
         $firstRepository = m::mock('stdClass');
         $firstRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/repository');
@@ -43,12 +62,12 @@ class RepositoryFactoryTest extends \TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getRealPath')->once()->andReturn('/absolute/path/other-repository');
 
-        $finder->shouldReceive('depth->directories->in')
+        $this->finder->shouldReceive('depth->directories->in')
             ->once()
             ->with('/var/www/git-pretty-stats/non-default-dir')
             ->andReturn(array($firstRepository, $secondRepository));
 
-        $factory = new RepositoryFactory($config, $finder, '/var/www/git-pretty-stats/');
+        $factory = new RepositoryFactory($this->finder, '/var/www/git-pretty-stats');
 
         $this->assertEquals(
             array('/absolute/path/repository', '/absolute/path/other-repository'),
@@ -59,17 +78,13 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testGetPathsWithConfigArray ()
     {
-        $finder = m::mock('stdClass');
-
         $firstRepositoryPath = '/path/to/first-repo';
         $secondRepositoryPath = '/path/to/second-repo';
 
-        $config = array(
-            'repositoriesPath' => array(
-                $firstRepositoryPath,
-                $secondRepositoryPath
-            )
-        );
+        \Config::shouldReceive('get')
+            ->once()
+            ->with('git-pretty-stats.repositoriesPath')
+            ->andReturn(array($firstRepositoryPath, $secondRepositoryPath));
 
         $firstRepository = m::mock('stdClass');
         $firstRepository->shouldReceive('getRealPath')->once()->andReturn($firstRepositoryPath);
@@ -77,12 +92,12 @@ class RepositoryFactoryTest extends \TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getRealPath')->once()->andReturn($secondRepositoryPath);
 
-        $finder
+        $this->finder
             ->shouldReceive('depth->directories->append')
             ->once()
             ->andReturn(array($firstRepository, $secondRepository));
 
-        $factory = new RepositoryFactory($config, $finder, '/var/www/git-pretty-stats/');
+        $factory = new RepositoryFactory($this->finder, '/var/www/git-pretty-stats');
 
         $this->assertEquals(
             array($firstRepositoryPath, $secondRepositoryPath),
@@ -93,7 +108,7 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testRepositoriesSetterAndGetter ()
     {
-        $factory = new RepositoryFactory;
+        $factory = new RepositoryFactory($this->finder);
 
         $repositories = array('first-repo', 'second-repo');
 
@@ -114,7 +129,7 @@ class RepositoryFactoryTest extends \TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getName')->once()->andReturn('second-repo');
 
-        $factory = m::mock('GitPrettyStats\RepositoryFactory[getPaths,load]');
+        $factory = m::mock('GitPrettyStats\RepositoryFactory[getPaths,load]', [$this->finder]);
         $factory
             ->shouldReceive('getPaths')
             ->once()
@@ -137,7 +152,7 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testAllLazyLoad ()
     {
-        $factory = new RepositoryFactory;
+        $factory = new RepositoryFactory($this->finder);
 
         $repositories = array(
             'first-repo' => '/path',
@@ -155,7 +170,7 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testFromName ()
     {
-        $factory = new RepositoryFactory;
+        $factory = new RepositoryFactory($this->finder);
 
         $repositories = array(
             'first-repo' => '/path',
@@ -197,7 +212,7 @@ class RepositoryFactoryTest extends \TestCase
             ->once()
             ->andReturn(173);
 
-        $factory = m::mock('GitPrettyStats\RepositoryFactory[all]');
+        $factory = m::mock('GitPrettyStats\RepositoryFactory[all]', [$this->finder]);
         $factory->shouldReceive('all')->once()->andReturn(array($firstRepository, $secondRepository));
 
         $this->assertEquals(
