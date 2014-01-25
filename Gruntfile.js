@@ -105,6 +105,13 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false,
                 }
+            },
+            tests: {
+                files: ['app/tests/**/*', 'app/GitPrettyStats/**/*', 'app/controllers/**/*'],
+                tasks: 'phpunit',
+                options: {
+                    spawn: false,
+                }
             }
         },
 
@@ -156,8 +163,29 @@ module.exports = function(grunt) {
 
         clean: {
             build: ['<%= root %>/*']
+        },
+
+        phpunit: {
+            default: {
+                dir: 'app/tests'
+            }
         }
     });
+
+    grunt.event.on('watch', function(action, filepath) {
+        var wdi = filepath.lastIndexOf('/');
+        var wd =  filepath.substring(0,wdi);
+
+        var fnamei = filepath.lastIndexOf('.');
+        var fname = filepath.substring(wdi+1,fnamei);
+
+        if (fname.indexOf('Test') === -1) {
+            fname = fname + 'Test';
+        }
+
+        grunt.config.set('phpunit.options.filter', fname);
+    });
+
 
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
