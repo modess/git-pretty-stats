@@ -111,6 +111,7 @@ class RepositoryFactory
         }
 
         // Load repositories
+        $repositories = array();
         foreach ($this->getPaths() as $path) {
             if ($repository = $this->load($path)) {
                 $repositories[ $repository->getName() ] = $repository;
