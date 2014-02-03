@@ -9,19 +9,36 @@ use GitPrettyStats\RepositoryFactory;
 
 $app = new Silex\Application();
 
+//
+// Register configuration service provider
+//
+$app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__ . "/config.php"));
+
+//
+// Register view service provider
+//
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+//
+// Register error handler
+//
 $app->error(function(\Exception $e) use($app) {
     return $app["twig"]->render("error.html", array("message" => $e->getMessage()));
 });
 
+//
+// Register hook that runs before the application
+//
 $app->before(function() use ($app) {
-    $repositoriesPath = 'repositories';
+    $app['config'] = null;
 
-    $configFilePath = __DIR__ . '/config.php';
-    $app['config'] = (file_exists($configFilePath)) ? require_once __DIR__ . '/config.php' : null;
+    try {
+        $app['config'] = $app['repositoriesPath'];
+    } catch (InvalidArgumentException $e) {
+        // Config file not setup
+    }
 
     $app['repositoryFactory'] = new RepositoryFactory($app['config']);
     $app['repositories']      = $app['repositoryFactory']->all();
@@ -31,6 +48,9 @@ $app->before(function() use ($app) {
     }
 });
 
+//
+// Default route
+//
 $app->get('/', function () use ($app) {
     return $app['twig']->render(
         'index.html',
@@ -40,6 +60,9 @@ $app->get('/', function () use ($app) {
     );
 });
 
+//
+// Repository route
+//
 $app->get('repository/{name}', function ($name) use ($app) {
     $repository = $app['repositoryFactory']->fromName($name);
 
@@ -54,6 +77,9 @@ $app->get('repository/{name}', function ($name) use ($app) {
     );
 });
 
+//
+// Repository statistics route
+//
 $app->get('/git-stats/{name}', function($name) use($app) {
     $cache_file = __DIR__.'/cache/'.$name.'.json';
     $from_cache
@@ -74,5 +100,4 @@ $app->get('/git-stats/{name}', function($name) use($app) {
     );
 });
 
-$app['debug'] = true;
 $app->run();
