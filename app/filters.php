@@ -13,7 +13,9 @@
 
 App::before(function($request)
 {
-    //
+    if (!ini_get('date.timezone')) {
+        return View::make('error.datetimezone');
+    }
 });
 
 
