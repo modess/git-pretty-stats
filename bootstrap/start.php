@@ -24,9 +24,10 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
+putenv('LARAVEL_ENV=local');
 $env = $app->detectEnvironment(array(
 
-	'local' => array('your-machine-name'),
+	'local' => array('*'),
 
 ));
 
