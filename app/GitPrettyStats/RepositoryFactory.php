@@ -40,13 +40,6 @@ class RepositoryFactory
     protected $repositories;
 
     /**
-     * Author email aliases
-     *
-     * @var  array
-     */
-    protected $emailAliases;
-
-    /**
      * Create a new factory
      *
      * @param  Symfony\Component\Finder\Finder File system handler
@@ -57,9 +50,6 @@ class RepositoryFactory
     {
         $this->finder  = $finder;
         $this->baseDir = ($baseDir !== null) ? $baseDir : base_path();
-
-        $emailAliases = Config::get('git-pretty-stats.emailAliases');
-        $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
     }
 
     /**
@@ -157,7 +147,7 @@ class RepositoryFactory
         }
 
         try {
-            $repository = new Repository($path, null, null, $this->emailAliases);
+            $repository = new Repository($path);
             return $repository;
         } catch (\Exception $e) {
             return false;

@@ -3,6 +3,7 @@ namespace GitPrettyStats;
 
 use Carbon\Carbon;
 use Gitter\Client;
+use Config;
 
 /**
  * Class Repository
@@ -43,12 +44,14 @@ class Repository
      * @param \Gitter\Client $client  Git client
      * @return void
      */
-    public function __construct($path, $client = null, $statistics = null, $emailAliases = array())
+    public function __construct($path, $client = null, $statistics = null)
     {
         $this->client       = ($client) ? $client : new Client;
         $this->statistics   = ($statistics) ? $statistics : new Statistics($this);
         $this->gitter       = $this->client->getRepository($path);
-        $this->emailAliases = $emailAliases;
+
+        $emailAliases       = Config::get('git-pretty-stats.emailAliases');
+        $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
     }
 
     /**
@@ -166,9 +169,7 @@ class Repository
         $email = $commit->getAuthor()->getEmail();
         $name  = $commit->getAuthor()->getName();
 
-        if (isset($this->emailAliases[$email])) {
-            $email = $this->emailAliases[$email];
-        }
+        $email = $this->getEmailAlias($email);
 
         if (!isset($this->commitsByContributor[$email])) {
             $this->commitsByContributor[$email] = array(
@@ -180,6 +181,17 @@ class Repository
         $date = $commit->getCommiterDate()->format('Y-m-d');
 
         $this->commitsByContributor[$email]['commits'][$date][] = $commit;
+    }
+
+    /**
+     * Get email alias
+     *
+     * @param string $email
+     * @return string
+     */
+    public function getEmailAlias($email)
+    {
+        return isset($this->emailAliases[$email]) ? $this->emailAliases[$email] : $email;
     }
 
     public function getDaysRepositoryBeenActive ()

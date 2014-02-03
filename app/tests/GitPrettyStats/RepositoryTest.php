@@ -19,7 +19,7 @@ class RepositoryTest extends \TestCase
         array('Author 2', 'author_2@email.com', '2013-03-02 14:55:47'),
         array('Author 3', 'author_3@email.com', '2013-03-03 09:13:47'),
         array('Author 2', 'author_2@email.com', '2013-03-03 19:55:47'),
-        array('Author alias 1', 'author_1@email.com', '2013-03-03 22:32:19'),
+        array('Author alias 1', 'author_1_another@email.com', '2013-03-03 22:32:19'),
         array('Author 4', 'author_4@email.com', '2013-03-04 10:32:00'),
         array('Author 4', 'author_4@email.com', '2013-03-04 14:55:47'),
         array('Author 5', 'author_5@email.com', '2013-03-05 09:55:47'),
@@ -28,8 +28,15 @@ class RepositoryTest extends \TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->client = m::mock('\Gitter\Client');
         $this->gitter = m::mock('\Gitter\Repository');
+
+        \Config::shouldReceive('get')
+            ->once()
+            ->with('git-pretty-stats.emailAliases')
+            ->andReturn(array('author_1_another@email.com' => 'author_1@email.com'));
 
         $this->client
             ->shouldReceive('getRepository')
@@ -386,6 +393,23 @@ class RepositoryTest extends \TestCase
             $expected,
             $repo->getCommitsByContributor(),
             'Unexpected data from commits by author'
+        );
+    }
+
+    public function testGetEmailAlias ()
+    {
+        $repo = $this->createInstance();
+
+        $this->assertEquals(
+            'email_without@alias.com',
+            $repo->getEmailAlias('email_without@alias.com'),
+            'E-mail without alias should be returned'
+        );
+
+        $this->assertEquals(
+            'author_1@email.com',
+            $repo->getEmailAlias('author_1_another@email.com'),
+            'E-mail with alias should return original'
         );
     }
 }
