@@ -1,0 +1,94 @@
+@import settings
+
+body, html
+  margin-bottom: 100px
+
+  &.list
+    background: $primary-color
+
+h3
+  font-size: 1.5em
+
+.todo
+  margin-top: 5em
+
+  ul
+    -webkit-border-radius: 6px
+    -moz-border-radius: 6px
+    border-radius: 6px
+
+  li
+    padding: 0
+    &:first-child
+      -webkit-border-radius: 6px 6px 0 0
+      -moz-border-radius: 6px 6px 0 0
+      border-radius: 6px 6px 0 0
+    &:last-child
+      padding-bottom: 0
+
+    .todo-icon
+      padding: 5px 22px 0 0
+
+  a
+    display: block
+    padding: 18px 42px 17px 25px
+    text-decoration: none
+
+.header
+  background: $primary-color
+
+  h1
+    color: white
+    font-size: 2em
+    margin-top: 0.5em
+
+    small
+      color: tint($primary-color, 60%)
+
+  button
+    margin-top: 1em
+
+  .select
+    margin-top: 8px
+
+.footer
+  width: 100%
+  padding: 20px
+  position: fixed
+  bottom: 0
+  background: #ECF0F1
+  text-align: center
+
+#tabs
+  margin-top: 15px
+
+.thumbnail
+  position: relative
+  margin-top: 1em
+  h4
+    font-size: 1.1em
+  h5
+    position: absolute
+    right: 10px
+    top: 0
+    padding: 10px
+    background: $primary-color
+    color: white
+    font-size: 1.25em
+
+#statistics
+  color: white
+  font-weight: bold
+
+  .thumbnail
+    background: $secondary-color
+    padding: 10px
+
+    .title
+      font-size: 0.95em
+
+    .value
+      font-size: 2.5em
+      line-height: 1em
+      padding-top: 10px
+      text-align: right
