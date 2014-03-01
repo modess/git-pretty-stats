@@ -4,19 +4,14 @@ namespace GitPrettyStats;
 use Carbon\Carbon;
 use Gitter\Client;
 use Config;
+use Gitter\Repository as GitterRepository;
 
 /**
  * Class Repository
  * @author Niklas Modess <niklas@codingswag.com>
  */
-class Repository
+class Repository extends GitterRepository
 {
-    /** @var \Gitter\Repository */
-    public $gitter;
-
-    /** @var \Gitter\Client */
-    public $client;
-
     /** @var array Storage for "raw" commits */
     public $commits = array();
 
@@ -46,20 +41,13 @@ class Repository
      */
     public function __construct($path, $client = null, $statistics = null)
     {
-        $this->client       = ($client) ? $client : new Client;
-        $this->statistics   = ($statistics) ? $statistics : new Statistics($this);
-        $this->gitter       = $this->client->getRepository($path);
+        $client           = ($client) ? $client : new Client;
+        $this->statistics = ($statistics) ? $statistics : new Statistics($this);
 
         $emailAliases       = Config::get('git-pretty-stats.emailAliases');
         $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
-    }
 
-    /**
-     * @return \Gitter\Client
-     */
-    public function getClient()
-    {
-        return $this->client;
+        parent::__construct($path, $client);
     }
 
     /**
@@ -69,7 +57,7 @@ class Repository
      */
     public function getName ()
     {
-        $name = $this->gitter->getPath();
+        $name = $this->getPath();
 
         if (strstr($name, '/')) {
             $name = substr($name, strrpos($name, '/') + 1);
@@ -79,25 +67,13 @@ class Repository
     }
 
     /**
-     * Count all commits using the git binary
-     *
-     * @return int
-     */
-    public function countCommitsFromGit ()
-    {
-        return (version_compare($this->getClient()->getVersion(), '1.7.2', '>=')) ?
-            $this->getClient()->run($this->gitter, 'rev-list --count HEAD') :
-            $this->getClient()->run($this->gitter, 'rev-list HEAD | wc -l | tr -d "\n"');
-    }
-
-    /**
      * Load commits from git repo
      *
      * @return void
      */
     public function loadCommits()
     {
-        $this->commits = $this->gitter->getCommits();
+        $this->commits = $this->getCommits();
 
         $this->parseCommits();
     }

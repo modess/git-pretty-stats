@@ -193,26 +193,27 @@ class RepositoryFactoryTest extends \TestCase
 
     public function testToArray ()
     {
-        $gitter = m::mock('stdClass');
-        $gitter->shouldReceive('getCurrentBranch')->twice()->andReturn('master');
-
         $firstRepository = m::mock('stdClass');
-        $firstRepository->gitter = $gitter;
         $firstRepository
             ->shouldReceive('getName')
             ->twice()
             ->andReturn('first-repo')
-            ->shouldReceive('countCommitsFromGit')
+            ->shouldReceive('getCurrentBranch')
+            ->once()
+            ->andReturn('master')
+            ->shouldReceive('getTotalCommits')
             ->once()
             ->andReturn(271);
 
         $secondRepository = m::mock('stdClass');
-        $secondRepository->gitter = $gitter;
         $secondRepository
             ->shouldReceive('getName')
             ->twice()
             ->andReturn('second-repo')
-            ->shouldReceive('countCommitsFromGit')
+            ->shouldReceive('getCurrentBranch')
+            ->once()
+            ->andReturn('master')
+            ->shouldReceive('getTotalCommits')
             ->once()
             ->andReturn(173);
 

@@ -31,16 +31,11 @@ class RepositoryTest extends \TestCase
         parent::setUp();
 
         $this->client = m::mock('\Gitter\Client');
-        $this->gitter = m::mock('\Gitter\Repository');
 
         \Config::shouldReceive('get')
             ->once()
             ->with('git-pretty-stats.emailAliases')
             ->andReturn(array('author_1_another@email.com' => 'author_1@email.com'));
-
-        $this->client
-            ->shouldReceive('getRepository')
-            ->andReturn($this->gitter);
 
         $commits = array();
         foreach ($this->commits as $commit) {
@@ -100,11 +95,7 @@ class RepositoryTest extends \TestCase
      */
     public function testGetName($path, $expected)
     {
-        $this->gitter
-            ->shouldReceive('getPath')
-            ->andReturn($path);
-
-        $repo = $this->createInstance();
+        $repo = new Repository($path, $this->client);
 
         $this->assertEquals(
             $expected,
@@ -115,11 +106,11 @@ class RepositoryTest extends \TestCase
 
     public function testLoadCommits ()
     {
-        $this->gitter->shouldReceive('getCommits')->once();
+        $repo = m::mock('GitPrettyStats\Repository[parseCommits,getCommits]', array('.', $this->client));
 
-        $repo = m::mock('GitPrettyStats\Repository[parseCommits]', array('.', $this->client));
-
-        $repo->shouldReceive('parseCommits')->once();
+        $repo
+            ->shouldReceive('parseCommits')->once()
+            ->shouldReceive('getCommits')->once();
 
         $repo->loadCommits();
 
@@ -127,10 +118,6 @@ class RepositoryTest extends \TestCase
 
     public function testNumberOfCommitsAreCorrect()
     {
-        $this->client
-            ->shouldReceive('getRepository')
-            ->andReturn($this->gitter);
-
         $repo = $this->createInstance();
 
         $this->assertEquals(
@@ -142,10 +129,6 @@ class RepositoryTest extends \TestCase
 
     public function testNumberOfContributorsAreCorrect()
     {
-        $this->client
-            ->shouldReceive('getRepository')
-            ->andReturn($this->gitter);
-
         $repo = $this->createInstance();
         $repo->parseCommits();
 
@@ -204,34 +187,6 @@ class RepositoryTest extends \TestCase
         $repo = $this->createInstance();
 
         $this->assertEquals($this->client, $repo->getClient(), 'Invalid client returned');
-    }
-
-    public function testCountCommitsFromGit ()
-    {
-        $this->client
-            ->shouldReceive('getVersion')
-            ->once()
-            ->andReturn('1.8.2')
-            ->shouldReceive('run')
-            ->with($this->gitter, 'rev-list --count HEAD')
-            ->andReturn(5);
-
-        $repo = $this->createInstance();
-        $this->assertEquals(5, $repo->countCommitsFromGit(), 'Invalid commit count from git');
-    }
-
-    public function testCountCommitsFromGitBackwardsCompatible ()
-    {
-        $this->client
-            ->shouldReceive('getVersion')
-            ->once()
-            ->andReturn('1.7.0')
-            ->shouldReceive('run')
-            ->with($this->gitter, 'rev-list HEAD | wc -l | tr -d "\n"')
-            ->andReturn(5);
-
-        $repo = $this->createInstance();
-        $this->assertEquals(5, $repo->countCommitsFromGit(), 'Invalid commit count from git');
     }
 
     public function testAddingCommitToStats()

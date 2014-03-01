@@ -45,7 +45,7 @@ class RepositoryController extends Controller {
         return View::make('repository')->with(array(
             'repositories'  => $repositories,
             'name'          => $repository->getName(),
-            'branch'        => $repository->gitter->getCurrentBranch()
+            'branch'        => $repository->getCurrentBranch()
         ));
     }
 
@@ -67,7 +67,7 @@ class RepositoryController extends Controller {
             'repositories'  => $repositories,
             'repository'    => array(
                 'name'          => $repository->getName(),
-                'branch'        => $repository->gitter->getCurrentBranch(),
+                'branch'        => $repository->getCurrentBranch(),
                 'data'          => $statistics
             )
         ));

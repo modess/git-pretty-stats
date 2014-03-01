@@ -187,8 +187,8 @@ class RepositoryFactory
         foreach ($this->all() as $repository) {
             $toArray[ $repository->getName() ] = array(
                 'name'    => $repository->getName(),
-                'commits' => $repository->countCommitsFromGit(),
-                'branch'  => $repository->gitter->getCurrentBranch()
+                'commits' => $repository->getTotalCommits(),
+                'branch'  => $repository->getCurrentBranch()
             );
         }
 
