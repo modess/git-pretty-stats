@@ -27,8 +27,6 @@ You know those cool graphs and statistics you can get for a repository on github
 
 ## Installation
 
-Start by clone this repository and setup your web server. Take a look at the great repository [laravel-website-configs](https://github.com/daylerees/laravel-website-configs) by Dayle Rees for Laravel web server configurations.
-
 Install dependencies using [Composer](http://getcomposer.org/)
 
     php composer.phar install
@@ -43,6 +41,13 @@ cd repositories
 git clone <repository-url>
 ```
 You can clone as many as you want to in to this folder.
+
+### Web server configuration
+
+See [laravel-website-configs](https://github.com/daylerees/laravel-website-configs) by Dayle Rees for examples of Laravel web server configurations.
+
+* [Apache](https://github.com/daylerees/laravel-website-configs/blob/master/apache.conf)
+* [NginX](https://github.com/daylerees/laravel-website-configs/blob/master/nginx.conf)
 
 ### Configuration
 To manually override configuration, start by copying `app/config/git-pretty-stats.php` to `app/config/local/git-pretty-stats.php`. Then you can configure the following in that file:
