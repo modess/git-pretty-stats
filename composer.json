@@ -1,7 +1,8 @@
 {
     "require": {
         "laravel/framework": "4.1.*",
-        "klaussilveira/gitter": "0.2.0"
+        "klaussilveira/gitter": "0.2.0",
+        "symfony/process": "v2.4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*@dev",
