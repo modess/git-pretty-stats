@@ -61,6 +61,7 @@ nbproject/
 # Project #
 ###########
 .sass-cache/
+.tmp/
 /vendor/
 /assets/vendor
 /assets/compiled
