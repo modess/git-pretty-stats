@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: {
       // configurable paths
-      app: require('./bower.json').appPath || 'app/assets/app',
+      app: require('./bower.json').appPath || 'app/assets',
       dist: 'public'
     },
 
