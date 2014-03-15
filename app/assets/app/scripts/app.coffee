@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('assetsApp', [
+angular.module('gitPrettyStats', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -10,6 +10,6 @@ angular.module('assetsApp', [
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
-        controller: 'MainCtrl'
+        controller: 'MainController'
       .otherwise
         redirectTo: '/'

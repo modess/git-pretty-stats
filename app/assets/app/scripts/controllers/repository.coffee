@@ -1,4 +1,4 @@
-angular.module('main').controller('RepositoryController', ['$scope', '$http', ($scope, $http) ->
+angular.module('gitPrettyStats').controller('RepositoryController', ['$scope', '$http', ($scope, $http) ->
   $scope.name = $("input[name='name']").val()
   $('#loader').modal { show: true }
 
