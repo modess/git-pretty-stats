@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app/assets/app',
-      dist: 'dist'
+      dist: 'public'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -108,10 +108,14 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>/*',
+            '!<%= yeoman.dist %>/index.php*',
+            '!<%= yeoman.dist %>/packages/*',
+            '!<%= yeoman.dist %>/packages/.git*',
             '!<%= yeoman.dist %>/.git*'
           ]
         }]
       },
+      index: '<%= yeoman.dist %>/index.html',
       server: '.tmp'
     },
 
@@ -299,7 +303,6 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
-            'bower_components/**/*',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
@@ -315,6 +318,10 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      laravel: {
+        src: '<%= yeoman.dist %>/index.html',
+        dest: 'app/views/index.php'
       }
     },
 
@@ -335,32 +342,6 @@ module.exports = function (grunt) {
         'svgmin'
       ]
     },
-
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
 
     // Test settings
     karma: {
@@ -414,7 +395,9 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'copy:laravel',
+    'clean:index',
   ]);
 
   grunt.registerTask('default', [
