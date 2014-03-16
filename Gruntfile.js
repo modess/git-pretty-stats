@@ -42,50 +42,20 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      copyLaravel: {
+        files: ['<%= yeoman.app %>/index.html'],
+        tasks: ['copy:laravel']
+      },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: 35729
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '.tmp/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/styles/{,*/}*.sass',
+          '<%= yeoman.app %>/scripts/{,*/}*.coffee',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
-      }
-    },
-
-    // The actual grunt server settings
-    connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
-        livereload: 35729
-      },
-      livereload: {
-        options: {
-          open: true,
-          base: [
-            '.tmp',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
-      test: {
-        options: {
-          port: 9001,
-          base: [
-            '.tmp',
-            'test',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
-      dist: {
-        options: {
-          base: '<%= yeoman.dist %>'
-        }
       }
     },
 
@@ -106,7 +76,6 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/index.php*',
             '!<%= yeoman.dist %>/packages/*',
@@ -117,21 +86,6 @@ module.exports = function (grunt) {
       },
       index: '<%= yeoman.dist %>/index.html',
       server: '.tmp'
-    },
-
-    // Add vendor prefixed styles
-    autoprefixer: {
-      options: {
-        browsers: ['last 1 version']
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      }
     },
 
     // Automatically inject Bower components into the app
@@ -154,7 +108,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/scripts',
           src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
+          dest: '<%= yeoman.dist %>/scripts',
           ext: '.js'
         }]
       },
@@ -174,7 +128,7 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        cssDir: '<%= yeoman.dist %>/styles',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
@@ -199,90 +153,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Renames files for browser caching purposes
-    rev: {
-      dist: {
-        files: {
-          src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
-          ]
-        }
-      }
-    },
-
-    // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
-    // additional tasks can operate on them
-    useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
-      options: {
-        dest: '<%= yeoman.dist %>'
-      }
-    },
-
-    // Performs rewrites based on rev and the useminPrepare configuration
-    usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      options: {
-        assetsDirs: ['<%= yeoman.dist %>']
-      }
-    },
-
-    // The following *-min tasks produce minified files in the dist folder
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    htmlmin: {
-      dist: {
-        options: {
-          collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeCommentsFromCDATA: true,
-          removeOptionalTags: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
-      }
-    },
-
-    // Allow the use of non-minsafe AngularJS files. Automatically makes it
-    // minsafe compatible so Uglify does not destroy the ng references
-    ngmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
-        }]
-      }
-    },
-
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -303,14 +173,10 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'bower_components/**/*',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
         }]
       },
       styles: {
@@ -320,7 +186,7 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       },
       laravel: {
-        src: '<%= yeoman.dist %>/index.html',
+        src: '<%= yeoman.app %>/index.html',
         dest: 'app/views/index.php'
       }
     },
@@ -338,8 +204,6 @@ module.exports = function (grunt) {
       dist: [
         'coffee',
         'compass:dist',
-        'imagemin',
-        'svgmin'
       ]
     },
 
@@ -353,50 +217,29 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
+  grunt.registerTask('serve', function () {
     grunt.task.run([
       'clean:server',
       'bower-install',
       'concurrent:server',
-      'autoprefixer',
-      'connect:livereload',
+      'copy',
+      'clean:index',
       'watch'
     ]);
-  });
-
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
   });
 
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
-    'autoprefixer',
-    'connect:test',
     'karma'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
-    'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngmin',
-    'copy:dist',
+    'copy',
     'cdnify',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin',
-    'htmlmin',
-    'copy:laravel',
     'clean:index',
   ]);
 

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "statistics.js",
+  "sourceRoot": "",
+  "sources": [
+    "statistics.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,CAAA,CAAyD,GAAzD,CAAO,EAAP,GAAA,IAAA;CACE,UAAO;CAAA,CACK,CADL,GACL,EAAA;CADK,CAEQ,IAAb,KAAA,YAFK;CADgD,KACvD;CADF,EAAyD;CAAzD"
+}
