@@ -24,11 +24,11 @@ class RepositoryController extends Controller {
      *
      * @return View
      */
-    public function index ()
+    public function all ()
     {
         $repositories = $this->factory->toArray();
 
-        return View::make('list')->withRepositories($repositories);
+        return Response::json($repositories);
     }
 
     /**
