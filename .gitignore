@@ -69,4 +69,3 @@ nbproject/
 phpunit.xml
 composer.lock
 !.gitkeep
-config.php
