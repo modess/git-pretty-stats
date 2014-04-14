@@ -99,11 +99,9 @@ If there is some certain statistics or graph that you are missing and would like
 
 ## Screenshots
 
-For more screenshots visit the [project homepage](http://www.codingswag.com/git-pretty-stats).
+![](https://modess.github.io/git-pretty-stats/commit-activity.png)
 
-![](http://www.codingswag.com/wp-content/uploads/2013/06/Screenshot-2013-07-10-at-14.38.34.png)
-
-![](http://www.codingswag.com/wp-content/uploads/2013/06/Screenshot-2013-07-10-at-14.38.43.png)
+![](https://modess.github.io/git-pretty-stats/contributors.png)
 
 ## Powered by
 
