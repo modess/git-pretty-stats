@@ -21,8 +21,7 @@
         <div class="container">
             <div class="row">
                 <strong>Git Pretty Stats</strong> -
-                <a href="http://www.codingswag.com/git-pretty-stats">homepage</a> -
-                <a href="http://www.github.com/modess/git-pretty-stats">github repository</a>
+                <a href="https://www.github.com/modess/git-pretty-stats">github</a>
             </div>
         </div>
     </div>
