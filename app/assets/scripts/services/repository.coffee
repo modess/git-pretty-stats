@@ -10,4 +10,4 @@ angular.module('gitPrettyStats')
         url: base_url + '/repository/'
       )
 
-    return repository
+    repository
