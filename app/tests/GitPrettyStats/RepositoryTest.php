@@ -106,6 +106,9 @@ class RepositoryTest extends \TestCase
 
     public function testLoadCommits ()
     {
+        \Cache::shouldReceive('get')->once()->with('commits:.')->andReturn(null);
+        \Cache::shouldReceive('put')->once();
+
         $repo = m::mock('GitPrettyStats\Repository[parseCommits,getCommits]', array('.', $this->client));
 
         $repo

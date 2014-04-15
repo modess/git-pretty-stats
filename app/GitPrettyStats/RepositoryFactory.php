@@ -163,6 +163,12 @@ class RepositoryFactory
         return $created;
     }
 
+    /**
+     * Try to create repository from path
+     *
+     * @param str $path
+     * @return false|Repository
+     */
     public function create ($path)
     {
         try {
