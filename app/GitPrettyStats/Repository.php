@@ -4,6 +4,7 @@ namespace GitPrettyStats;
 use Carbon\Carbon;
 use Gitter\Client;
 use Config;
+use Cache;
 use Gitter\Repository as GitterRepository;
 
 /**
@@ -73,9 +74,28 @@ class Repository extends GitterRepository
      */
     public function loadCommits()
     {
-        $this->commits = $this->getCommits();
+        $cacheKey = sprintf('commits:%s', $this->getPath());
+        $cache    = Cache::get($cacheKey);
 
-        $this->parseCommits();
+        if ($cache === null) {
+            $this->commits = $this->getCommits();
+            $this->parseCommits();
+
+            $cacheValues = array(
+                'commits'              => $this->commits,
+                'commitsByDate'        => $this->commitsByDate,
+                'commitsByDay'         => $this->commitsByDay,
+                'commitsByHour'        => $this->commitsByHour,
+                'commitsByContributor' => $this->commitsByContributor
+            );
+            Cache::put($cacheKey, $cacheValues, 60);
+        } else {
+            $this->commits              = $cache['commits'];
+            $this->commitsByDate        = $cache['commitsByDate'];
+            $this->commitsByDay         = $cache['commitsByDay'];
+            $this->commitsByHour        = $cache['commitsByHour'];
+            $this->commitsByContributor = $cache['commitsByContributor'];
+        }
     }
 
     /**
