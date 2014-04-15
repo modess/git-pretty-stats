@@ -3,6 +3,7 @@ namespace GitPrettyStats;
 
 use Symfony\Component\Finder\Finder;
 use Config;
+use Cache;
 
 /**
  * Factory for repositories
@@ -147,6 +148,23 @@ class RepositoryFactory
             return false;
         }
 
+        $cacheKey = sprintf('info:%s', $path);
+
+        // Try cache
+        $cached = Cache::get($cacheKey);
+        if ($cached !== null) {
+            return $cached;
+        }
+
+        // Load repository and store in cache
+        $created = $this->create($path);
+        Cache::put($cacheKey, $created, 60);
+
+        return $created;
+    }
+
+    public function create ($path)
+    {
         try {
             $repository = new Repository($path);
             return $repository;
