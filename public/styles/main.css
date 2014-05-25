@@ -7628,117 +7628,65 @@ td.visible-print {
     display: none !important;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\000035}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\000037}}
 .no-margin-top {
   margin-top: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\000039}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000311}}
 .divider {
   margin: 10px 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000313}}
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-/* Space out content a bit */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000321}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000315}}
 body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000329}}
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000320}}
+#tabs {
+  margin-top: 15px;
 }
 
-/* Custom page header */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000335}}
-.header {
-  border-bottom: 1px solid #e5e5e5;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000324}}
+.thumbnail {
+  position: relative;
+  margin-top: 1em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000328}}
+.thumbnail h4 {
+  font-size: 1.1em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000332}}
+.thumbnail h5 {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  padding: 10px;
+  background: #1abc9c;
+  color: white;
+  font-size: 1.25em;
 }
 
-/* Make the masthead heading the same height as the navigation */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000340}}
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000343}}
+#statistics {
+  color: white;
+  font-weight: bold;
 }
-
-/* Custom page footer */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000348}}
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000347}}
+#statistics .thumbnail {
+  background: #3498db;
+  padding: 10px;
 }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000354}}
-.container-narrow > hr {
-  margin: 30px 0;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000351}}
+#statistics .thumbnail .title {
+  font-size: 1.4em;
 }
-
-/* Main marketing message and sign up button */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000359}}
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000364}}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000370}}
-.marketing {
-  margin: 40px 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000374}}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000380}}
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000387}}
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Space out the masthead */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000392}}
-  .header {
-    margin-bottom: 30px;
-  }
-
-  /* Remove the bottom border on the jumbotron for visual effect */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000396}}
-  .jumbotron {
-    border-bottom: 0;
-  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000355}}
+#statistics .thumbnail .value {
+  font-size: 4em;
+  line-height: 1em;
+  padding-top: 10px;
+  text-align: right;
 }
