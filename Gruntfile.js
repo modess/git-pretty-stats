@@ -46,6 +46,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/views/{,*/}*.html'],
         tasks: ['copy:views']
       },
+      copyTemplates: {
+        files: ['<%= yeoman.app %>/scripts/templates/{,*/}*.html'],
+        tasks: ['copy:templates']
+      },
       copyLaravel: {
         files: ['<%= yeoman.app %>/index.html'],
         tasks: ['copy:laravel']
@@ -192,6 +196,12 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.app %>/views',
         dest: '<%= yeoman.dist %>/views',
+        src: '{,*/}*.html'
+      },
+      templates: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/scripts/templates',
+        dest: '<%= yeoman.dist %>/templates',
         src: '{,*/}*.html'
       },
       laravel: {

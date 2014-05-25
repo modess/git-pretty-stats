@@ -25,19 +25,29 @@
     </ul>
 
     <div class="tab-content">
-      <div id="statistics" ng-if="activeTab == 1 || !activeTab" class="tab-pane active">
+      <div id="statistics"
+        ng-if="activeTab == 1 || !activeTab"
+        ng-class="{'active': activeTab == 1 || !activeTab}"
+        class="tab-pane active">
         <gps-statistics></gps-statistics>
       </div>
 
-      <div id="commits" class="tab-pane fade">
-        <h3>By date <small>(zoomable)</small></h3>
-        <div id="commitsByDate" style="height: 300px; width: 100%;"></div>
+      <div id="commits"
+        ng-if="activeTab == 2"
+        ng-class="{'active': activeTab == 2, 'fade': activeTab !== 2}"
+        class="tab-pane commit-activity">
+        <h3>By date</h3>
+        <gps-commits-by-date-chart></gps-commits-by-date-chart>
 
-        <h3>By hour of day</h3>
-        <div id="commitsByHour" style="height: 400px; width: 100%;"></div>
+        <hr />
 
         <h3>By day of week</h3>
-        <div id="commitsByDay" style="height: 300px; width: 100%;"></div>
+        <gps-commits-by-day-chart></gps-commits-by-day-chart>
+
+        <hr />
+
+        <h3>By hour of day</h3>
+        <gps-commits-by-hour-chart></gps-commits-by-hour-chart>
       </div>
 
       <div id="contributors" class="tab-pane fade">

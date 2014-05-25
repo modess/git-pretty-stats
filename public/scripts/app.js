@@ -20,8 +20,6 @@
     }).otherwise({
       redirectTo: '/'
     });
-  }).config(function(cfpLoadingBarProvider) {
-    return cfpLoadingBarProvider.includeSpinner = false;
   });
 
 }).call(this);

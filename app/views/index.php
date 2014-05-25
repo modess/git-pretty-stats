@@ -38,16 +38,20 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script src="bower_components/highcharts/js/highcharts.src.js"></script>
+    <script src="bower_components/highcharts/js/highcharts-more.src.js"></script>
+    <script src="bower_components/highcharts/js/modules/exporting.src.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/charts/commits.js"></script>
-        <script src="scripts/charts/contributors.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/repository.js"></script>
         <script src="scripts/directives/statistics.js"></script>
+        <script src="scripts/directives/commits_by_date_chart.js"></script>
+        <script src="scripts/directives/commits_by_day_chart.js"></script>
+        <script src="scripts/directives/commits_by_hour_chart.js"></script>
         <script src="scripts/services/repository.js"></script>
         <!-- endbuild -->
 </body>

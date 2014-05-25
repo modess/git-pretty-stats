@@ -60,3 +60,13 @@ body {
     }
   }
 }
+
+.commit-activity {
+  .chart {
+    height: 300px;
+
+    &.hour {
+      height: 400px;
+    }
+  }
+}

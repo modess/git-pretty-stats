@@ -25,6 +25,3 @@ angular.module('gitPrettyStats', [
 
       .otherwise
         redirectTo: '/'
-
-  .config (cfpLoadingBarProvider) ->
-    cfpLoadingBarProvider.includeSpinner = false;

@@ -7690,3 +7690,12 @@ body {
   padding-top: 10px;
   text-align: right;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000365}}
+.commit-activity .chart {
+  height: 300px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000368}}
+.commit-activity .chart.hour {
+  height: 400px;
+}
