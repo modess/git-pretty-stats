@@ -4,7 +4,8 @@ angular.module('gitPrettyStats', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'chieffancypants.loadingBar'
 ])
   .config ($routeProvider) ->
     $routeProvider
@@ -16,3 +17,5 @@ angular.module('gitPrettyStats', [
             Repository.all()
       .otherwise
         redirectTo: '/'
+  .config (cfpLoadingBarProvider) ->
+    cfpLoadingBarProvider.includeSpinner = false;

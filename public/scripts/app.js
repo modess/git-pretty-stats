@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('gitPrettyStats', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute']).config(function($routeProvider) {
+  angular.module('gitPrettyStats', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute', 'chieffancypants.loadingBar']).config(function($routeProvider) {
     return $routeProvider.when('/', {
       templateUrl: 'views/main.html',
       controller: 'MainController',
@@ -12,6 +12,8 @@
     }).otherwise({
       redirectTo: '/'
     });
+  }).config(function(cfpLoadingBarProvider) {
+    return cfpLoadingBarProvider.includeSpinner = false;
   });
 
 }).call(this);
