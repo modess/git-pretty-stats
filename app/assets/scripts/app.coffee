@@ -15,7 +15,16 @@ angular.module('gitPrettyStats', [
         resolve:
           repositories: (Repository) ->
             Repository.all()
+
+      .when '/repository/:name',
+        templateUrl: 'views/repository.html'
+        controller: 'RepositoryController'
+        resolve:
+          repo: ($route, Repository) ->
+            Repository.get($route.current.params.name)
+
       .otherwise
         redirectTo: '/'
+
   .config (cfpLoadingBarProvider) ->
     cfpLoadingBarProvider.includeSpinner = false;

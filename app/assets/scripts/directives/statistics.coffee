@@ -1,6 +1,4 @@
-angular.module('gitPrettyStats').directive('statistics', ->
-  return {
+angular.module('gitPrettyStats')
+  .directive 'gpsStatistics', ->
     restrict: 'E'
     templateUrl: 'views/statistics.html'
-  }
-)

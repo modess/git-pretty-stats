@@ -47,6 +47,7 @@
         <script src="scripts/charts/contributors.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/repository.js"></script>
+        <script src="scripts/directives/statistics.js"></script>
         <script src="scripts/services/repository.js"></script>
         <!-- endbuild -->
 </body>

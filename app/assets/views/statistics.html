@@ -1,8 +1,10 @@
+<div class="divider"></div>
+
 <div class="row thumbnails">
   <div class="col-md-4" ng-repeat="statistic in repository.data.statistics">
     <div class="thumbnail">
-      <div class="title"><% statistic.title %></div>
-      <div class="value"><% statistic.value %></div>
+      <div class="title">{{ statistic.title }}</div>
+      <div class="value">{{ statistic.value }}</div>
     </div>
   </div>
 </div>

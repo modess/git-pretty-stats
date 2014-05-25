@@ -1,5 +1,5 @@
 (function() {
-  angular.module('gitPrettyStats').directive('statistics', function() {
+  angular.module('gitPrettyStats').directive('gpsStatistics', function() {
     return {
       restrict: 'E',
       templateUrl: 'views/statistics.html'

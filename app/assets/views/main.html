@@ -3,9 +3,8 @@
     ng-class="overclass"
     ng-mouseenter="overclass = 'active'"
     ng-mouseout="overclass = ''"
-    href="/#/{{ repository.name }}"
-    ng-repeat="repository in repositories"
-  >
+    ng-href="/#/repository/{{ repository.name }}"
+    ng-repeat="repository in repositories">
     <strong>{{ repository.name }}</strong>
     <span class="badge">{{ repository.commits }} commits</span>
   </a>

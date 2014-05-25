@@ -9,6 +9,14 @@
           return Repository.all();
         }
       }
+    }).when('/repository/:name', {
+      templateUrl: 'views/repository.html',
+      controller: 'RepositoryController',
+      resolve: {
+        repo: function($route, Repository) {
+          return Repository.get($route.current.params.name);
+        }
+      }
     }).otherwise({
       redirectTo: '/'
     });
