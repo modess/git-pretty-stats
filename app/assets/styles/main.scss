@@ -17,6 +17,15 @@ body {
   padding-bottom: 20px;
 }
 
+$loading-bar-height: 10px;
+#loading-bar .bar,
+#loading-bar .peg {
+  height: $loading-bar-height;
+}
+#loading-bar-spinner {
+  top: ($loading-bar-height + 10);
+}
+
 #tabs {
   margin-top: 15px;
 }
