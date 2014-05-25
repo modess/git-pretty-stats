@@ -42,6 +42,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      copyView: {
+        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        tasks: ['copy:views']
+      },
       copyLaravel: {
         files: ['<%= yeoman.app %>/index.html'],
         tasks: ['copy:laravel']
@@ -51,7 +55,7 @@ module.exports = function (grunt) {
           livereload: 35729
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.app %>/**/*.html',
           '<%= yeoman.app %>/styles/{,*/}*.sass',
           '<%= yeoman.app %>/scripts/{,*/}*.coffee',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -172,7 +176,6 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
             'fonts/*'
@@ -184,6 +187,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      views: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/views',
+        dest: '<%= yeoman.dist %>/views',
+        src: '{,*/}*.html'
       },
       laravel: {
         src: '<%= yeoman.app %>/index.html',
