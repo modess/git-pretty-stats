@@ -1,7 +1,5 @@
 'use strict'
 
 angular.module('gitPrettyStats')
-  .controller 'MainController', ($scope, Repository) ->
-    Repository.all().then((response) ->
-      $scope.repositories = response.data
-    )
+  .controller 'MainController', ($scope, repositories) ->
+    $scope.repositories = repositories.data

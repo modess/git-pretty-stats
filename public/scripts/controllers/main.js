@@ -1,9 +1,7 @@
 (function() {
   'use strict';
-  angular.module('gitPrettyStats').controller('MainController', function($scope, Repository) {
-    return Repository.all().then(function(response) {
-      return $scope.repositories = response.data;
-    });
+  angular.module('gitPrettyStats').controller('MainController', function($scope, repositories) {
+    return $scope.repositories = repositories.data;
   });
 
 }).call(this);

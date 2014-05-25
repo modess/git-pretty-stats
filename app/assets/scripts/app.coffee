@@ -11,5 +11,8 @@ angular.module('gitPrettyStats', [
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainController'
+        resolve:
+          repositories: (Repository) ->
+            Repository.all()
       .otherwise
         redirectTo: '/'
