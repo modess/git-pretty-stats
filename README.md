@@ -92,7 +92,7 @@ Since `0.4` the application is based on the Laravel framework and some changes h
 1. Check for [open issues](https://github.com/modess/git-pretty-stats/issues) or open a fresh issue to start a discussion around a feature idea or a bug.
 2. Fork the [git-pretty-stats](https://github.com/modess/git-pretty-stats) repository on Github to start making your changes.
 3. Write test(s) which shows that the bug was fixed or that the feature works as expected.
-5. Send a pull request to the **develop** branch. Make sure to add yourself to CONTRIBUTORS.md.
+5. Send a pull request. Make sure to add yourself to `CONTRIBUTORS.md`.
 
 If there is some certain statistics or graph that you are missing and would like to be added? [Create an issue](https://github.com/modess/git-pretty-stats/issues/new) and request it!
 
