@@ -1,6 +1,21 @@
 @import "bootstrap_variables";
 @import "compass/css3";
 
+@mixin respond-to($media) {
+  @if $media == xs {
+    @media (max-width: $screen-xs-max) { @content; }
+  }
+  @else if $media == sm {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) { @content; }
+  }
+  @else if $media == md {
+    @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) { @content; }
+  }
+  @else if $media == lg {
+    @media (min-width: $screen-lg-min) { @content; }
+  }
+}
+
 .no-margin-top {
   margin-top: 0;
 }
@@ -82,14 +97,16 @@ $loading-bar-height: 10px;
     border: 0;
 
     .title {
-      font-size: 1.4em;
+      font-size: 1.2em;
+      @include respond-to(lg) { font-size: 1.1em; }
     }
 
     .value {
-      font-size: 4em;
+      font-size: 3em;
       line-height: 1em;
       padding-top: 10px;
       text-align: right;
+      @include respond-to(xs) { text-align: left; }
     }
   }
 }
