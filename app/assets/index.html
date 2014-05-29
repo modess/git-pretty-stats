@@ -13,6 +13,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/src/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -24,6 +25,10 @@
 
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
+
+    <div class="footer">
+      <a href="https://www.github.com/modess/git-pretty-stats"><i class="fa fa-github"></i></a>
+    </div>
 
     <script type="text/javascript">var base_url = '<?php echo URL::to("/"); ?>';</script>
     <!-- build:js scripts/vendor.js -->

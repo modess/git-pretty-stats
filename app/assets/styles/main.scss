@@ -26,7 +26,23 @@
 
 body {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 80px;
+}
+
+.footer {
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  background: $color-cyan-light;
+  text-align: center;
+
+  a {
+    color: $color-cyan-darker;
+    font-size: 1.8em;
+
+    &:hover { color: $color-cyan-dark; }
+  }
 }
 
 #tabs {
