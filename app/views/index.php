@@ -12,11 +12,11 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-loading-bar/src/loading-bar.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>

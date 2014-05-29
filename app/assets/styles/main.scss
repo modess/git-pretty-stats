@@ -1,8 +1,4 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
-@import 'sass-bootstrap/lib/bootstrap';
-
-$primary-color: #1ABC9C;
-$secondary-color: #3498db;
+@import "bootstrap_variables";
 
 .no-margin-top {
   margin-top: 0;
@@ -43,7 +39,7 @@ $loading-bar-height: 10px;
     right: 10px;
     top: 0;
     padding: 10px;
-    background: $primary-color;
+    background: $brand-primary;
     color: white;
     font-size: 1.25em;
   }
@@ -54,7 +50,7 @@ $loading-bar-height: 10px;
   font-weight: bold;
 
   .thumbnail {
-    background: $secondary-color;
+    background: $brand-secondary;
     padding: 10px;
 
     .title {
