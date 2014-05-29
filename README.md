@@ -87,7 +87,6 @@ Now go to your web browser and go to the URL where you've set everything up.
 
 Since `0.4` the application is based on the Laravel framework and some changes have been made. All you need to do (except following the installation instructions again) is to move your `config.php` to `app/config/local/git-pretty-stats.php` if you have one.
 
-
 ## Contribute
 
 1. Check for [open issues](https://github.com/modess/git-pretty-stats/issues) or open a fresh issue to start a discussion around a feature idea or a bug.
@@ -98,24 +97,9 @@ Since `0.4` the application is based on the Laravel framework and some changes h
 If there is some certain statistics or graph that you are missing and would like to be added? [Create an issue](https://github.com/modess/git-pretty-stats/issues/new) and request it!
 
 ## Screenshots
+![](https://modess.github.io/git-pretty-stats/statistics-0.5.png)
 
-![](https://modess.github.io/git-pretty-stats/commit-activity.png)
+![](https://modess.github.io/git-pretty-stats/commit-activity-0.5.png)
 
-![](https://modess.github.io/git-pretty-stats/contributors.png)
-
-## Powered by
-
-* [Laravel](https://github.com/laravel/laravel)
-* [Gitter](https://github.com/klaussilveira/gitter)
-* [Carbon](https://github.com/briannesbitt/Carbon)
-* [Flat UI](https://github.com/designmodo/Flat-UI)
-* [Highcharts JS](https://github.com/highslide-software/highcharts.com)
-* [Handlebars.JS](https://github.com/wycats/handlebars.js)
-* [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
-
-## TODO
-
-* Cache for large repositories
-* More graphs/statistics
-* Additions / deletions for contributors
+![](https://modess.github.io/git-pretty-stats/contributors-0.5.png)
 

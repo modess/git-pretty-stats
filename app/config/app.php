@@ -107,6 +107,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
 
+        'Barryvdh\Cors\CorsServiceProvider',
         'GitPrettyStats\Providers\RepositoryFactoryServiceProvider',
     ),
 

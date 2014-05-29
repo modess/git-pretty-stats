@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <a class="list-group-item"
+    ng-href="/#/repository/{{ repository.name }}"
+    ng-repeat="repository in repositories">
+    <strong>{{ repository.name }}</strong>
+    <span class="badge">{{ repository.commits }} commits</span>
+  </a>
+</ul>
