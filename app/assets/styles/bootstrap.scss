@@ -1,7 +1,6 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 // Core variables and mixins
-@import "../bower_components/sass-bootstrap/lib/variables";
 @import "bootstrap_variables";
 @import "../bower_components/sass-bootstrap/lib/mixins";
 
@@ -50,4 +49,3 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 // Utility classes
 @import "../bower_components/sass-bootstrap/lib/utilities";
 @import "../bower_components/sass-bootstrap/lib/responsive-utilities";
-

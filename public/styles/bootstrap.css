@@ -375,8 +375,8 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #333333;
-  background-color: white;
+  color: white;
+  background-color: #54c4a5;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_scaffolding\.scss}line{font-family:\0000334}}
@@ -427,7 +427,7 @@ img {
 .img-thumbnail, .thumbnail {
   padding: 4px;
   line-height: 1.428571429;
-  background-color: white;
+  background-color: #54c4a5;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -2009,7 +2009,7 @@ th {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_tables\.scss}line{font-family:\0000356}}
 .table .table {
-  background-color: white;
+  background-color: #54c4a5;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_tables\.scss}line{font-family:\0000370}}
@@ -2550,7 +2550,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;
-  color: #737373;
+  color: white;
 }
 
 @media (min-width: 768px) {
@@ -2831,20 +2831,20 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000374}}
 .btn-info {
   color: white;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #3baa8b;
+  border-color: #34977c;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003470}}
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active {
   color: white;
-  background-color: #39b3d7;
-  border-color: #269abc;
+  background-color: #308c73;
+  border-color: #256a57;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003475}}
 .open .btn-info.dropdown-toggle {
   color: white;
-  background-color: #39b3d7;
-  border-color: #269abc;
+  background-color: #308c73;
+  border-color: #256a57;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003481}}
 .btn-info:active, .btn-info.active {
@@ -2856,8 +2856,8 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003494}}
 .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #3baa8b;
+  border-color: #34977c;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000383}}
@@ -4063,7 +4063,7 @@ input[type="button"].btn-block {
   color: white;
   text-decoration: none;
   outline: 0;
-  background-color: #428bca;
+  background-color: #7ad1b9;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_dropdowns\.scss}line{font-family:\00003103}}
@@ -4591,7 +4591,7 @@ input[type="button"].btn-block {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\0000381}}
 .nav-tabs {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #3baa8b;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\0000383}}
 .nav-tabs > li {
@@ -4607,13 +4607,13 @@ input[type="button"].btn-block {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\0000394}}
 .nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #dddddd;
+  border-color: #3baa8b #3baa8b #3baa8b;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003103}}
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  color: #555555;
-  background-color: white;
-  border: 1px solid #dddddd;
+  color: white;
+  background-color: #3baa8b;
+  border: 1px solid #3baa8b;
   border-bottom-color: transparent;
   cursor: default;
 }
@@ -4633,7 +4633,7 @@ input[type="button"].btn-block {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003138}}
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   color: white;
-  background-color: #428bca;
+  background-color: #7ad1b9;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003142}}
 .nav-pills > li.active > a .caret, .nav-pills > li.active > a:hover .caret, .nav-pills > li.active > a:focus .caret {
@@ -4710,7 +4710,7 @@ input[type="button"].btn-block {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: white;
+    border-bottom-color: #54c4a5;
   }
 }
 
@@ -5531,11 +5531,11 @@ input[type="button"].btn-block {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_labels\.scss}line{font-family:\0000348}}
 .label-info {
-  background-color: #5bc0de;
+  background-color: #3baa8b;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003540}}
 .label-info[href]:hover, .label-info[href]:focus {
-  background-color: #31b0d5;
+  background-color: #2e846c;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_labels\.scss}line{font-family:\0000352}}
@@ -5657,7 +5657,7 @@ a.list-group-item.active > .badge,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_thumbnails\.scss}line{font-family:\0000321}}
 .thumbnail .caption {
   padding: 9px;
-  color: #333333;
+  color: white;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_thumbnails\.scss}line{font-family:\0000330}}
@@ -5869,7 +5869,7 @@ a.thumbnail.active {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_progress-bars\.scss}line{font-family:\0000382}}
 .progress-bar-info {
-  background-color: #5bc0de;
+  background-color: #3baa8b;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003559}}
 .progress-striped .progress-bar-info {
@@ -5958,8 +5958,8 @@ a.thumbnail.active {
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
-  background-color: white;
-  border: 1px solid #dddddd;
+  background-color: #3baa8b;
+  border: 1px solid #54c4a5;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000327}}
 .list-group-item:first-child {
@@ -5983,7 +5983,7 @@ a.thumbnail.active {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000345}}
 a.list-group-item {
-  color: #555555;
+  color: white;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000348}}
 a.list-group-item .list-group-item-heading {
@@ -5992,14 +5992,14 @@ a.list-group-item .list-group-item-heading {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000354}}
 a.list-group-item:hover, a.list-group-item:focus {
   text-decoration: none;
-  background-color: whitesmoke;
+  background-color: #7ad1b9;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000362}}
 a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
   z-index: 2;
-  color: white;
-  background-color: #428bca;
-  border-color: #428bca;
+  color: #27715d;
+  background-color: #7ad1b9;
+  border-color: #7ad1b9;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000369}}
 a.list-group-item.active .list-group-item-heading, a.list-group-item.active:hover .list-group-item-heading, a.list-group-item.active:focus .list-group-item-heading {
@@ -6007,7 +6007,7 @@ a.list-group-item.active .list-group-item-heading, a.list-group-item.active:hove
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000372}}
 a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .list-group-item-text, a.list-group-item.active:focus .list-group-item-text {
-  color: #e1edf7;
+  color: white;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000381}}

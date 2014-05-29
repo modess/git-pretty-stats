@@ -1,4 +1,5 @@
 @import "bootstrap_variables";
+@import "compass/css3";
 
 .no-margin-top {
   margin-top: 0;
@@ -13,6 +14,30 @@ body {
   padding-bottom: 20px;
 }
 
+#tabs {
+  margin-top: 15px;
+}
+.nav li a {
+  color: $color-cyan-lighter;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    color: #fff;
+    background: $color-cyan-light;
+    border-color: $color-cyan-light $color-cyan-light $color-cyan-dark $color-cyan-light;
+  }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  small {
+    color: $color-cyan-darker;
+  }
+}
+
+.list-group-item .badge {
+  background-color: $color-cyan;
+}
+
 $loading-bar-height: 10px;
 #loading-bar .bar,
 #loading-bar .peg {
@@ -22,26 +47,28 @@ $loading-bar-height: 10px;
   top: ($loading-bar-height + 10);
 }
 
-#tabs {
-  margin-top: 15px;
-}
-
 .thumbnail {
   position: relative;
   margin-top: 1em;
+  border: 0;
+  background: $color-cyan-dark;
 
   h4 {
     font-size: 1.1em;
+    margin-top: 8px;
+    margin-left: 8px;
   }
 
   h5 {
     position: absolute;
-    right: 10px;
+    right: 8px;
+    margin-top: 8px;
     top: 0;
     padding: 10px;
-    background: $brand-primary;
+    background: $color-cyan;
     color: white;
     font-size: 1.25em;
+    @include border-radius($border-radius-base);
   }
 }
 
@@ -50,8 +77,9 @@ $loading-bar-height: 10px;
   font-weight: bold;
 
   .thumbnail {
-    background: $brand-secondary;
+    background: $color-blue;
     padding: 10px;
+    border: 0;
 
     .title {
       font-size: 1.4em;
