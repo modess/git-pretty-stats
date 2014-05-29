@@ -101,7 +101,10 @@ module.exports = function (grunt) {
       app: {
         html: '<%= yeoman.app %>/index.html',
         ignorePath: '<%= yeoman.app %>/',
-        exclude: ['<%= yeoman.app %>/bower_components/sass-bootstrap/dist/css'],
+        exclude: [
+          '<%= yeoman.app %>/bower_components/sass-bootstrap/dist/css',
+          '<%= yeoman.app %>/bower_components/highcharts/js/modules/exporting.src.js'
+        ],
       }
     },
 

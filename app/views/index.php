@@ -45,7 +45,6 @@
     <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script src="bower_components/highcharts/js/highcharts.src.js"></script>
     <script src="bower_components/highcharts/js/highcharts-more.src.js"></script>
-    <script src="bower_components/highcharts/js/modules/exporting.src.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
