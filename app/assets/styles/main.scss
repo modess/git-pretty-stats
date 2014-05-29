@@ -133,10 +133,12 @@ $loading-bar-height: 10px;
 
 .commit-activity {
   .chart {
-    height: 300px;
+    height: 400px;
+  }
 
-    &.hour {
-      height: 400px;
-    }
+  .divide-responsive-charts {
+    display: none;
+
+    @include respond-to(md) { display: block; }
   }
 }

@@ -144,9 +144,15 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003135}}
 .commit-activity .chart {
-  height: 300px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003138}}
-.commit-activity .chart.hour {
   height: 400px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003139}}
+.commit-activity .divide-responsive-charts {
+  display: none;
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003139}}
+  .commit-activity .divide-responsive-charts {
+    display: block;
+  }
 }

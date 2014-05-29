@@ -39,13 +39,18 @@
 
         <hr />
 
-        <h3>By day of week</h3>
-        <gps-commits-by-day-chart></gps-commits-by-day-chart>
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <h3>By day of week</h3>
+            <gps-commits-by-day-chart></gps-commits-by-day-chart>
+            <hr class="divide-responsive-charts" />
+          </div>
 
-        <hr />
-
-        <h3>By hour of day</h3>
-        <gps-commits-by-hour-chart></gps-commits-by-hour-chart>
+          <div class="col-md-12 col-lg-6">
+            <h3>By hour of day</h3>
+            <gps-commits-by-hour-chart></gps-commits-by-hour-chart>
+          </div>
+        </div>
       </div>
 
       <div ng-if="activeTab == 3"
