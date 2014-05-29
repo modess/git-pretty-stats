@@ -1,15 +1,16 @@
 (function() {
   'use strict';
-  angular.module('gitPrettyStats').directive('gpsCommitsByDateChart', function($timeout) {
+  angular.module('gitPrettyStats').directive('gpsContributor', function($timeout) {
     return {
       restrict: 'E',
       replace: true,
-      template: '<div id="chart-commits-by-date" class="chart" style="width:100%"></div>',
+      templateUrl: 'templates/contributor.html',
+      scope: {
+        contributor: '='
+      },
       link: function(scope, iElement, iAttrs) {
-        var data;
-        data = scope.charts.date;
         return $timeout(function() {
-          return angular.element("#chart-commits-by-date").highcharts({
+          return iElement.find('.chart').highcharts({
             chart: {
               type: "areaspline",
               zoomType: "x"
@@ -26,8 +27,8 @@
               }
             },
             xAxis: {
-              categories: data.x,
-              tickInterval: parseInt(data.x.length / 20),
+              categories: scope.contributor.data.x,
+              tickInterval: parseInt(scope.contributor.data.x.length / 10),
               labels: {
                 rotation: -45,
                 y: 35
@@ -41,7 +42,7 @@
             series: [
               {
                 name: "Commits",
-                data: data.y
+                data: scope.contributor.data.y
               }
             ]
           });
@@ -53,5 +54,5 @@
 }).call(this);
 
 /*
-//@ sourceMappingURL=commits_by_date_chart.js.map
+//@ sourceMappingURL=contributor.js.map
 */

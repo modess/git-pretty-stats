@@ -52,6 +52,7 @@
         <script src="scripts/directives/commits_by_date_chart.js"></script>
         <script src="scripts/directives/commits_by_day_chart.js"></script>
         <script src="scripts/directives/commits_by_hour_chart.js"></script>
+        <script src="scripts/directives/contributor.js"></script>
         <script src="scripts/services/repository.js"></script>
         <!-- endbuild -->
 </body>

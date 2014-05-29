@@ -19,21 +19,19 @@
 
   <div class="container">
     <ul class="nav nav-tabs" id="tabs">
-      <li ng-class="{'active': activeTab == 1 || !activeTab}"><a id="tab-statistics" ng-click="activeTab = 1" data-toggle="tab">Statistics</a></li>
-      <li ng-class="{'active': activeTab == 2}"><a id="tab-commit-activity" ng-click="activeTab = 2" data-toggle="tab">Commit activity</a></li>
-      <li ng-class="{'active': activeTab == 3}"><a id="tab-contributors" ng-click="activeTab = 3" data-toggle="tab">Contributors</a></li>
+      <li ng-class="{'active': activeTab == 1 || !activeTab}"><a ng-click="activeTab = 1" data-toggle="tab">Statistics</a></li>
+      <li ng-class="{'active': activeTab == 2}"><a ng-click="activeTab = 2" data-toggle="tab">Commit activity</a></li>
+      <li ng-class="{'active': activeTab == 3}"><a ng-click="activeTab = 3" data-toggle="tab">Contributors</a></li>
     </ul>
 
     <div class="tab-content">
-      <div id="statistics"
-        ng-if="activeTab == 1 || !activeTab"
+      <div ng-if="activeTab == 1 || !activeTab"
         ng-class="{'active': activeTab == 1 || !activeTab}"
-        class="tab-pane active">
+        class="tab-pane statistics">
         <gps-statistics></gps-statistics>
       </div>
 
-      <div id="commits"
-        ng-if="activeTab == 2"
+      <div ng-if="activeTab == 2"
         ng-class="{'active': activeTab == 2, 'fade': activeTab !== 2}"
         class="tab-pane commit-activity">
         <h3>By date</h3>
@@ -50,9 +48,13 @@
         <gps-commits-by-hour-chart></gps-commits-by-hour-chart>
       </div>
 
-      <div id="contributors" class="tab-pane fade">
+      <div ng-if="activeTab == 3"
+        ng-class="{'active': activeTab == 3, 'fade': activeTab !== 3}"
+        class="tab-pane contributors">
         <h3>Contributors <small>(zoomable)</small></h3>
-        <div class="thumbnails"></div>
+        <div class="row thumbnails">
+          <gps-contributor ng-repeat="contributor in charts.contributor" contributor="contributor"></gps-contributor>
+        </div>
       </div>
     </div>
   </div>

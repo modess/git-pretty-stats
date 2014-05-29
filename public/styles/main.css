@@ -7680,33 +7680,33 @@ body {
   font-size: 1.25em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000343}}
-#statistics {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000352}}
+.statistics {
   color: white;
   font-weight: bold;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000347}}
-#statistics .thumbnail {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000356}}
+.statistics .thumbnail {
   background: #3498db;
   padding: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000351}}
-#statistics .thumbnail .title {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000360}}
+.statistics .thumbnail .title {
   font-size: 1.4em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000355}}
-#statistics .thumbnail .value {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000364}}
+.statistics .thumbnail .value {
   font-size: 4em;
   line-height: 1em;
   padding-top: 10px;
   text-align: right;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000365}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000374}}
 .commit-activity .chart {
   height: 300px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000368}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\0000377}}
 .commit-activity .chart.hour {
   height: 400px;
 }
