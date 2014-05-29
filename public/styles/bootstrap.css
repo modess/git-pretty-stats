@@ -2704,19 +2704,19 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 .btn-primary {
   color: white;
   background-color: #428bca;
-  border-color: #357ebd;
+  border-color: #428bca;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003470}}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
   color: white;
   background-color: #3276b1;
-  border-color: #285e8e;
+  border-color: #2d6ca2;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003475}}
 .open .btn-primary.dropdown-toggle {
   color: white;
   background-color: #3276b1;
-  border-color: #285e8e;
+  border-color: #2d6ca2;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003481}}
 .btn-primary:active, .btn-primary.active {
@@ -2729,26 +2729,26 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003494}}
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
   background-color: #428bca;
-  border-color: #357ebd;
+  border-color: #428bca;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000362}}
 .btn-warning {
   color: white;
   background-color: #f0ad4e;
-  border-color: #eea236;
+  border-color: #f0ad4e;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003470}}
 .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active {
   color: white;
   background-color: #ed9c28;
-  border-color: #d58512;
+  border-color: #eb9316;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003475}}
 .open .btn-warning.dropdown-toggle {
   color: white;
   background-color: #ed9c28;
-  border-color: #d58512;
+  border-color: #eb9316;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003481}}
 .btn-warning:active, .btn-warning.active {
@@ -2761,26 +2761,26 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003494}}
 .btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
   background-color: #f0ad4e;
-  border-color: #eea236;
+  border-color: #f0ad4e;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000366}}
 .btn-danger {
   color: white;
   background-color: #d9534f;
-  border-color: #d43f3a;
+  border-color: #d9534f;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003470}}
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active {
   color: white;
   background-color: #d2322d;
-  border-color: #ac2925;
+  border-color: #c12e2a;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003475}}
 .open .btn-danger.dropdown-toggle {
   color: white;
   background-color: #d2322d;
-  border-color: #ac2925;
+  border-color: #c12e2a;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003481}}
 .btn-danger:active, .btn-danger.active {
@@ -2793,26 +2793,26 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003494}}
 .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
   background-color: #d9534f;
-  border-color: #d43f3a;
+  border-color: #d9534f;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000370}}
 .btn-success {
   color: white;
   background-color: #5cb85c;
-  border-color: #4cae4c;
+  border-color: #5cb85c;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003470}}
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active {
   color: white;
   background-color: #47a447;
-  border-color: #398439;
+  border-color: #419641;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003475}}
 .open .btn-success.dropdown-toggle {
   color: white;
   background-color: #47a447;
-  border-color: #398439;
+  border-color: #419641;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003481}}
 .btn-success:active, .btn-success.active {
@@ -2825,26 +2825,26 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003494}}
 .btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
   background-color: #5cb85c;
-  border-color: #4cae4c;
+  border-color: #5cb85c;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000374}}
 .btn-info {
   color: white;
   background-color: #3baa8b;
-  border-color: #34977c;
+  border-color: #3baa8b;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003470}}
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active {
   color: white;
   background-color: #308c73;
-  border-color: #256a57;
+  border-color: #2b7d66;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003475}}
 .open .btn-info.dropdown-toggle {
   color: white;
   background-color: #308c73;
-  border-color: #256a57;
+  border-color: #2b7d66;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003481}}
 .btn-info:active, .btn-info.active {
@@ -2857,7 +2857,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003494}}
 .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
   background-color: #3baa8b;
-  border-color: #34977c;
+  border-color: #3baa8b;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\0000383}}
@@ -4020,9 +4020,9 @@ input[type="button"].btn-block {
   margin: 2px 0 0;
   list-style: none;
   font-size: 14px;
-  background-color: white;
+  background-color: #3baa8b;
   border: 1px solid #cccccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid #3baa8b;
   border-radius: 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -4047,15 +4047,15 @@ input[type="button"].btn-block {
   clear: both;
   font-weight: normal;
   line-height: 1.428571429;
-  color: #333333;
+  color: white;
   white-space: nowrap;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_dropdowns\.scss}line{font-family:\0000377}}
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   text-decoration: none;
-  color: #262626;
-  background-color: whitesmoke;
+  color: #f2f2f2;
+  background-color: #54c4a5;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_dropdowns\.scss}line{font-family:\0000388}}
