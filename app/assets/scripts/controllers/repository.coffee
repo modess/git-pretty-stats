@@ -1,8 +1,8 @@
 'use strict'
 
 angular.module('gitPrettyStats')
-  .controller 'RepositoryController', ($scope, repo) ->
-    $scope.repository   = repo.data.repository
-    $scope.repositories = repo.data.repositories
+  .controller 'RepositoryController', ($scope, repositories, repo) ->
+    $scope.repository   = repo.data
+    $scope.repositories = repositories.data
 
-    $scope.charts = repo.data.repository.data.charts
+    $scope.charts = $scope.repository.data.charts

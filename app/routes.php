@@ -3,4 +3,4 @@
 Route::get('/', 'MainController@index');
 
 Route::get('/repository', 'RepositoryController@all');
-Route::get('/repository/{name}', 'RepositoryController@data');
+Route::get('/repository/{name}', 'RepositoryController@show');

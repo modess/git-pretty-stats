@@ -13,6 +13,9 @@
       templateUrl: 'views/repository.html',
       controller: 'RepositoryController',
       resolve: {
+        repositories: function(Repository) {
+          return Repository.all();
+        },
         repo: function($route, Repository) {
           return Repository.get($route.current.params.name);
         }

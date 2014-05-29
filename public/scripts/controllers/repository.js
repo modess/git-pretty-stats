@@ -1,9 +1,9 @@
 (function() {
   'use strict';
-  angular.module('gitPrettyStats').controller('RepositoryController', function($scope, repo) {
-    $scope.repository = repo.data.repository;
-    $scope.repositories = repo.data.repositories;
-    return $scope.charts = repo.data.repository.data.charts;
+  angular.module('gitPrettyStats').controller('RepositoryController', function($scope, repositories, repo) {
+    $scope.repository = repo.data;
+    $scope.repositories = repositories.data;
+    return $scope.charts = $scope.repository.data.charts;
   });
 
 }).call(this);

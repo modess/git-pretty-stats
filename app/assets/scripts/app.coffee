@@ -20,6 +20,8 @@ angular.module('gitPrettyStats', [
         templateUrl: 'views/repository.html'
         controller: 'RepositoryController'
         resolve:
+          repositories: (Repository) ->
+            Repository.all()
           repo: ($route, Repository) ->
             Repository.get($route.current.params.name)
 

@@ -32,30 +32,12 @@ class RepositoryController extends Controller {
     }
 
     /**
-     * Get repository
-     *
-     * @param str $name
-     * @return View
-     */
-    public function show ($name)
-    {
-        $repositories = $this->factory->toArray();
-        $repository   = $this->factory->fromName($name);
-
-        return View::make('repository')->with(array(
-            'repositories'  => $repositories,
-            'name'          => $repository->getName(),
-            'branch'        => $repository->getCurrentBranch()
-        ));
-    }
-
-    /**
      * Get repository data
      *
      * @param str $name
      * @return Response
      */
-    public function data ($name)
+    public function show ($name)
     {
         $repositories = $this->factory->toArray();
         $repository   = $this->factory->fromName($name);
@@ -64,12 +46,9 @@ class RepositoryController extends Controller {
         $statistics = $repository->getStatistics();
 
         return Response::json(array(
-            'repositories'  => $repositories,
-            'repository'    => array(
-                'name'          => $repository->getName(),
-                'branch'        => $repository->getCurrentBranch(),
-                'data'          => $statistics
-            )
+            'name'   => $repository->getName(),
+            'branch' => $repository->getCurrentBranch(),
+            'data'   => $repository->getStatistics()
         ));
     }
 }
