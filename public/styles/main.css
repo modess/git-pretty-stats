@@ -1,0 +1,158 @@
+/* line 19, ../../app/assets/styles/main.scss */
+.no-margin-top {
+  margin-top: 0;
+}
+
+/* line 23, ../../app/assets/styles/main.scss */
+.divider {
+  margin: 10px 0;
+}
+
+/* line 27, ../../app/assets/styles/main.scss */
+body {
+  padding-top: 20px;
+  padding-bottom: 80px;
+}
+
+/* line 32, ../../app/assets/styles/main.scss */
+.footer {
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  background: #7ad1b9;
+  text-align: center;
+}
+/* line 40, ../../app/assets/styles/main.scss */
+.footer a {
+  color: #27715d;
+  font-size: 1.8em;
+}
+/* line 44, ../../app/assets/styles/main.scss */
+.footer a:hover {
+  color: #3baa8b;
+}
+
+/* line 48, ../../app/assets/styles/main.scss */
+#tabs {
+  margin-top: 15px;
+}
+
+/* line 51, ../../app/assets/styles/main.scss */
+.nav li a {
+  color: #b3e5d7;
+  cursor: pointer;
+}
+/* line 55, ../../app/assets/styles/main.scss */
+.nav li a:hover, .nav li a:focus {
+  color: #fff;
+  background: #7ad1b9;
+  border-color: #7ad1b9 #7ad1b9 #3baa8b #7ad1b9;
+}
+
+/* line 63, ../../app/assets/styles/main.scss */
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  color: #27715d;
+}
+
+/* line 68, ../../app/assets/styles/main.scss */
+.list-group {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+/* line 72, ../../app/assets/styles/main.scss */
+.list-group-item .badge {
+  background-color: #54c4a5;
+}
+
+/* line 78, ../../app/assets/styles/main.scss */
+#loading-bar .bar,
+#loading-bar .peg {
+  height: 10px;
+}
+
+/* line 81, ../../app/assets/styles/main.scss */
+#loading-bar-spinner {
+  top: 20px;
+}
+
+/* line 85, ../../app/assets/styles/main.scss */
+.thumbnail {
+  position: relative;
+  margin-top: 1em;
+  border: 0;
+  background: #3baa8b;
+}
+/* line 91, ../../app/assets/styles/main.scss */
+.thumbnail h4 {
+  font-size: 1.1em;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+/* line 97, ../../app/assets/styles/main.scss */
+.thumbnail h5 {
+  position: absolute;
+  right: 8px;
+  margin-top: 8px;
+  top: 0;
+  padding: 10px;
+  background: #54c4a5;
+  color: white;
+  font-size: 1.25em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* line 110, ../../app/assets/styles/main.scss */
+.statistics {
+  color: white;
+  font-weight: bold;
+}
+/* line 114, ../../app/assets/styles/main.scss */
+.statistics .thumbnail {
+  background: #46a4bb;
+  padding: 10px;
+  border: 0;
+}
+/* line 119, ../../app/assets/styles/main.scss */
+.statistics .thumbnail .title {
+  font-size: 1.2em;
+}
+@media (min-width: 1200px) {
+  /* line 119, ../../app/assets/styles/main.scss */
+  .statistics .thumbnail .title {
+    font-size: 1.1em;
+  }
+}
+/* line 124, ../../app/assets/styles/main.scss */
+.statistics .thumbnail .value {
+  font-size: 3em;
+  line-height: 1em;
+  padding-top: 10px;
+  text-align: right;
+}
+@media (max-width: 767px) {
+  /* line 124, ../../app/assets/styles/main.scss */
+  .statistics .thumbnail .value {
+    text-align: left;
+  }
+}
+
+/* line 135, ../../app/assets/styles/main.scss */
+.commit-activity .chart {
+  height: 400px;
+}
+/* line 139, ../../app/assets/styles/main.scss */
+.commit-activity .divide-responsive-charts {
+  display: none;
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  /* line 139, ../../app/assets/styles/main.scss */
+  .commit-activity .divide-responsive-charts {
+    display: block;
+  }
+}

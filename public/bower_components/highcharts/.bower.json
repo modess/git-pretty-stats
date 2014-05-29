@@ -1,0 +1,35 @@
+{
+  "name": "highcharts",
+  "version": "3.0.9",
+  "main": [
+    "js/highcharts.src.js",
+    "js/highcharts-more.src.js",
+    "js/modules/exporting.src.js"
+  ],
+  "ignore": [
+    "errors",
+    "exporting-server",
+    "gfx",
+    "lib",
+    "samples",
+    "studies",
+    "test",
+    "tools",
+    "utils",
+    "ant",
+    "build.md",
+    "build.properties",
+    "build.xml",
+    "invalidations.txt"
+  ],
+  "homepage": "https://github.com/highslide-software/highcharts.com",
+  "_release": "3.0.9",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.9",
+    "commit": "52139eaefaaebffe8b0ec50d756faaabd30fc63c"
+  },
+  "_source": "https://github.com/highslide-software/highcharts.com.git",
+  "_target": "~3.0.9",
+  "_originalSource": "https://github.com/highslide-software/highcharts.com.git"
+}

@@ -1,0 +1,144 @@
+@import "bootstrap_variables";
+@import "compass/css3";
+
+@mixin respond-to($media) {
+  @if $media == xs {
+    @media (max-width: $screen-xs-max) { @content; }
+  }
+  @else if $media == sm {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) { @content; }
+  }
+  @else if $media == md {
+    @media (min-width: $screen-md-min) and (max-width: $screen-lg-min) { @content; }
+  }
+  @else if $media == lg {
+    @media (min-width: $screen-lg-min) { @content; }
+  }
+}
+
+.no-margin-top {
+  margin-top: 0;
+}
+
+.divider {
+  margin: 10px 0;
+}
+
+body {
+  padding-top: 20px;
+  padding-bottom: 80px;
+}
+
+.footer {
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  background: $color-cyan-light;
+  text-align: center;
+
+  a {
+    color: $color-cyan-darker;
+    font-size: 1.8em;
+
+    &:hover { color: $color-cyan-dark; }
+  }
+}
+
+#tabs {
+  margin-top: 15px;
+}
+.nav li a {
+  color: $color-cyan-lighter;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    color: #fff;
+    background: $color-cyan-light;
+    border-color: $color-cyan-light $color-cyan-light $color-cyan-dark $color-cyan-light;
+  }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  small {
+    color: $color-cyan-darker;
+  }
+}
+
+.list-group {
+  max-width: $screen-sm;
+  margin: 0 auto;
+}
+.list-group-item .badge {
+  background-color: $color-cyan;
+}
+
+$loading-bar-height: 10px;
+#loading-bar .bar,
+#loading-bar .peg {
+  height: $loading-bar-height;
+}
+#loading-bar-spinner {
+  top: ($loading-bar-height + 10);
+}
+
+.thumbnail {
+  position: relative;
+  margin-top: 1em;
+  border: 0;
+  background: $color-cyan-dark;
+
+  h4 {
+    font-size: 1.1em;
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+
+  h5 {
+    position: absolute;
+    right: 8px;
+    margin-top: 8px;
+    top: 0;
+    padding: 10px;
+    background: $color-cyan;
+    color: white;
+    font-size: 1.25em;
+    @include border-radius($border-radius-base);
+  }
+}
+
+.statistics {
+  color: white;
+  font-weight: bold;
+
+  .thumbnail {
+    background: $color-blue;
+    padding: 10px;
+    border: 0;
+
+    .title {
+      font-size: 1.2em;
+      @include respond-to(lg) { font-size: 1.1em; }
+    }
+
+    .value {
+      font-size: 3em;
+      line-height: 1em;
+      padding-top: 10px;
+      text-align: right;
+      @include respond-to(xs) { text-align: left; }
+    }
+  }
+}
+
+.commit-activity {
+  .chart {
+    height: 400px;
+  }
+
+  .divide-responsive-charts {
+    display: none;
+
+    @include respond-to(md) { display: block; }
+  }
+}
