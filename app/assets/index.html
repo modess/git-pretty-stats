@@ -14,6 +14,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-loading-bar/src/loading-bar.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-snap/angular-snap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -46,6 +47,8 @@
     <script src="bower_components/highcharts/js/highcharts.src.js"></script>
     <script src="bower_components/highcharts/js/highcharts-more.src.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/snapjs/snap.js"></script>
+    <script src="bower_components/angular-snap/angular-snap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
