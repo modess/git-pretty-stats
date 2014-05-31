@@ -37,6 +37,29 @@ body {
   background: $color-cyan-dark;
 }
 
+.navbar-default {
+  .navbar-toggle {
+    float: left;
+    margin-left: 15px;
+    margin-right: 0;
+    display: block;
+    background: $color-cyan-lighter;
+    border-color: $color-cyan-lighter;
+    color: #fff;
+
+    .icon-bar {
+      background: $color-cyan-dark;
+    }
+
+    &:hover, &:focus {
+      background: $color-cyan-lighter;
+      .icon-bar {
+        background: $color-cyan-light;
+      }
+    }
+  }
+}
+
 .footer {
   width: 100%;
   padding: 10px;
