@@ -24,7 +24,7 @@
   <body ng-app="gitPrettyStats">
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container" ui-view></div>
 
     <div class="footer">
       <a href="https://www.github.com/modess/git-pretty-stats"><i class="fa fa-github"></i></a>
@@ -45,6 +45,7 @@
     <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script src="bower_components/highcharts/js/highcharts.src.js"></script>
     <script src="bower_components/highcharts/js/highcharts-more.src.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

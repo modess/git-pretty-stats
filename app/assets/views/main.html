@@ -1,6 +1,6 @@
 <ul class="list-group">
   <a class="list-group-item"
-    ng-href="/#/repository/{{ repository.name }}"
+    ui-sref="repository({ name: repository.name })"
     ng-repeat="repository in repositories">
     <strong>{{ repository.name }}</strong>
     <span class="badge">{{ repository.commits }} commits</span>
