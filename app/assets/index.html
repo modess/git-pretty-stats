@@ -24,12 +24,7 @@
   </head>
   <body ng-app="gitPrettyStats">
 
-    <!-- Add your site or application content here -->
-    <div class="container" ui-view></div>
-
-    <div class="footer">
-      <a href="https://www.github.com/modess/git-pretty-stats"><i class="fa fa-github"></i></a>
-    </div>
+    <div ui-view></div>
 
     <script type="text/javascript">var base_url = '<?php echo URL::to("/"); ?>';</script>
     <!-- build:js scripts/vendor.js -->

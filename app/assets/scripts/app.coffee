@@ -2,6 +2,7 @@
 
 angular.module('gitPrettyStats', [
   'ui.router',
+  'snap',
   'chieffancypants.loadingBar'
 ])
   .config ($stateProvider, $urlRouterProvider) ->
@@ -16,11 +17,10 @@ angular.module('gitPrettyStats', [
           repositories: (Repository) ->
             Repository.all()
       .state 'repository',
-        url: '/repository/:name'
+        parent: 'repositories'
+        url: '/:name'
         templateUrl: 'views/repository.html'
         controller: 'RepositoryController'
         resolve:
-          repositories: (Repository) ->
-            Repository.all()
           repo: ($stateParams, Repository) ->
             Repository.get($stateParams.name)
