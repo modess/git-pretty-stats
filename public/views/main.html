@@ -1,8 +1,13 @@
-<ul class="list-group">
-  <a class="list-group-item"
-    ng-href="/#/repository/{{ repository.name }}"
-    ng-repeat="repository in repositories">
-    <strong>{{ repository.name }}</strong>
-    <span class="badge">{{ repository.commits }} commits</span>
-  </a>
-</ul>
+<div snap-drawer>
+  <ul class="list-group" ng-include="'templates/repository_list.html'"></ul>
+</div>
+
+<div snap-content>
+  <div class="content" ui-view>
+    <ul class="list-group inline" ng-include="'templates/repository_list.html'"></ul>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://www.github.com/modess/git-pretty-stats"><i class="fa fa-github"></i></a>
+</div>

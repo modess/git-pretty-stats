@@ -1,29 +1,35 @@
 'use strict'
 
 angular.module('gitPrettyStats', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
+  'ui.router',
+  'snap',
   'chieffancypants.loadingBar'
 ])
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/',
+  .run ($rootScope, $state, $stateParams, snapRemote) ->
+    $rootScope.$state = $state
+    $rootScope.$stateParams = $stateParams
+
+    $rootScope.$on '$locationChangeStart', ->
+      snapRemote.close()
+
+  .config ($stateProvider, $urlRouterProvider, snapRemoteProvider) ->
+    snapRemoteProvider.globalOptions.touchToDrag = false
+
+    $urlRouterProvider.otherwise "/repositories"
+
+    $stateProvider
+      .state 'repositories',
+        url: '/repositories'
         templateUrl: 'views/main.html'
         controller: 'MainController'
         resolve:
           repositories: (Repository) ->
             Repository.all()
-
-      .when '/repository/:name',
+      .state 'repository',
+        parent: 'repositories'
+        url: '/:name'
         templateUrl: 'views/repository.html'
         controller: 'RepositoryController'
         resolve:
-          repositories: (Repository) ->
-            Repository.all()
-          repo: ($route, Repository) ->
-            Repository.get($route.current.params.name)
-
-      .otherwise
-        redirectTo: '/'
+          repo: ($stateParams, Repository) ->
+            Repository.get($stateParams.name)
