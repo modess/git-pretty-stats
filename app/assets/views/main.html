@@ -10,7 +10,16 @@
 </div>
 
 <div snap-content>
-  <div class="content" ui-view></div>
+  <div class="content" ui-view>
+    <ul class="list-group inline">
+      <a class="list-group-item"
+        ui-sref="repository({ name: repository.name })"
+        ng-repeat="repository in repositories">
+        <strong>{{ repository.name }}</strong>
+        <span class="badge">{{ repository.commits }} commits</span>
+      </a>
+    </ul>
+  </div>
 </div>
 
 <div class="footer">

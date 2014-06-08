@@ -114,9 +114,16 @@ h1,h2,h3,h4,h5,h6 {
 .list-group {
   max-width: $screen-sm;
   margin: 0 auto;
-}
-.list-group-item .badge {
-  background-color: $color-cyan;
+
+  &.inline {
+    margin: $footer-height auto;
+  }
+
+  .list-group-item {
+    .badge {
+      background-color: $color-cyan;
+    }
+  }
 }
 
 $loading-bar-height: 10px;
