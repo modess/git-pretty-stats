@@ -1,6 +1,8 @@
 (function() {
   'use strict';
-  angular.module('gitPrettyStats', ['ui.router', 'snap', 'chieffancypants.loadingBar']).run(function($rootScope, snapRemote) {
+  angular.module('gitPrettyStats', ['ui.router', 'snap', 'chieffancypants.loadingBar']).run(function($rootScope, $state, $stateParams, snapRemote) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
     return $rootScope.$on('$locationChangeStart', function() {
       return snapRemote.close();
     });

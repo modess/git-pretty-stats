@@ -5,9 +5,13 @@ angular.module('gitPrettyStats', [
   'snap',
   'chieffancypants.loadingBar'
 ])
-  .run ($rootScope, snapRemote) ->
+  .run ($rootScope, $state, $stateParams, snapRemote) ->
+    $rootScope.$state = $state
+    $rootScope.$stateParams = $stateParams
+
     $rootScope.$on '$locationChangeStart', ->
       snapRemote.close()
+
   .config ($stateProvider, $urlRouterProvider, snapRemoteProvider) ->
     snapRemoteProvider.globalOptions.touchToDrag = false
 
