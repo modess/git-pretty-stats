@@ -420,7 +420,7 @@ img {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_scaffolding\.scss}line{font-family:\0000371}}
 .img-rounded {
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_scaffolding\.scss}line{font-family:\0000378}}
@@ -429,7 +429,7 @@ img {
   line-height: 1.428571429;
   background-color: #54c4a5;
   border: 1px solid #dddddd;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
@@ -826,7 +826,7 @@ code {
   color: #c7254e;
   background-color: #f9f2f4;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_code\.scss}line{font-family:\0000325}}
@@ -841,7 +841,7 @@ pre {
   color: #333333;
   background-color: whitesmoke;
   border: 1px solid #cccccc;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_code\.scss}line{font-family:\0000339}}
 pre code {
@@ -2292,7 +2292,7 @@ output {
   background-color: white;
   background-image: none;
   border: 1px solid #cccccc;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
@@ -2412,7 +2412,7 @@ input[type="checkbox"],
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003853}}
@@ -2438,7 +2438,7 @@ textarea.input-sm, .input-group-sm > textarea.form-control,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003853}}
@@ -2633,7 +2633,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.428571429;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -2894,7 +2894,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\00003127}}
@@ -2904,7 +2904,7 @@ textarea.input-lg, .input-group-lg > textarea.form-control,
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_buttons\.scss}line{font-family:\00003131}}
@@ -4023,7 +4023,7 @@ input[type="button"].btn-block {
   background-color: #3baa8b;
   border: 1px solid #cccccc;
   border: 1px solid #3baa8b;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
@@ -4344,13 +4344,13 @@ input[type="button"].btn-block {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_button-groups\.scss}line{font-family:\00003209}}
 .btn-group-vertical > .btn:first-child:not(:last-child) {
-  border-top-right-radius: 4px;
+  border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_button-groups\.scss}line{font-family:\00003213}}
 .btn-group-vertical > .btn:last-child:not(:first-child) {
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
@@ -4442,7 +4442,7 @@ input[type="button"].btn-block {
   text-align: center;
   background-color: #eeeeee;
   border: 1px solid #cccccc;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_input-groups\.scss}line{font-family:\0000371}}
 .input-group-addon.input-sm,
@@ -4450,7 +4450,7 @@ input[type="button"].btn-block {
 .input-group-sm > .input-group-btn > .input-group-addon.btn {
   padding: 5px 10px;
   font-size: 12px;
-  border-radius: 3px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_input-groups\.scss}line{font-family:\0000376}}
 .input-group-addon.input-lg,
@@ -4458,7 +4458,7 @@ input[type="button"].btn-block {
 .input-group-lg > .input-group-btn > .input-group-addon.btn {
   padding: 10px 16px;
   font-size: 18px;
-  border-radius: 6px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_input-groups\.scss}line{font-family:\0000384}}
 .input-group-addon input[type="radio"],
@@ -4603,7 +4603,7 @@ input[type="button"].btn-block {
   margin-right: 2px;
   line-height: 1.428571429;
   border: 1px solid transparent;
-  border-radius: 4px 4px 0 0;
+  border-radius: 0 0 0 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\0000394}}
 .nav-tabs > li > a:hover {
@@ -4624,7 +4624,7 @@ input[type="button"].btn-block {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003127}}
 .nav-pills > li > a {
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003130}}
 .nav-pills > li + li {
@@ -4688,7 +4688,7 @@ input[type="button"].btn-block {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003203}}
 .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
   margin-right: 0;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003211}}
 .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
@@ -4702,7 +4702,7 @@ input[type="button"].btn-block {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003216}}
   .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
     border-bottom: 1px solid #dddddd;
-    border-radius: 4px 4px 0 0;
+    border-radius: 0 0 0 0;
   }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navs\.scss}line{font-family:\00003222}}
   .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
@@ -4763,7 +4763,7 @@ input[type="button"].btn-block {
 @media (min-width: 768px) {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navbar\.scss}line{font-family:\0000311}}
   .navbar {
-    border-radius: 4px;
+    border-radius: 0;
   }
 }
 
@@ -4926,7 +4926,7 @@ input[type="button"].btn-block {
   margin-bottom: 8px;
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_navbar\.scss}line{font-family:\00003187}}
 .navbar-toggle .icon-bar {
@@ -5300,7 +5300,7 @@ input[type="button"].btn-block {
   margin-bottom: 20px;
   list-style: none;
   background-color: whitesmoke;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_breadcrumbs\.scss}line{font-family:\0000312}}
 .breadcrumb > li {
@@ -5322,7 +5322,7 @@ input[type="button"].btn-block {
   display: inline-block;
   padding-left: 0;
   margin: 20px 0;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_pagination\.scss}line{font-family:\0000310}}
 .pagination > li {
@@ -5344,14 +5344,14 @@ input[type="button"].btn-block {
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
   margin-left: 0;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_pagination\.scss}line{font-family:\0000332}}
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_pagination\.scss}line{font-family:\0000341}}
 .pagination > li > a:hover, .pagination > li > a:focus,
@@ -5392,14 +5392,14 @@ input[type="button"].btn-block {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003521}}
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003527}}
 .pagination-lg > li:last-child > a,
 .pagination-lg > li:last-child > span {
-  border-bottom-right-radius: 6px;
-  border-top-right-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003515}}
@@ -5411,14 +5411,14 @@ input[type="button"].btn-block {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003521}}
 .pagination-sm > li:first-child > a,
 .pagination-sm > li:first-child > span {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_mixins\.scss}line{font-family:\00003527}}
 .pagination-sm > li:last-child > a,
 .pagination-sm > li:last-child > span {
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_pager\.scss}line{font-family:\000036}}
@@ -5622,7 +5622,7 @@ a.list-group-item.active > .badge,
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_jumbotron\.scss}line{font-family:\0000323}}
 .container .jumbotron {
-  border-radius: 6px;
+  border-radius: 0;
 }
 @media screen and (min-width: 768px) {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_jumbotron\.scss}line{font-family:\000036}}
@@ -5672,7 +5672,7 @@ a.thumbnail.active {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_alerts\.scss}line{font-family:\0000316}}
 .alert h4 {
@@ -5819,7 +5819,7 @@ a.thumbnail.active {
   height: 20px;
   margin-bottom: 20px;
   background-color: whitesmoke;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -5963,14 +5963,14 @@ a.thumbnail.active {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000327}}
 .list-group-item:first-child {
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000330}}
 .list-group-item:last-child {
   margin-bottom: 0;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_list-group\.scss}line{font-family:\0000336}}
 .list-group-item > .badge {
@@ -6027,7 +6027,7 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   margin-bottom: 20px;
   background-color: white;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -6135,8 +6135,8 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: -1;
+  border-top-left-radius: -1;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_panels\.scss}line{font-family:\0000399}}
 .panel-heading > .dropdown .dropdown-toggle {
@@ -6159,14 +6159,14 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   padding: 10px 15px;
   background-color: whitesmoke;
   border-top: 1px solid #dddddd;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: -1;
+  border-bottom-left-radius: -1;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_panels\.scss}line{font-family:\00003130}}
 .panel-group .panel {
   margin-bottom: 0;
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_panels\.scss}line{font-family:\00003134}}
@@ -6335,7 +6335,7 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
   margin-bottom: 20px;
   background-color: whitesmoke;
   border: 1px solid #e3e3e3;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -6348,13 +6348,13 @@ a.list-group-item.active .list-group-item-text, a.list-group-item.active:hover .
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_wells\.scss}line{font-family:\0000322}}
 .well-lg {
   padding: 24px;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_wells\.scss}line{font-family:\0000326}}
 .well-sm {
   padding: 9px;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_close\.scss}line{font-family:\000036}}
@@ -6436,7 +6436,7 @@ button.close {
   background-color: white;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 0;
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -6579,7 +6579,7 @@ button.close {
   text-align: center;
   text-decoration: none;
   background-color: black;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/bower_components\/sass-bootstrap\/lib\/_tooltip\.scss}line{font-family:\0000335}}
@@ -6666,7 +6666,7 @@ button.close {
   background-clip: padding-box;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border-radius: 0;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal;
