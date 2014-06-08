@@ -5,7 +5,9 @@ angular.module('gitPrettyStats', [
   'snap',
   'chieffancypants.loadingBar'
 ])
-  .config ($stateProvider, $urlRouterProvider) ->
+  .config ($stateProvider, $urlRouterProvider, snapRemoteProvider) ->
+    snapRemoteProvider.globalOptions.touchToDrag = false
+
     $urlRouterProvider.otherwise "/repositories"
 
     $stateProvider
