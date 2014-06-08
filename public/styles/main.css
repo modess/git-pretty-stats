@@ -118,41 +118,42 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 .list-group {
   max-width: 768px;
   margin: 0 auto;
+  list-style: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003118}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003119}}
 .list-group.inline {
   margin: 55px auto;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003123}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003124}}
 .list-group .list-group-item .badge {
   background-color: #54c4a5;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003131}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003132}}
 #loading-bar .bar,
 #loading-bar .peg {
   height: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003135}}
 #loading-bar-spinner {
   top: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003139}}
 .thumbnail {
   position: relative;
   margin-top: 1em;
   border: 0;
   background: #3baa8b;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003144}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003145}}
 .thumbnail h4 {
   font-size: 1.1em;
   margin-top: 8px;
   margin-left: 8px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003150}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003151}}
 .thumbnail h5 {
   position: absolute;
   right: 8px;
@@ -169,28 +170,28 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   border-radius: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003163}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003164}}
 .statistics {
   color: white;
   font-weight: bold;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003168}}
 .statistics .thumbnail {
   background: #46a4bb;
   padding: 10px;
   border: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003172}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003173}}
 .statistics .thumbnail .title {
   font-size: 1.2em;
 }
 @media (min-width: 1200px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003172}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003173}}
   .statistics .thumbnail .title {
     font-size: 1.1em;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003178}}
 .statistics .thumbnail .value {
   font-size: 3em;
   line-height: 1em;
@@ -198,22 +199,22 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   text-align: right;
 }
 @media (max-width: 767px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003178}}
   .statistics .thumbnail .value {
     text-align: left;
   }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003188}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003189}}
 .commit-activity .chart {
   height: 400px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003192}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003193}}
 .commit-activity .divide-responsive-charts {
   display: none;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003192}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/niklas\/dev\/git-pretty-stats\/app\/assets\/styles\/main\.scss}line{font-family:\00003193}}
   .commit-activity .divide-responsive-charts {
     display: block;
   }
