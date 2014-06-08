@@ -1,6 +1,10 @@
 (function() {
   'use strict';
-  angular.module('gitPrettyStats', ['ui.router', 'snap', 'chieffancypants.loadingBar']).config(function($stateProvider, $urlRouterProvider, snapRemoteProvider) {
+  angular.module('gitPrettyStats', ['ui.router', 'snap', 'chieffancypants.loadingBar']).run(function($rootScope, snapRemote) {
+    return $rootScope.$on('$locationChangeStart', function() {
+      return snapRemote.close();
+    });
+  }).config(function($stateProvider, $urlRouterProvider, snapRemoteProvider) {
     snapRemoteProvider.globalOptions.touchToDrag = false;
     $urlRouterProvider.otherwise("/repositories");
     return $stateProvider.state('repositories', {
