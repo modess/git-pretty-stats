@@ -12,7 +12,7 @@
     return $stateProvider.state('repositories', {
       url: '/repositories',
       templateUrl: 'views/main.html',
-      controller: 'MainController',
+      controller: 'RepositoriesController',
       resolve: {
         repositories: function(Repository) {
           return Repository.all();

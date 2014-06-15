@@ -21,7 +21,7 @@ angular.module('gitPrettyStats', [
       .state 'repositories',
         url: '/repositories'
         templateUrl: 'views/main.html'
-        controller: 'MainController'
+        controller: 'RepositoriesController'
         resolve:
           repositories: (Repository) ->
             Repository.all()

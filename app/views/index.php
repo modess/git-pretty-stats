@@ -49,7 +49,7 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/repositories.js"></script>
         <script src="scripts/controllers/repository.js"></script>
         <script src="scripts/directives/statistics.js"></script>
         <script src="scripts/directives/commits_by_date_chart.js"></script>

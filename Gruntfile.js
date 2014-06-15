@@ -185,6 +185,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'bower_components/**/*',
+            '!bower_components/highcharts/js/.htaccess',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
