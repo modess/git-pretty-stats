@@ -190,6 +190,23 @@ class RepositoryFactoryTest extends \TestCase
         );
     }
 
+    public function testGetFullPath ()
+    {
+        $factory = new RepositoryFactory($this->finder, '/var/www/dev');
+
+        $paths = array(
+            '/base-path'      => '/base-path',
+            'relative-path'   => '/var/www/dev/relative-path',
+            './relative-repo' => '/var/www/dev/./relative-repo'
+        );
+
+        foreach ($paths as $path => $expected) {
+            $this->assertEquals(
+                $expected,
+                $factory->getFullPath($path)
+            );
+        }
+    }
 
     public function testToArray ()
     {
