@@ -71,10 +71,7 @@ class RepositoryFactory
             {
                 $paths = array();
                 foreach ($repositoriesPath as $path) {
-                    if (substr($path, 0, 1) != '/') {
-                        $path = $this->baseDir . '/' . $path;
-                    }
-                    $paths[] = $path;
+                    $paths[] = $this->getFullPath($path);
                 }
 
                 $directories = $this->finder
@@ -88,7 +85,7 @@ class RepositoryFactory
                 $directories = $this->finder
                     ->depth(0)
                     ->directories()
-                    ->in($this->baseDir . '/' . $repositoriesPath);
+                    ->in($this->getFullPath($repositoriesPath));
             }
 
             // Real paths for all repositories
@@ -98,6 +95,17 @@ class RepositoryFactory
         }
 
         return $this->paths;
+    }
+
+    /**
+     * Get full path for directory
+     *
+     * @param  string $path
+     * @return string
+     */
+    public function getFullPath ($path)
+    {
+        return substr($path, 0, 1) == '/' ? $path : $this->baseDir . '/' . $path;
     }
 
     /**
