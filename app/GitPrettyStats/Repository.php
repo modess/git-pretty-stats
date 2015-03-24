@@ -60,8 +60,8 @@ class Repository extends GitterRepository
     {
         $name = $this->getPath();
 
-        if (strstr($name, '/')) {
-            $name = substr($name, strrpos($name, '/') + 1);
+        if (strstr($name, DIRECTORY_SEPARATOR)) {
+            $name = substr($name, strrpos($name, DIRECTORY_SEPARATOR) + 1);
         }
 
         return trim($name);
