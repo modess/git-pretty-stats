@@ -43,22 +43,6 @@ class Repository extends GitterRepository
     }
 
     /**
-     * Get name of repository (top level directory)
-     *
-     * @return string
-     */
-    public function getName ()
-    {
-        $name = $this->getPath();
-
-        if (strstr($name, DIRECTORY_SEPARATOR)) {
-            $name = substr($name, strrpos($name, DIRECTORY_SEPARATOR) + 1);
-        }
-
-        return trim($name);
-    }
-
-    /**
      * Get email alias
      *
      * @param string $email
