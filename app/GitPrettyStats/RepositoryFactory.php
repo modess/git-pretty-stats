@@ -113,7 +113,7 @@ class RepositoryFactory
      *
      * @return array
      */
-    public function all ()
+    public function all ($includeStatistics = false)
     {
         if ($this->repositories) {
             return $this->repositories;
@@ -122,7 +122,7 @@ class RepositoryFactory
         // Load repositories
         $repositories = array();
         foreach ($this->getPaths() as $path) {
-            if ($repository = $this->load($path)) {
+            if ($repository = $this->load($path, $includeStatistics)) {
                 $repositories[ $repository->getName() ] = $repository;
             }
         }
@@ -150,7 +150,7 @@ class RepositoryFactory
      * @param  string $path
      * @return GitPrettyStats\Repository|false
      */
-    public function load ($path)
+    public function load ($path, $includeStatistics = false)
     {
         if ( !is_dir($path)) {
             return false;
@@ -165,7 +165,7 @@ class RepositoryFactory
         }
 
         // Load repository and store in cache
-        $created = $this->create($path);
+        $created = $this->create($path, $includeStatistics);
         Cache::put($cacheKey, $created, 60);
 
         return $created;
@@ -177,10 +177,20 @@ class RepositoryFactory
      * @param str $path
      * @return false|Repository
      */
-    public function create ($path)
+    public function create ($path, $includeStatistics = false)
     {
         try {
             $repository = new Repository($path);
+
+            if ($includeStatistics === true) {
+                $repository->addStatistics(array(
+                    new \Gitter\Statistics\Contributors,
+                    new \Gitter\Statistics\Date,
+                    new \Gitter\Statistics\Day,
+                    new \Gitter\Statistics\Hour
+                ));
+            }
+
             return $repository;
         } catch (\Exception $e) {
             return false;
@@ -212,11 +222,11 @@ class RepositoryFactory
      *
      * @return array
      */
-    public function toArray ()
+    public function toArray ($includeStatistics = false)
     {
         $toArray = array();
 
-        foreach ($this->all() as $repository) {
+        foreach ($this->all($includeStatistics) as $repository) {
             $toArray[ $repository->getName() ] = array(
                 'name'    => $repository->getName(),
                 'commits' => $repository->getTotalCommits(),

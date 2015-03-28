@@ -39,16 +39,14 @@ class RepositoryController extends Controller {
      */
     public function show ($name)
     {
-        $repositories = $this->factory->toArray();
-        $repository   = $this->factory->fromName($name);
-        $repository->loadCommits();
+        $this->factory->toArray(true);
 
-        $statistics = $repository->getStatistics();
+        $repository   = $this->factory->fromName($name);
 
         return Response::json(array(
             'name'   => $repository->getName(),
             'branch' => $repository->getCurrentBranch(),
-            'data'   => $repository->getStatistics()
+            'data'   => $repository->statistics()
         ));
     }
 }

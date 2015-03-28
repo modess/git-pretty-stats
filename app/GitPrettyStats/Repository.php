@@ -2,6 +2,10 @@
 namespace GitPrettyStats;
 
 use Carbon\Carbon;
+use GitPrettyStats\Charts\CommitsByContributorChart;
+use GitPrettyStats\Charts\CommitsByDateChart;
+use GitPrettyStats\Charts\CommitsByDayChart;
+use GitPrettyStats\Charts\CommitsByHourChart;
 use Gitter\Client;
 use Config;
 use Cache;
@@ -13,23 +17,8 @@ use Gitter\Repository as GitterRepository;
  */
 class Repository extends GitterRepository
 {
-    /** @var array Storage for "raw" commits */
-    public $commits = array();
-
-    /** @var array Storage for commits by date */
-    public $commitsByDate = array();
-
-    /** @var array Storage for commits by hour */
-    public $commitsByHour = array();
-
-    /** @var array Storage for commits by hour */
-    public $commitsByDay = array();
-
-    /** @var array Storage for commits by contributor */
-    public $commitsByContributor = array();
-
-    /** @var PrettyGitStats\Statistics */
-    public $statistics;
+    /** @var \GitPrettyStats\StatisticsFormatter */
+    public $statisticsFormatter;
 
     /** @var array Author email aliases */
     public $emailAliases = array();
@@ -37,17 +26,19 @@ class Repository extends GitterRepository
     /**
      * Constructor
      *
-     * @param \Gitter\Client $client  Git client
-     * @return void
+     * @param string              $path
+     * @param Client              $client Git client
+     * @param StatisticsFormatter $statisticsFormatter
+     * @return \GitPrettyStats\Repository
      */
-    public function __construct($path, $client = null, $statistics = null)
+    public function __construct($path, Client $client = null, StatisticsFormatter $statisticsFormatter = null)
     {
-        $client           = ($client) ? $client : new Client;
-        $this->statistics = ($statistics) ? $statistics : new Statistics($this);
+        $this->statisticsFormatter = $statisticsFormatter ?: new StatisticsFormatter($this);
 
         $emailAliases       = Config::get('git-pretty-stats.emailAliases');
         $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
 
+        $client = ($client) ? $client : new Client;
         parent::__construct($path, $client);
     }
 
@@ -68,118 +59,6 @@ class Repository extends GitterRepository
     }
 
     /**
-     * Load commits from git repo
-     *
-     * @return void
-     */
-    public function loadCommits()
-    {
-        $cacheKey = sprintf('commits:%s', $this->getPath());
-        $cache    = Cache::get($cacheKey);
-
-        if ($cache === null) {
-            $this->commits = $this->getCommits();
-            $this->parseCommits();
-
-            $cacheValues = array(
-                'commits'              => $this->commits,
-                'commitsByDate'        => $this->commitsByDate,
-                'commitsByDay'         => $this->commitsByDay,
-                'commitsByHour'        => $this->commitsByHour,
-                'commitsByContributor' => $this->commitsByContributor
-            );
-            Cache::put($cacheKey, $cacheValues, 60);
-        } else {
-            $this->commits              = $cache['commits'];
-            $this->commitsByDate        = $cache['commitsByDate'];
-            $this->commitsByDay         = $cache['commitsByDay'];
-            $this->commitsByHour        = $cache['commitsByHour'];
-            $this->commitsByContributor = $cache['commitsByContributor'];
-        }
-    }
-
-    /**
-     * Count number of commits
-     *
-     * @return int
-     */
-    public function getNumberOfCommits()
-    {
-        return count($this->commits);
-    }
-
-    /**
-     * Count number of contributors
-     *
-     * @return int
-     */
-    public function getNumberOfContributors()
-    {
-        return count($this->commitsByContributor);
-    }
-
-    /**
-     * Parses commits and adds them to stats
-     *
-     * @return array
-     */
-    public function parseCommits()
-    {
-        foreach ($this->commits as $commit) {
-            $date = $commit->getCommiterDate()->format('Y-m-d');
-            $hour = $commit->getCommiterDate()->format('H');
-            $day  = $commit->getCommiterDate()->format('N');
-
-            $this->addCommitToStats($this->commitsByDate, $date);
-            $this->addCommitToStats($this->commitsByHour, $hour);
-            $this->addCommitToStats($this->commitsByDay, $day);
-
-            $this->addCommitToContributor($commit);
-        }
-    }
-
-    /**
-     * Increment commit statistics
-     *
-     * @param array $stats The array of commits
-     * @param string $key Key to increment
-     * @return void
-     */
-    public function addCommitToStats(&$stats, $key)
-    {
-        if (!isset($stats[$key])) {
-            $stats[$key] = 0;
-        }
-
-        $stats[$key]++;
-    }
-
-    /**
-     * Add a commit to contributor statistics
-     *
-     * @param array $commit
-     * @return void
-     */
-    public function addCommitToContributor($commit)
-    {
-        $email = $commit->getAuthor()->getEmail();
-        $name  = $commit->getAuthor()->getName();
-
-        $email = $this->getEmailAlias($email);
-
-        if (!isset($this->commitsByContributor[$email])) {
-            $this->commitsByContributor[$email] = array(
-                'name'    => $name,
-                'commits' => array()
-            );
-        }
-
-        $date = $commit->getCommiterDate()->format('Y-m-d');
-
-        $this->commitsByContributor[$email]['commits'][$date][] = $commit;
-    }
-
-    /**
      * Get email alias
      *
      * @param string $email
@@ -190,180 +69,65 @@ class Repository extends GitterRepository
         return isset($this->emailAliases[$email]) ? $this->emailAliases[$email] : $email;
     }
 
-    public function getDaysRepositoryBeenActive ()
-    {
-        return $this->getFirstCommitDate()->diffInDays($this->getLastCommitDate());
-    }
-
     /**
      * Returns array with statistics and graph data
      *
      * @return array
      */
-    public function getStatistics()
+    public function statistics()
     {
-        $statistics = array(
+        $commitsByDateChart        = new CommitsByDateChart($this);
+        $commitsByHourChart        = new CommitsByHourChart($this);
+        $commitsByDayChart         = new CommitsByDayChart($this);
+        $commitsByContributorChart = new CommitsByContributorChart($this);
+
+        return array(
             'statistics' => array(
-                $this->statistics->commits(),
-                $this->statistics->contributors(),
-                $this->statistics->contributorsAverageCommits(),
-                $this->statistics->firstCommit(),
-                $this->statistics->latestCommit(),
-                $this->statistics->activeFor(),
-                $this->statistics->averageCommitsPerDay(),
+                $this->statisticsFormatter->totalNumberOfCommits(),
+                $this->statisticsFormatter->contributors(),
+                $this->statisticsFormatter->contributorsAverageCommits(),
+                $this->statisticsFormatter->firstCommitDate(),
+                $this->statisticsFormatter->latestCommitDate(),
+                $this->statisticsFormatter->activeFor(),
+                $this->statisticsFormatter->averageCommitsPerDay(),
             ),
             'charts' => array(
-                'date'        => $this->getCommitsByDate(),
-                'hour'        => $this->getCommitsByHour(),
-                'day'         => $this->getCommitsByDay(),
-                'contributor' => $this->getCommitsByContributor(),
+                'date'        => $commitsByDateChart->toArray(),
+                'hour'        => $commitsByHourChart->toArray(),
+                'day'         => $commitsByDayChart->toArray(),
+                'contributor' => $commitsByContributorChart->toArray(),
             )
         );
-
-        return $statistics;
     }
 
     /**
-     * @return Carbon
-     */
-    public function getFirstCommitDate()
-    {
-        ksort($this->commitsByDate);
-
-        $firstDate = array_slice($this->commitsByDate, 0, 1);
-
-        return new Carbon(key($firstDate));
-    }
-
-    /**
-     * @return Carbon
-     */
-    public function getLastCommitDate()
-    {
-        ksort($this->commitsByDate);
-
-        $lastDate = key(array_slice($this->commitsByDate, count($this->commitsByDate) - 1, 1));
-
-        return new Carbon(date("Y-m-d", strtotime($lastDate . ' +1 day')));
-    }
-
-    /**
-     * Get statistics for commits by date
+     * Get first commit date
      *
-     * @return array
+     * @return string
      */
-    public function getCommitsByDate()
+    public function getFirstCommitDate ()
     {
-        $begin    = $this->getFirstCommitDate();
-        $end      = $this->getLastCommitDate();
-        $interval = \DateInterval::createFromDateString('1 day');
-        $period   = new \DatePeriod($begin, $interval, $end);
+        $statistics    = $this->getStatistics();
+        $commitsByDate = $statistics['date'];
+        $commits       = $commitsByDate->getItems();
+        $firstDate     = key(array_slice($commits, 0, 1));
 
-        $data = array();
-        foreach ($period as $date) {
-            $dayFormatted = $date->format("Y-m-d");
-            $value        = isset($this->commitsByDate[$dayFormatted]) ? $this->commitsByDate[$dayFormatted] : 0;
-            $data['x'][]  = $dayFormatted;
-            $data['y'][]  = $value;
-        }
-
-        return $data;
+        return $firstDate;
     }
 
     /**
-     * Get statistics for commits by hour of day
+     * Get last commit date
      *
-     * @return array
+     * @return string
      */
-    public function getCommitsByHour()
+    public function getLastCommitDate ()
     {
-        $data = array();
+        $statistics    = $this->getStatistics();
+        $commitsByDate = $statistics['date'];
+        $commits       = $commitsByDate->getItems();
+        $lastDate      = key(array_slice($commits, -1));
 
-        ksort($this->commitsByHour);
-
-        foreach ($this->commitsByHour as $hour => $numberOfCommits) {
-            $data['x'][] = $hour;
-            $data['y'][] = $numberOfCommits;
-        }
-
-        return $data;
+        return $lastDate;
     }
 
-    /**
-     * Get statistics for commits by day of week
-     *
-     * @return array
-     */
-    public function getCommitsByDay()
-    {
-        $data = array();
-        $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-
-        ksort($this->commitsByDay);
-
-        foreach ($this->commitsByDay as $weekday => $numberOfCommits) {
-            $data[] = array($days[$weekday - 1], $numberOfCommits);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Get statistics for contributors
-     *
-     * @return array
-     */
-    public function getCommitsByContributor()
-    {
-        $data = array();
-
-        foreach ($this->commitsByContributor as $email => $contributor) {
-            $begin    = $this->getFirstCommitDate();
-            $end      = $this->getLastCommitDate();
-            $interval = \DateInterval::createFromDateString('1 day');
-            $period   = new \DatePeriod($begin, $interval, $end);
-
-            $commitsData  = array();
-            $totalCommits = 0;
-
-            foreach ($period as $date) {
-                $dayFormatted = $date->format("Y-m-d");
-
-                $value = isset($contributor['commits'][$dayFormatted]) ?
-                    count($contributor['commits'][$dayFormatted]) : 0;
-
-                $totalCommits += $value;
-
-                $commitsData['x'][] = $dayFormatted;
-                $commitsData['y'][] = $value;
-            }
-
-            $data[] = array(
-                'name'    => $contributor['name'],
-                'email'   => $email,
-                'commits' => $totalCommits,
-                'data'    => $commitsData,
-            );
-        }
-
-        usort($data, array($this, 'sortContributorsByCommits'));
-
-        return $data;
-    }
-
-    /**
-     * Sort contributors by number of commits they have in descending order
-     *
-     * @param array $sortA
-     * @param array $sortB
-     * @return bool
-     */
-    public function sortContributorsByCommits($sortA, $sortB)
-    {
-        if ($sortA['commits'] == $sortB['commits']) {
-            return 0;
-        }
-
-        return ($sortA['commits'] > $sortB['commits']) ? -1 : 1;
-    }
 }

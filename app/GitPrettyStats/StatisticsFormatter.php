@@ -1,23 +1,46 @@
 <?php
 namespace GitPrettyStats;
 
+use Carbon\Carbon;
+
 /**
- * Statistics for repository
+ * Statistics formatter for repository
  *
  * @author Niklas Modess <niklas@codingswag.com>
  */
-class Statistics
+class StatisticsFormatter
 {
-    /** @var GitPrettyStats\Repository */
-    public $repository;
+    /**
+     * @var Repository
+     */
+    protected $repository;
+
+    /**
+     * @var array Statistics
+     */
+    protected $statistics;
 
     /**
      * @param Repository $repository
-     * @return void
      */
-    public function __construct(Repository $repository)
+    public function __construct (Repository $repository)
     {
         $this->repository = $repository;
+    }
+
+    /**
+     * Get certain type of statistics
+     *
+     * @param $type
+     * @return mixed
+     */
+    public function statistics ($type)
+    {
+        if ($this->statistics === null) {
+            $this->statistics = $this->repository->getStatistics();
+        }
+
+        return $this->statistics[$type];
     }
 
     /**
@@ -27,9 +50,11 @@ class Statistics
      */
     public function contributors ()
     {
+        $contributors = $this->statistics('contributors');
+
         return array(
             'title' => 'Total contributors',
-            'value' => number_format($this->repository->getNumberOfContributors())
+            'value' => number_format(count($contributors))
         );
     }
 
@@ -38,11 +63,11 @@ class Statistics
      *
      * @return array
      */
-    public function commits ()
+    public function totalNumberOfCommits ()
     {
         return array(
             'title' => 'Total commits',
-            'value' => number_format($this->repository->getNumberOfCommits())
+            'value' => number_format($this->repository->getTotalCommits())
         );
     }
 
@@ -53,12 +78,11 @@ class Statistics
      */
     public function contributorsAverageCommits ()
     {
-        $value = ($this->repository->getNumberOfContributors() == 0) ?
-            0 : $this->repository->getNumberOfCommits() / $this->repository->getNumberOfContributors();
+        $contributors = $this->statistics('contributors');
 
         return array(
             'title' => 'Average commits per contributor',
-            'value' => number_format($value, 2)
+            'value' => number_format($this->repository->getTotalCommits() / count($contributors), 2)
         );
     }
 
@@ -67,11 +91,11 @@ class Statistics
      *
      * @return array
      */
-    public function firstCommit ()
+    public function firstCommitDate ()
     {
         return array(
             'title' => 'First commit date',
-            'value' => $this->repository->getFirstCommitDate()->format('Y-m-d'),
+            'value' => $this->repository->getFirstCommitDate(),
         );
     }
 
@@ -80,11 +104,11 @@ class Statistics
      *
      * @return array
      */
-    public function latestCommit ()
+    public function latestCommitDate ()
     {
         return array(
             'title' => 'Latest commit date',
-            'value' => $this->repository->getLastCommitDate()->format('Y-m-d'),
+            'value' => $this->repository->getLastCommitDate(),
         );
     }
 
@@ -95,9 +119,12 @@ class Statistics
      */
     public function activeFor ()
     {
+        $firstCommitDate = new Carbon($this->repository->getFirstCommitDate());
+        $lastCommitDate  = new Carbon($this->repository->getLastCommitDate());
+
         return array(
             'title' => 'Active for',
-            'value' => number_format($this->repository->getDaysRepositoryBeenActive()) . " days"
+            'value' => number_format($firstCommitDate->diffInDays($lastCommitDate)) . " days"
         );
     }
 
@@ -108,12 +135,11 @@ class Statistics
      */
     public function averageCommitsPerDay ()
     {
-        $value = ($this->repository->getDaysRepositoryBeenActive() == 0) ?
-            0 : $this->repository->getNumberOfCommits() / $this->repository->getDaysRepositoryBeenActive();
+        $commitsByDate = $this->statistics('date');
 
         return array(
             'title' => 'Average commits per day',
-            'value' => number_format($value, 2)
+            'value' => number_format(count($commitsByDate) / $this->repository->getTotalCommits(), 2)
         );
     }
 }
