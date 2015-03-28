@@ -171,8 +171,7 @@ $loading-bar-height: 10px;
     border: 0;
 
     .title {
-      font-size: 1.2em;
-      @include respond-to(lg) { font-size: 1.1em; }
+      font-size: 1em;
     }
 
     .value {

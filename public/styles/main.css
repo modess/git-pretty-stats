@@ -129,7 +129,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   background-color: #54c4a5;
 }
 
-/* line 132, ../../app/assets/styles/main.scss */
+/* line 131, ../../app/assets/styles/main.scss */
 #loading-bar .bar,
 #loading-bar .peg {
   height: 10px;
@@ -163,10 +163,8 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   background: #54c4a5;
   color: white;
   font-size: 1.25em;
-  -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
+  -webkit-border-radius: 0;
   border-radius: 0;
 }
 
@@ -177,21 +175,15 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 /* line 168, ../../app/assets/styles/main.scss */
 .statistics .thumbnail {
-  background: #46a4bb;
+  background: #46A4BB;
   padding: 10px;
   border: 0;
 }
 /* line 173, ../../app/assets/styles/main.scss */
 .statistics .thumbnail .title {
-  font-size: 1.2em;
+  font-size: 1em;
 }
-@media (min-width: 1200px) {
-  /* line 173, ../../app/assets/styles/main.scss */
-  .statistics .thumbnail .title {
-    font-size: 1.1em;
-  }
-}
-/* line 178, ../../app/assets/styles/main.scss */
+/* line 177, ../../app/assets/styles/main.scss */
 .statistics .thumbnail .value {
   font-size: 3em;
   line-height: 1em;
@@ -199,22 +191,22 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   text-align: right;
 }
 @media (max-width: 767px) {
-  /* line 178, ../../app/assets/styles/main.scss */
+  /* line 177, ../../app/assets/styles/main.scss */
   .statistics .thumbnail .value {
     text-align: left;
   }
 }
 
-/* line 189, ../../app/assets/styles/main.scss */
+/* line 188, ../../app/assets/styles/main.scss */
 .commit-activity .chart {
   height: 400px;
 }
-/* line 193, ../../app/assets/styles/main.scss */
+/* line 192, ../../app/assets/styles/main.scss */
 .commit-activity .divide-responsive-charts {
   display: none;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
-  /* line 193, ../../app/assets/styles/main.scss */
+  /* line 192, ../../app/assets/styles/main.scss */
   .commit-activity .divide-responsive-charts {
     display: block;
   }
