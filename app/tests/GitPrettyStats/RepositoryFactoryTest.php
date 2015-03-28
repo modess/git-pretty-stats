@@ -140,11 +140,11 @@ class RepositoryFactoryTest extends \TestCase
             ->andReturn(array('/first/path', '/second/path'))
             ->shouldReceive('load')
             ->once()
-            ->with('/first/path')
+            ->with('/first/path', false)
             ->andReturn($firstRepository)
             ->shouldReceive('load')
             ->once()
-            ->with('/second/path')
+            ->with('/second/path', false)
             ->andReturn($secondRepository);
 
         $this->assertEquals(
