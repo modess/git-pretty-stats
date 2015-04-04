@@ -133,7 +133,7 @@ class RepositoryFactoryTest extends \TestCase
         $secondRepository = m::mock('stdClass');
         $secondRepository->shouldReceive('getName')->once()->andReturn('second-repo');
 
-        $factory = m::mock('GitPrettyStats\RepositoryFactory[getPaths,load]', [$this->finder]);
+        $factory = m::mock('GitPrettyStats\RepositoryFactory[getPaths,load]', array($this->finder));
         $factory
             ->shouldReceive('getPaths')
             ->once()
@@ -234,7 +234,7 @@ class RepositoryFactoryTest extends \TestCase
             ->once()
             ->andReturn(173);
 
-        $factory = m::mock('GitPrettyStats\RepositoryFactory[all]', [$this->finder]);
+        $factory = m::mock('GitPrettyStats\RepositoryFactory[all]', array($this->finder));
         $factory->shouldReceive('all')->once()->andReturn(array($firstRepository, $secondRepository));
 
         $this->assertEquals(
