@@ -1,5 +1,4 @@
 @import "bootstrap_variables";
-@import "compass/css3";
 
 @mixin respond-to($media) {
   @if $media == xs {
@@ -157,7 +156,7 @@ $loading-bar-height: 10px;
     background: $color-cyan;
     color: white;
     font-size: 1.25em;
-    @include border-radius($border-radius-base);
+    border-radius: $border-radius-base;
   }
 }
 
