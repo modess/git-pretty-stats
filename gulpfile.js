@@ -9,7 +9,7 @@ var gulp = require('gulp'),
   merge = require('merge-stream'),
   watch = require('gulp-watch'),
   gulpif = require('gulp-if'),
-  clean = require('gulp-clean'),
+  del = require('del'),
   livereload = require('gulp-livereload'),
   templateCache = require('gulp-angular-templatecache'),
   jshint = require('gulp-jshint'),
@@ -53,17 +53,16 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter(jshintstylish));
 });
 
-gulp.task('clean', function () {
-  return gulp.src([
+gulp.task('clean', function (cb) {
+  del([
     distFolder + '**/*',
     '!' + distFolder + 'index.php',
     '!' + distFolder + '.htaccess'
-  ], {read: false})
-  .pipe(clean());
+  ], cb);
 });
 
 gulp.task('angular-templates', function () {
-  gulp.src([assetsViewsFolder + '/**/*.html', assetsTemplatesFolder + '**/*.html'])
+  return gulp.src([assetsViewsFolder + '/**/*.html', assetsTemplatesFolder + '**/*.html'])
     .pipe(templateCache({
       module: 'gitPrettyStats.templates',
       standalone: true
