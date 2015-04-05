@@ -1,10 +1,10 @@
 <div snap-drawer>
-  <ul class="list-group" ng-include="'repository_list.html'"></ul>
+  <gps-repository-list repositories="repositories"></gps-repository-list>
 </div>
 
 <div snap-content>
   <div class="content" ui-view>
-    <ul class="list-group inline" ng-include="'repository_list.html'"></ul>
+    <gps-repository-list repositories="repositories" inline="true"></gps-repository-list>
   </div>
 </div>
 
