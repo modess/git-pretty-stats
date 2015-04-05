@@ -51,10 +51,55 @@
 
   angular
     .module('gitPrettyStats')
+    .factory('Repository', function($http) {
+      var repository = {};
+
+      repository.all = function() {
+        return $http({
+          method: 'GET',
+          url: base_url + '/repository/'
+        });
+      };
+
+      repository.get = function(name) {
+        return $http({
+          method: 'GET',
+          url: base_url + '/repository/' + name
+        });
+      };
+
+      return repository;
+    });
+
+})();
+
+(function () {
+  'use strict';
+
+  angular
+    .module('gitPrettyStats')
     .directive('gpsStatistics', function() {
       return {
         restrict: 'E',
         templateUrl: 'statistics.html'
+      };
+    });
+
+})();
+
+(function () {
+  'use strict';
+
+  angular
+    .module('gitPrettyStats')
+    .directive('gpsRepositoryList', function() {
+      return {
+        restrict: 'E',
+        templateUrl: 'repository_list.html',
+        scope: {
+          'repositories': '=',
+          'inline': '@'
+        }
       };
     });
 
@@ -258,33 +303,6 @@
           }, 50);
         }
       };
-    });
-
-})();
-
-(function () {
-  'use strict';
-
-  angular
-    .module('gitPrettyStats')
-    .factory('Repository', function($http) {
-      var repository = {};
-
-      repository.all = function() {
-        return $http({
-          method: 'GET',
-          url: base_url + '/repository/'
-        });
-      };
-
-      repository.get = function(name) {
-        return $http({
-          method: 'GET',
-          url: base_url + '/repository/' + name
-        });
-      };
-
-      return repository;
     });
 
 })();
