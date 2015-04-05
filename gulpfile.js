@@ -86,6 +86,8 @@ gulp.task('vendor', function() {
 });
 
 gulp.task('watch', ['default'], function () {
+  livereload.listen();
+
   gulp.watch(assetsSassFolder + '**/*.scss', ['styles']);
   gulp.watch(assetsJsFolder + '**/*.js', ['scripts', 'jshint']);
   gulp.watch([assetsViewsFolder + '**/*.html', assetsTemplatesFolder + '**/*.html'], ['angular-templates']);
