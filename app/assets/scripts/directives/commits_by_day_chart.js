@@ -1,37 +1,40 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular
-  .module('gitPrettyStats')
-  .directive('gpsCommitsByDayChart', function($timeout) {
-    return {
-      restrict: 'E',
-      replace: true,
-      template: '<div id="chart-commits-by-day" class="chart" style="width:100%"></div>',
+  angular
+    .module('gitPrettyStats')
+    .directive('gpsCommitsByDayChart', function($timeout) {
+      return {
+        restrict: 'E',
+        replace: true,
+        template: '<div id="chart-commits-by-day" class="chart" style="width:100%"></div>',
 
-      link: function(scope) {
-        var data = scope.charts.day;
+        link: function(scope) {
+          var data = scope.charts.day;
 
-        $timeout(function() {
-          $("#chart-commits-by-day").highcharts({
-            chart: {
-              type: "pie"
-            },
-            title: {
-              text: ""
-            },
-            yAxis: {
+          $timeout(function() {
+            $("#chart-commits-by-day").highcharts({
+              chart: {
+                type: "pie"
+              },
               title: {
                 text: ""
-              }
-            },
-            series: [
-              {
-                name: "Commits",
-                data: data
-              }
-            ]
-          });
-        }, 50);
-      }
-    };
-  });
+              },
+              yAxis: {
+                title: {
+                  text: ""
+                }
+              },
+              series: [
+                {
+                  name: "Commits",
+                  data: data
+                }
+              ]
+            });
+          }, 50);
+        }
+      };
+    });
+
+})();
