@@ -1,4 +1,5 @@
 @import "bootstrap_variables";
+@import "fonts";
 
 @mixin respond-to($media) {
   @if $media == xs {
@@ -106,6 +107,7 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
   small {
+    font-family: $font-regular;
     color: $color-cyan-darker;
   }
 }
@@ -114,6 +116,7 @@ h1,h2,h3,h4,h5,h6 {
   max-width: $screen-sm;
   margin: 0 auto;
   list-style: none;
+  font-family: $font-bold;
 
   &.inline {
     margin: $footer-height auto;
@@ -162,7 +165,7 @@ $loading-bar-height: 10px;
 
 .statistics {
   color: white;
-  font-weight: bold;
+  font-family: $font-bold;
 
   .thumbnail {
     background: $color-blue;
@@ -193,4 +196,8 @@ $loading-bar-height: 10px;
 
     @include respond-to(md) { display: block; }
   }
+}
+
+strong {
+  font-family: $font-bold;
 }
