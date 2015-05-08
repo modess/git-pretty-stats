@@ -248,7 +248,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "OpenSans", "Helvetica Neue", Helvetica, Arial, sans-serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #fff;
@@ -373,7 +373,7 @@ cite {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "OpenSans-bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit; }
@@ -4943,6 +4943,30 @@ td.visible-print {
 
 
 
+@font-face {
+  font-family: 'OpenSans-Bold';
+  src: url("../fonts/opensans-bold-webfont.eot");
+  src: url("../fonts/opensans-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans-bold-webfont.woff2") format("woff2"), url("../fonts/opensans-bold-webfont.woff") format("woff"), url("../fonts/opensans-bold-webfont.ttf") format("truetype"), url("../fonts/opensans-bold-webfont.svg#open_sansbold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'OpenSans-Italic';
+  src: url("../fonts/opensans-italic-webfont.eot");
+  src: url("../fonts/opensans-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans-italic-webfont.woff2") format("woff2"), url("../fonts/opensans-italic-webfont.woff") format("woff"), url("../fonts/opensans-italic-webfont.ttf") format("truetype"), url("../fonts/opensans-italic-webfont.svg#open_sansitalic") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'OpenSans-Light';
+  src: url("../fonts/opensans-light-webfont.eot");
+  src: url("../fonts/opensans-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans-light-webfont.woff2") format("woff2"), url("../fonts/opensans-light-webfont.woff") format("woff"), url("../fonts/opensans-light-webfont.ttf") format("truetype"), url("../fonts/opensans-light-webfont.svg#open_sanslight") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'OpenSans';
+  src: url("../fonts/opensans-regular-webfont.eot");
+  src: url("../fonts/opensans-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/opensans-regular-webfont.woff2") format("woff2"), url("../fonts/opensans-regular-webfont.woff") format("woff"), url("../fonts/opensans-regular-webfont.ttf") format("truetype"), url("../fonts/opensans-regular-webfont.svg#open_sansregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 .no-margin-top {
   margin-top: 0; }
 
@@ -5015,12 +5039,14 @@ body {
     border-color: #7ad1b9 #7ad1b9 #3baa8b #7ad1b9; }
 
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  font-family: "OpenSans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #27715d; }
 
 .list-group {
   max-width: 768px;
   margin: 0 auto;
-  list-style: none; }
+  list-style: none;
+  font-family: "OpenSans-bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .list-group.inline {
     margin: 55px auto; }
   .list-group .list-group-item .badge {
@@ -5055,7 +5081,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 .statistics {
   color: white;
-  font-weight: bold; }
+  font-family: "OpenSans-bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .statistics .thumbnail {
     background: #46A4BB;
     padding: 10px;
@@ -5078,5 +5104,8 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   @media (min-width: 992px) and (max-width: 1200px) {
     .commit-activity .divide-responsive-charts {
       display: block; } }
+
+strong {
+  font-family: "OpenSans-bold", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 

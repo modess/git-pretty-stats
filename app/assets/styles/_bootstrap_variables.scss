@@ -60,7 +60,13 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-fallbacks-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-regular: "OpenSans", $font-fallbacks-serif;
+$font-bold: "OpenSans-bold", $font-fallbacks-serif;
+$font-italic: "OpenSans-italic", $font-fallbacks-serif;
+$font-light: "OpenSans-light", $font-fallbacks-serif;
+
+$font-family-sans-serif:  $font-regular, "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
@@ -79,7 +85,7 @@ $font-size-h6:            ceil($font-size-base * 0.85) !default; // ~12px
 $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
 
-$headings-font-family:    $font-family-base !default;
+$headings-font-family:    $font-bold !default;
 $headings-font-weight:    500 !default;
 $headings-line-height:    1.1 !default;
 $headings-color:          inherit !default;

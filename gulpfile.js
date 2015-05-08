@@ -21,6 +21,7 @@ var assetsVendorFolder    = assetsFolder + 'bower_components/';
 var assetsJsFolder        = assetsFolder + 'scripts/';
 var assetsSassFolder      = assetsFolder + 'styles/';
 var assetsViewsFolder     = assetsFolder + 'views/';
+var assetsFontsFolder     = assetsFolder + 'fonts/';
 var assetsTemplatesFolder = assetsJsFolder + 'templates/';
 
 var distFolder      = './public/';
@@ -43,7 +44,10 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src(assetsVendorFolder + 'font-awesome/fonts/*')
+  var fontAwesome = gulp.src(assetsVendorFolder + 'font-awesome/fonts/*');
+  var openSans    = gulp.src(assetsFontsFolder + '/*');
+
+  return merge(fontAwesome, openSans)
     .pipe(gulp.dest(distFontsFolder));
 });
 
